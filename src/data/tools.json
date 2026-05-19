@@ -229,20 +229,20 @@
         "ja": "PDFからWordへ変換"
       },
       "description": {
-        "en": "Convert PDF files to editable Word documents.",
-        "zh-CN": "将 PDF 文件转换为可编辑的 Word 文档。",
-        "zh-TW": "將 PDF 檔案轉換為可編輯的 Word 文件。",
-        "ja": "PDFファイルを編集可能なWord文書に変換します。"
+        "en": "Free online PDF to Word converter. Convert PDF to editable DOCX with formatting preserved. No installation or signup required.",
+        "zh-CN": "免费在线 PDF 转 Word 工具。将 PDF 转换为可编辑的 DOCX 文档，保留原始格式，无需安装软件或注册账号。",
+        "zh-TW": "免費線上 PDF 轉 Word 工具。將 PDF 轉換為可編輯的 DOCX 文件，保留原始格式，無需安裝軟體或註冊帳號。",
+        "ja": "無料オンラインPDF→Wordコンバーター。書式を保持したままPDFを編集可能なDOCXに変換。インストール・登録不要。"
       },
       "subtitle": {
-        "en": "PDF to DOCX Conversion",
-        "zh-CN": "PDF 转 DOCX 转换",
-        "zh-TW": "PDF 轉 DOCX 轉換",
-        "ja": "PDFからDOCXへの変換"
+        "en": "Free Online PDF to Word Converter",
+        "zh-CN": "免费在线 PDF 转 Word 转换器",
+        "zh-TW": "免費線上 PDF 轉 Word 轉換器",
+        "ja": "無料オンラインPDFからWord変換ツール"
       },
       "category": "pdf",
       "component": "PdfToWord",
-      "keywords": "pdf word docx convert document",
+      "keywords": "pdf word docx convert document free online converter no signup",
       "apiType": "convert",
       "apiEndpoint": "/pdf-to-word",
       "variants": [
@@ -301,20 +301,20 @@
         "ja": "PDFからJPGへ変換"
       },
       "description": {
-        "en": "Convert PDF pages to JPG images.",
-        "zh-CN": "将 PDF 页面转换为 JPG 图片。",
-        "zh-TW": "將 PDF 頁面轉換為 JPG 圖片。",
-        "ja": "PDFページをJPG画像に変換します。"
+        "en": "Free online PDF to JPG converter. Extract PDF pages as high-quality JPG images instantly. No registration or watermark.",
+        "zh-CN": "免费在线 PDF 转 JPG 工具。即时将 PDF 页面提取为高质量 JPG 图片，无需注册，无水印。",
+        "zh-TW": "免費線上 PDF 轉 JPG 工具。即時將 PDF 頁面提取為高品質 JPG 圖片，無需註冊，無浮水印。",
+        "ja": "無料オンラインPDF→JPGコンバーター。PDFページを高品質JPGとして即時抽出。登録・透かし不要。"
       },
       "subtitle": {
-        "en": "PDF to Image Conversion",
-        "zh-CN": "PDF 转图片",
-        "zh-TW": "PDF 轉圖片",
-        "ja": "PDFから画像への変換"
+        "en": "Free PDF to JPG Image Extractor",
+        "zh-CN": "免费在线 PDF 转 JPG 图片提取工具",
+        "zh-TW": "免費線上 PDF 轉 JPG 圖片提取工具",
+        "ja": "無料PDFからJPG画像抽出ツール"
       },
       "category": "pdf",
       "component": "PdfToJpg",
-      "keywords": "pdf jpg image convert page",
+      "keywords": "pdf jpg jpeg image convert page free online extractor high quality",
       "apiType": "convert",
       "apiEndpoint": "/pdf-to-jpg/",
       "variants": [
@@ -374,20 +374,20 @@
         "ja": "PDF圧縮"
       },
       "description": {
-        "en": "Reduce PDF file size while maintaining quality.",
-        "zh-CN": "在保持质量的同时减小 PDF 文件大小。",
-        "zh-TW": "在保持品質的同時減小 PDF 檔案大小。",
-        "ja": "品質を維持しながらPDFファイルサイズを縮小します。"
+        "en": "Free online PDF compressor. Reduce PDF file size by up to 80% while maintaining quality. Fast, secure, no signup needed.",
+        "zh-CN": "免费在线 PDF 压缩工具。在保持质量的同时将 PDF 文件大小缩小最多 80%，快速安全，无需注册。",
+        "zh-TW": "免費線上 PDF 壓縮工具。在保持品質的同時將 PDF 檔案大小縮小最多 80%，快速安全，無需註冊。",
+        "ja": "無料オンラインPDF圧縮ツール。品質を保ちながらPDFのファイルサイズを最大80%削減。高速・安全・登録不要。"
       },
       "subtitle": {
-        "en": "PDF Compression",
-        "zh-CN": "PDF 压缩",
-        "zh-TW": "PDF 壓縮",
-        "ja": "PDF圧縮"
+        "en": "Free Online PDF Compressor",
+        "zh-CN": "免费在线 PDF 压缩工具",
+        "zh-TW": "免費線上 PDF 壓縮工具",
+        "ja": "無料オンラインPDF圧縮ツール"
       },
       "category": "pdf",
       "component": "CompressPdf",
-      "keywords": "pdf compress reduce size optimize",
+      "keywords": "pdf compress reduce size optimize free online compressor shrink",
       "apiType": "convert",
       "apiEndpoint": "/compress-pdf/",
       "variants": [
@@ -446,20 +446,20 @@
         "ja": "JPGからPDFへ変換"
       },
       "description": {
-        "en": "Merge multiple images into a single PDF document.",
-        "zh-CN": "将多张图片合并为一个 PDF 文档。",
-        "zh-TW": "將多張圖片合併為一個 PDF 文件。",
-        "ja": "複数の画像を1つのPDF文書に結合します。"
+        "en": "Free online JPG to PDF converter. Convert and merge multiple images into one PDF. Drag-and-drop reordering, no watermark, no signup.",
+        "zh-CN": "免费在线 JPG 转 PDF 工具。将多张图片转换并合并为一个 PDF，支持拖拽排序，无水印，无需注册。",
+        "zh-TW": "免費線上 JPG 轉 PDF 工具。將多張圖片轉換並合併為一個 PDF，支援拖放排序，無浮水印，無需註冊。",
+        "ja": "無料オンラインJPG→PDFコンバーター。複数画像を1つのPDFに変換・結合。ドラッグ&ドロップ並べ替え・透かしなし・登録不要。"
       },
       "subtitle": {
-        "en": "Image to PDF Merge",
-        "zh-CN": "图片合并为 PDF",
-        "zh-TW": "圖片合併為 PDF",
-        "ja": "画像をPDFに結合"
+        "en": "Free Online JPG to PDF Converter",
+        "zh-CN": "免费在线 JPG 转 PDF 转换器",
+        "zh-TW": "免費線上 JPG 轉 PDF 轉換器",
+        "ja": "無料オンラインJPGからPDF変換ツール"
       },
       "category": "pdf",
       "component": "JpgToPdf",
-      "keywords": "jpg jpeg image pdf merge combine",
+      "keywords": "jpg jpeg png image pdf merge combine free online converter no watermark",
       "apiType": "convert",
       "apiEndpoint": "/jpg-to-pdf/",
       "variants": [
@@ -771,20 +771,20 @@
         "ja": "PNGからJPGへ変換"
       },
       "description": {
-        "en": "Convert PNG images to JPG format.",
-        "zh-CN": "将 PNG 图片转换为 JPG 格式。",
-        "zh-TW": "將 PNG 圖片轉換為 JPG 格式。",
-        "ja": "PNG画像をJPG形式に変換します。"
+        "en": "Free online PNG to JPG converter. Convert PNG images to JPG with adjustable quality. No signup, no watermark, batch conversion supported.",
+        "zh-CN": "免费在线 PNG 转 JPG 工具。将 PNG 图片转换为 JPG，可调节质量，无需注册，无水印，支持批量转换。",
+        "zh-TW": "免費線上 PNG 轉 JPG 工具。將 PNG 圖片轉換為 JPG，可調節品質，無需註冊，無浮水印，支援批量轉換。",
+        "ja": "無料オンラインPNG→JPGコンバーター。品質調整可能でPNGをJPGに変換。登録・透かし不要、バッチ変換対応。"
       },
       "subtitle": {
-        "en": "PNG to JPG Conversion",
-        "zh-CN": "PNG 转 JPG 转换",
-        "zh-TW": "PNG 轉 JPG 轉換",
-        "ja": "PNGからJPGへの変換"
+        "en": "Free Online PNG to JPG Converter",
+        "zh-CN": "免费在线 PNG 转 JPG 转换器",
+        "zh-TW": "免費線上 PNG 轉 JPG 轉換器",
+        "ja": "無料オンラインPNGからJPG変換ツール"
       },
       "category": "image",
       "component": "PngToJpg",
-      "keywords": "png jpg jpeg convert image format",
+      "keywords": "png jpg jpeg convert image format free online converter batch quality",
       "apiType": "convert",
       "apiEndpoint": "/png-to-jpg/",
       "variants": [
@@ -843,20 +843,20 @@
         "ja": "Faviconジェネレーター"
       },
       "description": {
-        "en": "Convert images to favicon.ico format.",
-        "zh-CN": "将图片转换为 favicon.ico 格式。",
-        "zh-TW": "將圖片轉換為 favicon.ico 格式。",
-        "ja": "画像をfavicon.ico形式に変換します。"
+        "en": "Free online favicon generator. Convert PNG, JPG, or SVG to favicon.ico for your website. Generates all required sizes from 16×16 to 256×256.",
+        "zh-CN": "免费在线 Favicon 生成器。将 PNG、JPG 或 SVG 转换为网站用 favicon.ico，自动生成从 16×16 到 256×256 的所有尺寸。",
+        "zh-TW": "免費線上 Favicon 產生器。將 PNG、JPG 或 SVG 轉換為網站用 favicon.ico，自動產生從 16×16 到 256×256 的所有尺寸。",
+        "ja": "無料オンラインFaviconジェネレーター。PNG・JPG・SVGをWebサイト用favicon.icoに変換。16×16〜256×256の全サイズを自動生成。"
       },
       "subtitle": {
-        "en": "ICO Favicon Generator",
-        "zh-CN": "ICO Favicon 生成器",
-        "zh-TW": "ICO Favicon 產生器",
-        "ja": "ICO Faviconジェネレーター"
+        "en": "Free Favicon.ico Generator from Image",
+        "zh-CN": "免费图片转 Favicon.ico 生成器",
+        "zh-TW": "免費圖片轉 Favicon.ico 產生器",
+        "ja": "無料画像からFavicon.ico生成ツール"
       },
       "category": "image",
       "component": "ToFavicon",
-      "keywords": "favicon ico icon convert generate website",
+      "keywords": "favicon ico icon convert generate website png jpg svg free online",
       "apiType": "convert",
       "apiEndpoint": "/to-favicon/",
       "variants": [
@@ -987,20 +987,20 @@
         "ja": "PNGからICNSへ変換"
       },
       "description": {
-        "en": "Convert PNG images to macOS ICNS app icon format.",
-        "zh-CN": "将 PNG 图片转换为 macOS ICNS 应用图标格式。",
-        "zh-TW": "將 PNG 圖片轉換為 macOS ICNS 應用程式圖示格式。",
-        "ja": "PNG画像をmacOS ICNSアプリアイコン形式に変換します。"
+        "en": "Free online PNG to ICNS converter. Create macOS app icons in ICNS format from PNG images. Generates all required sizes for Mac app development.",
+        "zh-CN": "免费在线 PNG 转 ICNS 工具。从 PNG 图片创建 macOS ICNS 应用图标，自动生成 Mac 应用开发所需的所有尺寸。",
+        "zh-TW": "免費線上 PNG 轉 ICNS 工具。從 PNG 圖片建立 macOS ICNS 應用程式圖示，自動產生 Mac 應用開發所需的所有尺寸。",
+        "ja": "無料オンラインPNG→ICNSコンバーター。PNGからmacOSアプリ用ICNSアイコンを作成。Macアプリ開発に必要な全サイズを自動生成。"
       },
       "subtitle": {
-        "en": "macOS App Icon Generator",
-        "zh-CN": "macOS 应用图标生成",
-        "zh-TW": "macOS 應用程式圖示產生",
-        "ja": "macOSアプリアイコン生成"
+        "en": "Free PNG to macOS ICNS Icon Converter",
+        "zh-CN": "免费 PNG 转 macOS ICNS 图标工具",
+        "zh-TW": "免費 PNG 轉 macOS ICNS 圖示工具",
+        "ja": "無料PNG→macOS ICNSアイコン変換ツール"
       },
       "category": "image",
       "component": "PngToIcns",
-      "keywords": "png icns macos icon app apple convert",
+      "keywords": "png icns macos icon app apple convert free online generator mac development",
       "apiType": "convert",
       "apiEndpoint": "/png-to-icns/",
       "variants": [
@@ -1059,20 +1059,20 @@
         "ja": "WebPコンバーター"
       },
       "description": {
-        "en": "Convert WebP images to JPG or PNG format.",
-        "zh-CN": "将 WebP 图片转换为 JPG 或 PNG 格式。",
-        "zh-TW": "將 WebP 圖片轉換為 JPG 或 PNG 格式。",
-        "ja": "WebP画像をJPGまたはPNG形式に変換します。"
+        "en": "Free online WebP converter. Convert WebP images to JPG or PNG format instantly. No installation required, batch conversion supported.",
+        "zh-CN": "免费在线 WebP 转换工具。即时将 WebP 图片转换为 JPG 或 PNG 格式，无需安装，支持批量转换。",
+        "zh-TW": "免費線上 WebP 轉換工具。即時將 WebP 圖片轉換為 JPG 或 PNG 格式，無需安裝，支援批量轉換。",
+        "ja": "無料オンラインWebPコンバーター。WebP画像をJPGまたはPNG形式に即時変換。インストール不要、バッチ変換対応。"
       },
       "subtitle": {
-        "en": "WebP to JPG/PNG",
-        "zh-CN": "WebP 转 JPG/PNG",
-        "zh-TW": "WebP 轉 JPG/PNG",
-        "ja": "WebPからJPG/PNGへ"
+        "en": "Free Online WebP to JPG / PNG Converter",
+        "zh-CN": "免费在线 WebP 转 JPG/PNG 工具",
+        "zh-TW": "免費線上 WebP 轉 JPG/PNG 工具",
+        "ja": "無料オンラインWebP→JPG/PNG変換ツール"
       },
       "category": "image",
       "component": "WebpTo",
-      "keywords": "webp jpg png convert image format",
+      "keywords": "webp jpg png convert image format free online converter batch",
       "apiType": "convert",
       "apiEndpoint": "/webp-to/",
       "variants": [
@@ -1131,20 +1131,20 @@
         "ja": "SVGからPNGへ変換"
       },
       "description": {
-        "en": "Convert SVG vector graphics to PNG bitmap images.",
-        "zh-CN": "将 SVG 矢量图转换为 PNG 位图。",
-        "zh-TW": "將 SVG 向量圖轉換為 PNG 點陣圖。",
-        "ja": "SVGベクター画像をPNGビットマップに変換します。"
+        "en": "Free online SVG to PNG converter. Convert SVG vector graphics to PNG bitmap images at any resolution. No software installation required.",
+        "zh-CN": "免费在线 SVG 转 PNG 工具。将 SVG 矢量图以任意分辨率转换为 PNG 位图，无需安装软件。",
+        "zh-TW": "免費線上 SVG 轉 PNG 工具。將 SVG 向量圖以任意解析度轉換為 PNG 點陣圖，無需安裝軟體。",
+        "ja": "無料オンラインSVG→PNGコンバーター。SVGベクター画像を任意の解像度でPNGビットマップに変換。ソフトウェアインストール不要。"
       },
       "subtitle": {
-        "en": "Vector to Bitmap",
-        "zh-CN": "矢量图转位图",
-        "zh-TW": "向量圖轉點陣圖",
-        "ja": "ベクターからビットマップへ"
+        "en": "Free Online SVG to PNG Converter",
+        "zh-CN": "免费在线 SVG 转 PNG 转换器",
+        "zh-TW": "免費線上 SVG 轉 PNG 轉換器",
+        "ja": "無料オンラインSVGからPNG変換ツール"
       },
       "category": "image",
       "component": "SvgToPng",
-      "keywords": "svg png vector bitmap convert image",
+      "keywords": "svg png vector bitmap convert image free online resolution",
       "apiType": "convert",
       "variants": [
         {
@@ -1202,20 +1202,20 @@
         "ja": "PNGからSVGへ変換"
       },
       "description": {
-        "en": "Convert PNG bitmap images to SVG vector graphics.",
-        "zh-CN": "将 PNG 位图转换为 SVG 矢量图。",
-        "zh-TW": "將 PNG 點陣圖轉換為 SVG 向量圖。",
-        "ja": "PNGビットマップ画像をSVGベクターに変換します。"
+        "en": "Free online PNG to SVG converter. Vectorize PNG bitmap images to scalable SVG format. Ideal for logos, icons, and illustrations.",
+        "zh-CN": "免费在线 PNG 转 SVG 工具。将 PNG 位图矢量化为可缩放的 SVG 格式，适合 Logo、图标和插图。",
+        "zh-TW": "免費線上 PNG 轉 SVG 工具。將 PNG 點陣圖向量化為可縮放的 SVG 格式，適合 Logo、圖示和插圖。",
+        "ja": "無料オンラインPNG→SVGコンバーター。PNGビットマップをスケーラブルなSVG形式にベクター化。ロゴ・アイコン・イラストに最適。"
       },
       "subtitle": {
-        "en": "Bitmap to Vector",
-        "zh-CN": "位图转矢量图",
-        "zh-TW": "點陣圖轉向量圖",
-        "ja": "ビットマップからベクターへ"
+        "en": "Free Online PNG to SVG Vectorizer",
+        "zh-CN": "免费在线 PNG 转 SVG 矢量化工具",
+        "zh-TW": "免費線上 PNG 轉 SVG 向量化工具",
+        "ja": "無料オンラインPNG→SVGベクター化ツール"
       },
       "category": "image",
       "component": "PngToSvg",
-      "keywords": "png svg bitmap vector convert trace",
+      "keywords": "png svg bitmap vector convert trace free online vectorize logo icon",
       "apiType": "convert",
       "apiEndpoint": "/png-to-svg/",
       "variants": [
@@ -3016,20 +3016,20 @@
         "ja": "JSONフォーマッター"
       },
       "description": {
-        "en": "Beautify, minify, and validate JSON data.",
-        "zh-CN": "美化、压缩和验证 JSON 数据。",
-        "zh-TW": "美化、壓縮和驗證 JSON 資料。",
-        "ja": "JSONデータの整形・圧縮・検証を行います。"
+        "en": "Free online JSON formatter and validator. Beautify, minify, and validate JSON data with syntax highlighting and instant error detection.",
+        "zh-CN": "免费在线 JSON 格式化与验证工具。美化、压缩和验证 JSON 数据，支持语法高亮和即时错误检测。",
+        "zh-TW": "免費線上 JSON 格式化與驗證工具。美化、壓縮和驗證 JSON 資料，支援語法高亮和即時錯誤偵測。",
+        "ja": "無料オンラインJSONフォーマッター＆バリデーター。構文ハイライト付きでJSONを整形・圧縮・検証。即時エラー検出。"
       },
       "subtitle": {
-        "en": "JSON Beautify & Validate",
-        "zh-CN": "JSON 美化与验证",
-        "zh-TW": "JSON 美化與驗證",
-        "ja": "JSON整形＆検証"
+        "en": "Free Online JSON Formatter & Validator",
+        "zh-CN": "免费在线 JSON 格式化与验证工具",
+        "zh-TW": "免費線上 JSON 格式化與驗證工具",
+        "ja": "無料オンラインJSONフォーマッター＆バリデーター"
       },
       "category": "dev",
       "component": "JsonFormatter",
-      "keywords": "json format beautify minify validate pretty print",
+      "keywords": "json format beautify minify validate pretty print online free",
       "apiType": "frontend",
       "variants": [
         {
@@ -3109,20 +3109,20 @@
         "ja": "JWTデバッガー"
       },
       "description": {
-        "en": "Decode, encode, and verify JSON Web Tokens.",
-        "zh-CN": "解码、编码和验证 JSON Web Token。",
-        "zh-TW": "解碼、編碼和驗證 JSON Web Token。",
-        "ja": "JSON Web Tokenのデコード・エンコード・検証を行います。"
+        "en": "Free online JWT debugger. Decode, encode, and verify JSON Web Tokens. Inspect header, payload, and signature without sending data to a server.",
+        "zh-CN": "免费在线 JWT 调试工具。解码、编码和验证 JSON Web Token，检查 header、payload 和签名，数据不上传服务器。",
+        "zh-TW": "免費線上 JWT 偵錯工具。解碼、編碼和驗證 JSON Web Token，檢查 header、payload 和簽名，資料不上傳伺服器。",
+        "ja": "無料オンラインJWTデバッガー。JSON Web Tokenのデコード・エンコード・検証。ヘッダー・ペイロード・署名をサーバーに送信せず確認。"
       },
       "subtitle": {
-        "en": "JWT Decode & Verify",
-        "zh-CN": "JWT 解码与验证",
-        "zh-TW": "JWT 解碼與驗證",
-        "ja": "JWTデコード＆検証"
+        "en": "Free Online JWT Decoder & Debugger",
+        "zh-CN": "免费在线 JWT 解码与调试工具",
+        "zh-TW": "免費線上 JWT 解碼與偵錯工具",
+        "ja": "無料オンラインJWTデコーダー＆デバッガー"
       },
       "category": "dev",
       "component": "JwtDebugger",
-      "keywords": "jwt json web token decode encode verify debug",
+      "keywords": "jwt json web token decode encode verify debug online free security",
       "apiType": "frontend",
       "variants": [
         {
@@ -3180,20 +3180,20 @@
         "ja": "テキストケース変換"
       },
       "description": {
-        "en": "Convert text between 8 different case formats.",
-        "zh-CN": "在 8 种不同大小写格式之间转换文本。",
-        "zh-TW": "在 8 種不同大小寫格式之間轉換文字。",
-        "ja": "8種類の異なるケース形式間でテキストを変換します。"
+        "en": "Free online text case converter. Transform text between uppercase, lowercase, camelCase, snake_case, kebab-case, PascalCase, and more instantly.",
+        "zh-CN": "免费在线文本大小写转换工具。即时在大写、小写、camelCase、snake_case、kebab-case、PascalCase 等格式间转换。",
+        "zh-TW": "免費線上文字大小寫轉換工具。即時在大寫、小寫、camelCase、snake_case、kebab-case、PascalCase 等格式間轉換。",
+        "ja": "無料オンラインテキストケース変換ツール。大文字・小文字・camelCase・snake_case・kebab-case・PascalCase等を即時変換。"
       },
       "subtitle": {
-        "en": "8 Case Conversion Modes",
-        "zh-CN": "8 种转换模式",
-        "zh-TW": "8 種轉換模式",
-        "ja": "8種類の変換モード"
+        "en": "Uppercase, Lowercase, CamelCase & More",
+        "zh-CN": "大写、小写、驼峰等多种格式转换",
+        "zh-TW": "大寫、小寫、駝峰等多種格式轉換",
+        "ja": "大文字・小文字・キャメルケース等変換"
       },
       "category": "dev",
       "component": "TextCase",
-      "keywords": "text case upper lower camel snake kebab pascal title convert",
+      "keywords": "text case upper lower camel snake kebab pascal title convert online free",
       "apiType": "frontend",
       "variants": [
         {
@@ -3251,20 +3251,20 @@
         "ja": "Base64テキストデコーダー"
       },
       "description": {
-        "en": "Decode Base64 encoded strings to plain text.",
-        "zh-CN": "将 Base64 编码的字符串解码为纯文本。",
-        "zh-TW": "將 Base64 編碼的字串解碼為純文字。",
-        "ja": "Base64エンコードされた文字列をプレーンテキストにデコードします。"
+        "en": "Free online Base64 text decoder. Decode Base64 encoded strings to plain text instantly. Supports standard and URL-safe Base64 variants.",
+        "zh-CN": "免费在线 Base64 文本解码工具。即时将 Base64 编码字符串解码为纯文本，支持标准和 URL 安全的 Base64 变体。",
+        "zh-TW": "免費線上 Base64 文字解碼工具。即時將 Base64 編碼字串解碼為純文字，支援標準和 URL 安全的 Base64 變體。",
+        "ja": "無料オンラインBase64テキストデコーダー。Base64エンコード文字列をプレーンテキストに即時デコード。標準・URLセーフBase64対応。"
       },
       "subtitle": {
-        "en": "Base64 String Decode",
-        "zh-CN": "Base64 字符串解码",
-        "zh-TW": "Base64 字串解碼",
-        "ja": "Base64文字列デコード"
+        "en": "Free Online Base64 Text Decoder",
+        "zh-CN": "免费在线 Base64 文本解码工具",
+        "zh-TW": "免費線上 Base64 文字解碼工具",
+        "ja": "無料オンラインBase64テキストデコーダー"
       },
       "category": "dev",
       "component": "Base64Decoder",
-      "keywords": "base64 decode text string convert",
+      "keywords": "base64 decode text string convert online free decoder url-safe",
       "apiType": "frontend",
       "variants": [
         {
@@ -3322,20 +3322,20 @@
         "ja": "Base64テキストエンコーダー"
       },
       "description": {
-        "en": "Encode plain text to Base64 string online.",
-        "zh-CN": "将纯文本编码为 Base64 字符串。",
-        "zh-TW": "將純文字編碼為 Base64 字串。",
-        "ja": "プレーンテキストを Base64 文字列にエンコードします。"
+        "en": "Free online Base64 text encoder. Encode plain text to Base64 strings instantly. Supports standard and URL-safe Base64 output formats.",
+        "zh-CN": "免费在线 Base64 文本编码工具。即时将纯文本编码为 Base64 字符串，支持标准和 URL 安全的 Base64 输出格式。",
+        "zh-TW": "免費線上 Base64 文字編碼工具。即時將純文字編碼為 Base64 字串，支援標準和 URL 安全的 Base64 輸出格式。",
+        "ja": "無料オンラインBase64テキストエンコーダー。プレーンテキストをBase64文字列に即時エンコード。標準・URLセーフBase64出力対応。"
       },
       "subtitle": {
-        "en": "Text to Base64 Encode",
-        "zh-CN": "文本转 Base64 编码",
-        "zh-TW": "文字轉 Base64 編碼",
-        "ja": "テキスト Base64 エンコード"
+        "en": "Free Online Base64 Text Encoder",
+        "zh-CN": "免费在线 Base64 文本编码工具",
+        "zh-TW": "免費線上 Base64 文字編碼工具",
+        "ja": "無料オンラインBase64テキストエンコーダー"
       },
       "category": "dev",
       "component": "Base64Encoder",
-      "keywords": "base64 encode text string convert",
+      "keywords": "base64 encode text string convert online free encoder url-safe",
       "apiType": "frontend",
       "variants": [
         {
@@ -3372,20 +3372,20 @@
         "ja": "UUIDジェネレーター"
       },
       "description": {
-        "en": "Generate UUID v4 and v7 identifiers.",
-        "zh-CN": "生成 UUID v4 和 v7 标识符。",
-        "zh-TW": "產生 UUID v4 和 v7 識別碼。",
-        "ja": "UUID v4およびv7識別子を生成します。"
+        "en": "Free online UUID generator. Generate RFC 4122 compliant UUID v4 and v7 identifiers instantly. Batch generation and one-click copy supported.",
+        "zh-CN": "免费在线 UUID 生成器。即时生成符合 RFC 4122 的 UUID v4 和 v7 标识符，支持批量生成和一键复制。",
+        "zh-TW": "免費線上 UUID 產生器。即時產生符合 RFC 4122 的 UUID v4 和 v7 識別碼，支援批量產生和一鍵複製。",
+        "ja": "無料オンラインUUIDジェネレーター。RFC 4122準拠のUUID v4・v7を即時生成。バッチ生成とワンクリックコピー対応。"
       },
       "subtitle": {
-        "en": "UUID v4/v7 Generator",
-        "zh-CN": "UUID v4/v7 生成",
-        "zh-TW": "UUID v4/v7 產生",
-        "ja": "UUID v4/v7生成"
+        "en": "Free Online UUID v4 / v7 Generator",
+        "zh-CN": "免费在线 UUID v4 / v7 生成器",
+        "zh-TW": "免費線上 UUID v4 / v7 產生器",
+        "ja": "無料オンラインUUID v4/v7ジェネレーター"
       },
       "category": "dev",
       "component": "UuidGenerator",
-      "keywords": "uuid guid v4 v7 generate unique identifier",
+      "keywords": "uuid guid v4 v7 generate unique identifier online free batch rfc4122",
       "apiType": "frontend",
       "variants": [
         {
@@ -3681,20 +3681,20 @@
         "ja": "ファイルサイズ変換"
       },
       "description": {
-        "en": "Convert between Bit, Bytes, KB, MB, GB, and TB.",
-        "zh-CN": "在 Bit、Bytes、KB、MB、GB 和 TB 之间换算。",
-        "zh-TW": "在 Bit、Bytes、KB、MB、GB 和 TB 之間換算。",
-        "ja": "Bit、Bytes、KB、MB、GB、TB間で変換します。"
+        "en": "Free online file size converter. Instantly convert between Bit, Byte, KB, MB, GB, TB, and PB. Essential for developers and system administrators.",
+        "zh-CN": "免费在线文件大小换算工具。即时在 Bit、Byte、KB、MB、GB、TB、PB 之间换算，开发者和系统管理员必备。",
+        "zh-TW": "免費線上檔案大小換算工具。即時在 Bit、Byte、KB、MB、GB、TB、PB 之間換算，開發者和系統管理員必備。",
+        "ja": "無料オンラインファイルサイズ変換ツール。Bit・Byte・KB・MB・GB・TB・PB間を即時変換。開発者・システム管理者必携。"
       },
       "subtitle": {
-        "en": "Bit/Bytes/KB/MB/GB/TB",
-        "zh-CN": "Bit/Bytes/KB/MB/GB/TB",
-        "zh-TW": "Bit/Bytes/KB/MB/GB/TB",
-        "ja": "Bit/Bytes/KB/MB/GB/TB"
+        "en": "Bit, Byte, KB, MB, GB, TB Converter",
+        "zh-CN": "Bit、Byte、KB、MB、GB、TB 换算器",
+        "zh-TW": "Bit、Byte、KB、MB、GB、TB 換算器",
+        "ja": "Bit・Byte・KB・MB・GB・TB変換ツール"
       },
       "category": "dev",
       "component": "FileSizeConverter",
-      "keywords": "file size convert bit byte kb mb gb tb",
+      "keywords": "file size convert bit byte kb mb gb tb pb online free calculator",
       "apiType": "frontend",
       "variants": [
         {
@@ -3752,20 +3752,20 @@
         "ja": "中国語からピンインへ"
       },
       "description": {
-        "en": "Convert Chinese characters to Pinyin romanization.",
-        "zh-CN": "将中文汉字转换为拼音。",
-        "zh-TW": "將中文漢字轉換為拼音。",
-        "ja": "中国語の漢字をピンインのローマ字表記に変換します。"
+        "en": "Free online Chinese to Pinyin converter. Convert Hanzi to Pinyin with tone marks or numbers. Supports Simplified and Traditional Chinese.",
+        "zh-CN": "免费在线中文转拼音工具。将汉字转换为带声调符号或数字声调的拼音，支持简体和繁体中文。",
+        "zh-TW": "免費線上中文轉拼音工具。將漢字轉換為帶聲調符號或數字聲調的拼音，支援簡體和繁體中文。",
+        "ja": "無料オンライン中国語→ピンイン変換ツール。漢字を声調記号または数字付きピンインに変換。簡体字・繁体字対応。"
       },
       "subtitle": {
-        "en": "Hanzi to Pinyin",
-        "zh-CN": "汉字转拼音",
-        "zh-TW": "漢字轉拼音",
-        "ja": "漢字からピンインへ"
+        "en": "Hanzi to Pinyin Romanization Converter",
+        "zh-CN": "汉字转拼音注音工具",
+        "zh-TW": "漢字轉拼音注音工具",
+        "ja": "漢字からピンインローマ字変換ツール"
       },
       "category": "dev",
       "component": "ChineseToPinyin",
-      "keywords": "chinese pinyin hanzi romanization convert mandarin",
+      "keywords": "chinese pinyin hanzi romanization convert mandarin tone free online simplified traditional",
       "apiType": "frontend",
       "apiEndpoint": "/chinese-to-pinyin/api",
       "variants": [
@@ -3824,20 +3824,20 @@
         "ja": "カラーコンバーター"
       },
       "description": {
-        "en": "Convert colors between Hex, RGB, and HSL formats.",
-        "zh-CN": "在 Hex、RGB 和 HSL 格式之间转换颜色值。",
-        "zh-TW": "在 Hex、RGB 和 HSL 格式之間轉換顏色值。",
-        "ja": "Hex、RGB、HSL形式間でカラー値を変換します。"
+        "en": "Free online color converter. Convert colors between HEX, RGB, HSL, and RGBA formats with live preview. Perfect for web designers and CSS developers.",
+        "zh-CN": "免费在线色值转换工具。在 HEX、RGB、HSL 和 RGBA 格式之间转换颜色，实时预览，网页设计和 CSS 开发必备。",
+        "zh-TW": "免費線上色值轉換工具。在 HEX、RGB、HSL 和 RGBA 格式之間轉換顏色，即時預覽，網頁設計和 CSS 開發必備。",
+        "ja": "無料オンラインカラーコンバーター。HEX・RGB・HSL・RGBAを即時変換。ライブプレビュー付き。Webデザイン・CSS開発に最適。"
       },
       "subtitle": {
-        "en": "Hex/RGB/HSL Conversion",
-        "zh-CN": "Hex/RGB/HSL 转换",
-        "zh-TW": "Hex/RGB/HSL 轉換",
-        "ja": "Hex/RGB/HSL変換"
+        "en": "HEX, RGB, HSL Color Converter",
+        "zh-CN": "HEX、RGB、HSL 色值转换器",
+        "zh-TW": "HEX、RGB、HSL 色值轉換器",
+        "ja": "HEX・RGB・HSLカラーコンバーター"
       },
       "category": "dev",
       "component": "ColorConverter",
-      "keywords": "color convert hex rgb hsl css picker",
+      "keywords": "color convert hex rgb hsl rgba css picker online free web design",
       "apiType": "frontend",
       "apiEndpoint": "/color-converter/api",
       "variants": [
@@ -3896,20 +3896,20 @@
         "ja": "動画をMP4に変換"
       },
       "description": {
-        "en": "Convert various video formats to MP4.",
-        "zh-CN": "将各种视频格式转换为 MP4。",
-        "zh-TW": "將各種影片格式轉換為 MP4。",
-        "ja": "さまざまな動画形式をMP4に変換します。"
+        "en": "Free online video to MP4 converter. Convert AVI, MKV, MOV, WebM, and other video formats to MP4. Fast conversion, no file size limits.",
+        "zh-CN": "免费在线视频转 MP4 工具。将 AVI、MKV、MOV、WebM 等视频格式转换为 MP4，转换快速，无文件大小限制。",
+        "zh-TW": "免費線上影片轉 MP4 工具。將 AVI、MKV、MOV、WebM 等影片格式轉換為 MP4，轉換快速，無檔案大小限制。",
+        "ja": "無料オンライン動画→MP4コンバーター。AVI・MKV・MOV・WebM等の動画形式をMP4に変換。高速変換、ファイルサイズ制限なし。"
       },
       "subtitle": {
-        "en": "Video Format Conversion",
-        "zh-CN": "视频格式转换",
-        "zh-TW": "影片格式轉換",
-        "ja": "動画形式変換"
+        "en": "Free Online Video to MP4 Converter",
+        "zh-CN": "免费在线视频转 MP4 转换器",
+        "zh-TW": "免費線上影片轉 MP4 轉換器",
+        "ja": "無料オンライン動画MP4変換ツール"
       },
       "category": "video",
       "component": "ToMp4",
-      "keywords": "video mp4 convert format avi mkv mov webm",
+      "keywords": "video mp4 convert format avi mkv mov webm free online converter",
       "apiType": "convert",
       "apiEndpoint": "/to-mp4/",
       "variants": [
@@ -4369,20 +4369,20 @@
         "ja": "EXIFビューアー"
       },
       "description": {
-        "en": "View EXIF metadata embedded in image files.",
-        "zh-CN": "查看图片文件中嵌入的 EXIF 元数据。",
-        "zh-TW": "查看圖片檔案中嵌入的 EXIF 中繼資料。",
-        "ja": "画像ファイルに埋め込まれたEXIFメタデータを表示します。"
+        "en": "Free online EXIF viewer. Read EXIF metadata from JPG, PNG, and TIFF photos. View camera settings, GPS location, timestamp, and more.",
+        "zh-CN": "免费在线 EXIF 查看工具。读取 JPG、PNG 和 TIFF 照片的 EXIF 元数据，查看相机设置、GPS 位置、拍摄时间等信息。",
+        "zh-TW": "免費線上 EXIF 查看工具。讀取 JPG、PNG 和 TIFF 照片的 EXIF 中繼資料，查看相機設定、GPS 位置、拍攝時間等資訊。",
+        "ja": "無料オンラインEXIFビューアー。JPG・PNG・TIFF写真のEXIFメタデータを読み取り。カメラ設定・GPS位置・タイムスタンプ等を確認。"
       },
       "subtitle": {
-        "en": "Image Metadata Viewer",
-        "zh-CN": "图片元数据查看",
-        "zh-TW": "圖片中繼資料檢視",
-        "ja": "画像メタデータビューアー"
+        "en": "Free Online EXIF Metadata Viewer",
+        "zh-CN": "免费在线 EXIF 元数据查看工具",
+        "zh-TW": "免費線上 EXIF 中繼資料查看工具",
+        "ja": "無料オンラインEXIFメタデータビューアー"
       },
       "category": "image",
       "component": "ExifViewer",
-      "keywords": "exif metadata image photo gps camera info",
+      "keywords": "exif metadata image photo gps camera info viewer free online jpg png tiff",
       "apiType": "convert",
       "apiEndpoint": "/exif-viewer/api",
       "variants": [
@@ -4513,20 +4513,20 @@
         "ja": "URLエンコーダー"
       },
       "description": {
-        "en": "Encode strings for safe use in URLs.",
-        "zh-CN": "将字符串编码为 URL 安全格式。",
-        "zh-TW": "將字串編碼為 URL 安全格式。",
-        "ja": "文字列をURL安全な形式にエンコードします。"
+        "en": "Free online URL encoder. Percent-encode strings for safe use in URLs and query parameters. Supports full URI and component encoding modes.",
+        "zh-CN": "免费在线 URL 编码工具。对字符串进行百分号编码，安全用于 URL 和查询参数，支持完整 URI 和组件编码模式。",
+        "zh-TW": "免費線上 URL 編碼工具。對字串進行百分號編碼，安全用於 URL 和查詢參數，支援完整 URI 和元件編碼模式。",
+        "ja": "無料オンラインURLエンコーダー。URLとクエリパラメーターで安全に使えるようパーセントエンコード。完全URI・コンポーネントエンコード対応。"
       },
       "subtitle": {
-        "en": "URL String Encoding",
-        "zh-CN": "URL 字符串编码",
-        "zh-TW": "URL 字串編碼",
-        "ja": "URL文字列エンコード"
+        "en": "Free Online URL Percent-Encoder",
+        "zh-CN": "免费在线 URL 百分号编码工具",
+        "zh-TW": "免費線上 URL 百分號編碼工具",
+        "ja": "無料オンラインURLパーセントエンコーダー"
       },
       "category": "dev",
       "component": "UrlEncoder",
-      "keywords": "url encode percent encoding uri escape",
+      "keywords": "url encode percent encoding uri escape online free query string component",
       "apiType": "frontend",
       "variants": [
         {
@@ -4589,20 +4589,20 @@
         "ja": "URLデコーダー"
       },
       "description": {
-        "en": "Decode URL-encoded strings back to readable text.",
-        "zh-CN": "将 URL 编码的字符串解码为可读文本。",
-        "zh-TW": "將 URL 編碼的字串解碼為可讀文字。",
-        "ja": "URLエンコードされた文字列を読み取り可能なテキストにデコードします。"
+        "en": "Free online URL decoder. Decode percent-encoded URL strings back to readable text instantly. Supports full URI and component decoding modes.",
+        "zh-CN": "免费在线 URL 解码工具。即时将百分号编码的 URL 字符串解码为可读文本，支持完整 URI 和组件解码模式。",
+        "zh-TW": "免費線上 URL 解碼工具。即時將百分號編碼的 URL 字串解碼為可讀文字，支援完整 URI 和元件解碼模式。",
+        "ja": "無料オンラインURLデコーダー。パーセントエンコードされたURL文字列を即時デコード。完全URI・コンポーネントデコード対応。"
       },
       "subtitle": {
-        "en": "URL String Decoding",
-        "zh-CN": "URL 字符串解码",
-        "zh-TW": "URL 字串解碼",
-        "ja": "URL文字列デコード"
+        "en": "Free Online URL Percent-Decoder",
+        "zh-CN": "免费在线 URL 百分号解码工具",
+        "zh-TW": "免費線上 URL 百分號解碼工具",
+        "ja": "無料オンラインURLパーセントデコーダー"
       },
       "category": "dev",
       "component": "UrlDecoder",
-      "keywords": "url decode percent decoding uri unescape",
+      "keywords": "url decode percent decoding uri unescape online free query string",
       "apiType": "frontend",
       "variants": [
         {
@@ -4883,20 +4883,20 @@
         "ja": "画像からBase64へ"
       },
       "description": {
-        "en": "Encode images to Base64 data URI strings.",
-        "zh-CN": "将图片编码为 Base64 数据 URI 字符串。",
-        "zh-TW": "將圖片編碼為 Base64 資料 URI 字串。",
-        "ja": "画像をBase64データURIの文字列にエンコードします。"
+        "en": "Free online image to Base64 encoder. Convert PNG, JPG, GIF, and SVG images to Base64 data URI strings for embedding in HTML or CSS.",
+        "zh-CN": "免费在线图片转 Base64 编码工具。将 PNG、JPG、GIF 和 SVG 图片转换为 Base64 数据 URI，可直接嵌入 HTML 或 CSS 中。",
+        "zh-TW": "免費線上圖片轉 Base64 編碼工具。將 PNG、JPG、GIF 和 SVG 圖片轉換為 Base64 資料 URI，可直接嵌入 HTML 或 CSS 中。",
+        "ja": "無料オンライン画像→Base64エンコーダー。PNG・JPG・GIF・SVGをBase64データURIに変換。HTMLやCSSへの埋め込みに最適。"
       },
       "subtitle": {
-        "en": "Image Base64 Encoding",
-        "zh-CN": "图片 Base64 编码",
-        "zh-TW": "圖片 Base64 編碼",
-        "ja": "画像Base64エンコード"
+        "en": "Free Image to Base64 Data URI Encoder",
+        "zh-CN": "免费图片转 Base64 数据 URI 编码工具",
+        "zh-TW": "免費圖片轉 Base64 資料 URI 編碼工具",
+        "ja": "無料画像→Base64データURIエンコーダー"
       },
       "category": "image",
       "component": "Base64EncoderImg",
-      "keywords": "base64 image encode data uri png jpg",
+      "keywords": "base64 image encode data uri png jpg gif svg free online html css embed",
       "apiType": "frontend",
       "variants": [
         {
@@ -4959,20 +4959,20 @@
         "ja": "Base64から画像へ"
       },
       "description": {
-        "en": "Decode Base64 data URI strings back to images.",
-        "zh-CN": "将 Base64 数据 URI 字符串解码为图片。",
-        "zh-TW": "將 Base64 資料 URI 字串解碼為圖片。",
-        "ja": "Base64データURI文字列を画像にデコードします。"
+        "en": "Free online Base64 to image decoder. Convert Base64 data URI strings back to viewable and downloadable images. Supports PNG, JPG, GIF, WebP.",
+        "zh-CN": "免费在线 Base64 转图片解码工具。将 Base64 数据 URI 字符串解码为可查看和下载的图片，支持 PNG、JPG、GIF、WebP。",
+        "zh-TW": "免費線上 Base64 轉圖片解碼工具。將 Base64 資料 URI 字串解碼為可查看和下載的圖片，支援 PNG、JPG、GIF、WebP。",
+        "ja": "無料オンラインBase64→画像デコーダー。Base64データURI文字列を表示・ダウンロード可能な画像にデコード。PNG・JPG・GIF・WebP対応。"
       },
       "subtitle": {
-        "en": "Base64 Image Decoding",
-        "zh-CN": "Base64 图片解码",
-        "zh-TW": "Base64 圖片解碼",
-        "ja": "Base64画像デコード"
+        "en": "Free Online Base64 to Image Decoder",
+        "zh-CN": "免费在线 Base64 转图片解码工具",
+        "zh-TW": "免費線上 Base64 轉圖片解碼工具",
+        "ja": "無料オンラインBase64→画像デコーダー"
       },
       "category": "image",
       "component": "Base64DecoderImg",
-      "keywords": "base64 image decode data uri preview",
+      "keywords": "base64 image decode data uri preview png jpg gif webp free online download",
       "apiType": "frontend",
       "variants": [
         {
