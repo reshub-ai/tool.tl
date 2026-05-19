@@ -5,6 +5,10 @@ pages_build_output_dir = "./dist"
 
 [vars]
 PUBLIC_API_BASE = "https://api.tool.tl"
+PUBLIC_CONTENT_API_BASE = "https://api.tool.tl/content"
+PUBLIC_NETWORK_API_BASE = "https://api.tool.tl/network"
+PUBLIC_GA_ID = "G-8SLSZV6G0S"
+PUBLIC_ADSENSE_ID = "pub-9845089349130720"
 
 # KV namespace for caching (optional, configure after first deploy)
 # [[kv_namespaces]]
