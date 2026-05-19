@@ -1,0 +1,130 @@
+---
+export const prerender = false;
+
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import { fetchCategories, fetchArticles } from '@/lib/content-api';
+import { t } from '@/i18n/utils';
+import type { Locale } from '@/i18n/config';
+
+const locale: Locale = 'zh-TW';
+const { category: categorySlug } = Astro.params;
+
+const page = Number(Astro.url.searchParams.get('page')) || 1;
+
+let category: any = null;
+let articles = { articles: [] as any[], total: 0, pages: 0 };
+
+try {
+  const categories = await fetchCategories(locale);
+  category = categories.find((c: any) => c.slug === categorySlug);
+  if (category) {
+    articles = await fetchArticles(page, 20, category.id, locale);
+  }
+} catch (e) {}
+
+if (!category) {
+  return Astro.redirect('/zh-TW/topics');
+}
+---
+
+<BaseLayout
+  title={`${category.name} | ${t('topics.title', locale)}`}
+  description={category.desc || t('topics.subtitle', locale)}
+  locale={locale}
+  canonicalPath={`topics/${categorySlug}`}
+>
+  <Fragment slot="header">
+    <Header locale={locale}>
+      <LanguageSwitcher slot="language-switcher" locale={locale} currentPath={Astro.url.pathname} />
+      <LanguageSwitcher slot="language-switcher-mobile" locale={locale} currentPath={Astro.url.pathname} />
+    </Header>
+  </Fragment>
+
+  <div class="site-shell mx-auto px-4 sm:px-6 py-10">
+    <AdSlot name="blog-top" format="horizontal" />
+
+    <nav class="flex items-center gap-2 text-sm mb-6 mt-4" style="color: var(--color-text-secondary)">
+      <a href="/zh-TW" style="color: var(--color-primary)">{t('breadcrumb.home', locale)}</a>
+      <span>/</span>
+      <a href="/zh-TW/topics" style="color: var(--color-primary)">{t('topics.title', locale)}</a>
+      <span>/</span>
+      <span style="color: var(--color-text)">{category.name}</span>
+    </nav>
+
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--color-text)">
+      {category.name}
+    </h1>
+    {category.desc && (
+      <p class="mb-2" style="color: var(--color-text-secondary)">{category.desc}</p>
+    )}
+    <p class="text-sm mb-8" style="color: var(--color-text-secondary)">
+      {category.article_count} {t('topics.articles', locale)}
+    </p>
+
+    {articles.articles.length === 0 ? (
+      <p class="py-10 text-center" style="color: var(--color-text-secondary)">
+        {t('blog.no_articles', locale)}
+      </p>
+    ) : (
+      <div class="space-y-6">
+        {articles.articles.map((article: any, index: number) => (
+          <>
+            <article
+            class="rounded-xl border p-5"
+            style="background-color: var(--color-card-bg); border-color: var(--color-border)"
+          >
+            <h2 class="text-xl font-bold mb-2">
+              <a href={`/zh-TW/blog/${article.slug}`} class="hover:underline" style="color: var(--color-text)">
+                {article.title}
+              </a>
+            </h2>
+            {article.summary && (
+              <p class="text-sm mb-3 line-clamp-3" style="color: var(--color-text-secondary)">
+                {article.summary}
+              </p>
+            )}
+            <div class="flex items-center gap-4 text-sm" style="color: var(--color-text-secondary)">
+              <time>{article.created_at?.slice(0, 10)}</time>
+              <span>{article.views} {t('blog.views', locale)}</span>
+            </div>
+          </article>
+            {index === 1 && <AdSlot name="in-feed" format="fluid" />}
+          </>
+        ))}
+      </div>
+    )}
+
+    {articles.pages > 1 && (
+      <nav class="flex justify-center gap-4 mt-10">
+        {page > 1 && (
+          <a
+            href={`/zh-TW/topics/${categorySlug}?page=${page - 1}`}
+            class="px-4 py-2 rounded border"
+            style="border-color: var(--color-border); color: var(--color-primary)"
+          >
+            {t('blog.prev', locale)}
+          </a>
+        )}
+        {page < articles.pages && (
+          <a
+            href={`/zh-TW/topics/${categorySlug}?page=${page + 1}`}
+            class="px-4 py-2 rounded border"
+            style="border-color: var(--color-border); color: var(--color-primary)"
+          >
+            {t('blog.next', locale)}
+          </a>
+        )}
+      </nav>
+    )}
+
+    <AdSlot name="blog-bottom" format="horizontal" />
+  </div>
+
+  <Fragment slot="footer">
+    <Footer locale={locale} />
+  </Fragment>
+</BaseLayout>

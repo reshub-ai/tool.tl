@@ -1,0 +1,244 @@
+---
+import ToolPageLayout from '@/layouts/ToolPageLayout.astro';
+import type { Locale } from '@/i18n/config';
+import { t, getLocalizedPath } from '@/i18n/utils';
+import { getAllTools, getToolBySlug, getToolName, getToolDescription, type Tool } from '@/lib/tools';
+import FileUploadTool from '@/components/tools/FileUploadTool';
+import TextProcessTool from '@/components/tools/TextProcessTool';
+import NetworkTool from '@/components/tools/NetworkTool';
+import GeneratorTool from '@/components/tools/GeneratorTool';
+import EmailDiagnosticsTool from '@/components/tools/EmailDiagnosticsTool';
+import ExchangeRateTool from '@/components/tools/ExchangeRateTool';
+import BaseConverterTool from '@/components/tools/BaseConverterTool';
+import ChecksumCalculatorTool from '@/components/tools/ChecksumCalculatorTool';
+import HexArithmeticTool from '@/components/tools/HexArithmeticTool';
+import CrcCalculatorTool from '@/components/tools/CrcCalculatorTool';
+import TextStatsTool from '@/components/tools/TextStatsTool';
+import TextProcessorTool from '@/components/tools/TextProcessorTool';
+import Base64DecoderImgTool from '@/components/tools/Base64DecoderImgTool';
+import FileSizeConverterTool from '@/components/tools/FileSizeConverterTool';
+import JsonFormatterTool from '@/components/tools/JsonFormatterTool';
+import VideoConverterTool from '@/components/tools/VideoConverterTool';
+import JwtDebuggerTool from '@/components/tools/JwtDebuggerTool';
+import WebpConverterTool from '@/components/tools/WebpConverterTool';
+import CompressPdfTool from '@/components/tools/CompressPdfTool';
+import GifSplitTool from '@/components/tools/GifSplitTool';
+import TotpGeneratorTool from '@/components/tools/TotpGeneratorTool';
+import TextCaseTool from '@/components/tools/TextCaseTool';
+import Base64EncoderImgTool from '@/components/tools/Base64EncoderImgTool';
+import MortgageCalculatorTool from '@/components/tools/MortgageCalculatorTool';
+import ROICalculatorTool from '@/components/tools/ROICalculatorTool';
+import ProfitMarginTool from '@/components/tools/ProfitMarginTool';
+import BreakEvenTool from '@/components/tools/BreakEvenTool';
+import SalaryAfterTaxTool from '@/components/tools/SalaryAfterTaxTool';
+import ImageCompressorTool from '@/components/tools/ImageCompressorTool';
+import SaasChurnTool from '@/components/tools/SaasChurnTool';
+import LtvCalculatorTool from '@/components/tools/LtvCalculatorTool';
+import WebRTCLeakTestTool from '@/components/tools/WebRTCLeakTestTool';
+import ResizeImageTool from '@/components/tools/ResizeImageTool';
+import LoanAmortizationTool from '@/components/tools/LoanAmortizationTool';
+import BrowserFingerprintTool from '@/components/tools/BrowserFingerprintTool';
+import ImageToPdfTool from '@/components/tools/ImageToPdfTool';
+import OgImageGeneratorTool from '@/components/tools/OgImageGeneratorTool';
+import CarInsuranceCalculatorTool from '@/components/tools/CarInsuranceCalculatorTool';
+import MergePdfTool from '@/components/tools/MergePdfTool';
+import SplitPdfTool from '@/components/tools/SplitPdfTool';
+import DnsLeakTestTool from '@/components/tools/DnsLeakTestTool';
+import CompoundInterestTool from '@/components/tools/CompoundInterestTool';
+import CreditCardPayoffTool from '@/components/tools/CreditCardPayoffTool';
+import TaxBracketTool from '@/components/tools/TaxBracketTool';
+import RetirementCalculatorTool from '@/components/tools/RetirementCalculatorTool';
+import NetWorthCalculatorTool from '@/components/tools/NetWorthCalculatorTool';
+import BMICalculatorTool from '@/components/tools/BMICalculatorTool';
+import InvoiceGeneratorTool from '@/components/tools/InvoiceGeneratorTool';
+
+const locale: Locale = 'zh-CN';
+
+export function getStaticPaths() {
+  const tools = getAllTools();
+  return tools.map((tool) => ({
+    params: { slug: tool.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const tool = getToolBySlug(slug!)!;
+const name = getToolName(tool, locale);
+const description = getToolDescription(tool, locale);
+const subtitle = tool.subtitle?.[locale] || tool.subtitle?.en || '';
+
+const breadcrumbs = [
+  { label: t('breadcrumb.home', locale), href: `/${locale}` },
+  { label: t(`nav.category.${tool.category}`, locale), href: `/${locale}#${tool.category}` },
+  { label: name },
+];
+
+const toolProps = {
+  slug: tool.slug,
+  apiType: tool.apiType,
+  apiEndpoint: tool.apiEndpoint || '',
+  locale,
+};
+---
+
+<ToolPageLayout
+  title={name}
+  description={description}
+  locale={locale}
+  tool={tool}
+  canonicalPath={tool.slug}
+  breadcrumbs={breadcrumbs}
+>
+  <h1 class="text-2xl font-bold mb-2" style="color: var(--color-text)">{name}</h1>
+  {subtitle && <p class="mb-6" style="color: var(--color-text-secondary)">{subtitle}</p>}
+
+  {tool.category === 'email' && (
+    <EmailDiagnosticsTool client:load {...toolProps} />
+  )}
+  {tool.apiType === 'network' && tool.category !== 'email' && tool.component !== 'DnsLeakTest' && (
+    <NetworkTool client:load {...toolProps} />
+  )}
+  {tool.apiType === 'convert' && tool.category !== 'email' && tool.component !== 'ToMp4' && tool.component !== 'WebpTo' && tool.component !== 'CompressPdf' && tool.component !== 'GifSplit' && tool.component !== 'MergePdf' && tool.component !== 'SplitPdf' && (
+    <FileUploadTool client:load {...toolProps} />
+  )}
+  {tool.component === 'FileSizeConverter' && (
+    <FileSizeConverterTool client:load {...toolProps} />
+  )}
+  {tool.component === 'JsonFormatter' && (
+    <JsonFormatterTool client:load {...toolProps} />
+  )}
+  {tool.component === 'Base64DecoderImg' && (
+    <Base64DecoderImgTool client:load {...toolProps} />
+  )}
+  {tool.component === 'ToMp4' && (
+    <VideoConverterTool client:load {...toolProps} />
+  )}
+  {tool.component === 'JwtDebugger' && (
+    <JwtDebuggerTool client:load {...toolProps} />
+  )}
+  {tool.component === 'WebpTo' && (
+    <WebpConverterTool client:load {...toolProps} />
+  )}
+  {tool.component === 'CompressPdf' && (
+    <CompressPdfTool client:load {...toolProps} />
+  )}
+  {tool.component === 'GifSplit' && (
+    <GifSplitTool client:load {...toolProps} />
+  )}
+  {tool.component === 'TotpGenerator' && (
+    <TotpGeneratorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'TextCase' && (
+    <TextCaseTool client:load {...toolProps} />
+  )}
+  {tool.component === 'Base64EncoderImg' && (
+    <Base64EncoderImgTool client:load {...toolProps} />
+  )}
+  {tool.component === 'MortgageCalculator' && (
+    <MortgageCalculatorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'ROICalculator' && (
+    <ROICalculatorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'ProfitMargin' && (
+    <ProfitMarginTool client:load {...toolProps} />
+  )}
+  {tool.component === 'BreakEven' && (
+    <BreakEvenTool client:load {...toolProps} />
+  )}
+  {tool.component === 'SalaryAfterTax' && (
+    <SalaryAfterTaxTool client:load {...toolProps} />
+  )}
+  {tool.component === 'ImageCompressor' && (
+    <ImageCompressorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'SaasChurn' && (
+    <SaasChurnTool client:load {...toolProps} />
+  )}
+  {tool.component === 'LtvCalculator' && (
+    <LtvCalculatorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'WebRTCLeakTest' && (
+    <WebRTCLeakTestTool client:load {...toolProps} />
+  )}
+  {tool.component === 'ResizeImage' && (
+    <ResizeImageTool client:load {...toolProps} />
+  )}
+  {tool.component === 'LoanAmortization' && (
+    <LoanAmortizationTool client:load {...toolProps} />
+  )}
+  {tool.component === 'BrowserFingerprint' && (
+    <BrowserFingerprintTool client:load {...toolProps} />
+  )}
+  {tool.component === 'ImageToPdf' && (
+    <ImageToPdfTool client:load {...toolProps} />
+  )}
+  {tool.component === 'OgImageGenerator' && (
+    <OgImageGeneratorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'CarInsuranceCalculator' && (
+    <CarInsuranceCalculatorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'MergePdf' && (
+    <MergePdfTool client:load {...toolProps} />
+  )}
+  {tool.component === 'SplitPdf' && (
+    <SplitPdfTool client:load {...toolProps} />
+  )}
+  {tool.component === 'DnsLeakTest' && (
+    <DnsLeakTestTool client:load {...toolProps} />
+  )}
+  {tool.component === 'CompoundInterest' && (
+    <CompoundInterestTool client:load {...toolProps} />
+  )}
+  {tool.component === 'CreditCardPayoff' && (
+    <CreditCardPayoffTool client:load {...toolProps} />
+  )}
+  {tool.component === 'TaxBracket' && (
+    <TaxBracketTool client:load {...toolProps} />
+  )}
+  {tool.component === 'RetirementCalculator' && (
+    <RetirementCalculatorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'NetWorthCalculator' && (
+    <NetWorthCalculatorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'BMICalculator' && (
+    <BMICalculatorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'InvoiceGenerator' && (
+    <InvoiceGeneratorTool client:load {...toolProps} />
+  )}
+    {tool.component === 'CrcCalculator' && (
+    <CrcCalculatorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'HexArithmetic' && (
+    <HexArithmeticTool client:load {...toolProps} />
+  )}
+  {tool.component === 'TextStats' && (
+    <TextStatsTool client:load {...toolProps} />
+  )}
+  {tool.component === 'TextProcessor' && (
+    <TextProcessorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'ChecksumCalculator' && (
+    <ChecksumCalculatorTool client:load {...toolProps} />
+  )}
+  {tool.component === 'BaseConverter' && (
+    <BaseConverterTool client:load {...toolProps} />
+  )}
+  {tool.apiType === 'frontend' && (tool.component === 'UrlDecoder' || tool.component === 'UrlEncoder' || (tool.category === 'dev' && tool.component !== 'ChineseToPinyin' && tool.component !== 'ColorConverter' && tool.component !== 'BaseConverter' && tool.component !== 'ChecksumCalculator' && tool.component !== 'HexArithmetic' && tool.component !== 'CrcCalculator' && tool.component !== 'TextStats' && tool.component !== 'TextProcessor' && tool.component !== 'FileSizeConverter' && tool.component !== 'JsonFormatter' && tool.component !== 'JwtDebugger' && tool.component !== 'TextCase' && tool.component !== 'OgImageGenerator')) && (
+    <TextProcessTool client:load {...toolProps} component={tool.component} />
+  )}
+  {tool.component === 'ExchangeRate' && (
+    <ExchangeRateTool client:load {...toolProps} />
+  )}
+  {tool.apiType === 'frontend' && tool.component !== 'ExchangeRate' && tool.component !== 'Base64DecoderImg' && tool.component !== 'Base64EncoderImg' && tool.component !== 'UrlDecoder' && tool.component !== 'UrlEncoder' && tool.component !== 'TotpGenerator' && tool.component !== 'MortgageCalculator' && tool.component !== 'ROICalculator' && tool.component !== 'ProfitMargin' && tool.component !== 'BreakEven' && tool.component !== 'SalaryAfterTax' && tool.component !== 'ImageCompressor' && tool.component !== 'SaasChurn' && tool.component !== 'LtvCalculator' && tool.component !== 'WebRTCLeakTest' && tool.component !== 'ResizeImage' && tool.component !== 'LoanAmortization' && tool.component !== 'BrowserFingerprint' && tool.component !== 'ImageToPdf' && tool.component !== 'OgImageGenerator' && tool.component !== 'CarInsuranceCalculator' && tool.component !== 'TaxBracket' && tool.component !== 'CreditCardPayoff' && tool.component !== 'CompoundInterest' && tool.component !== 'RetirementCalculator' && tool.component !== 'NetWorthCalculator' && tool.component !== 'BMICalculator' && tool.component !== 'InvoiceGenerator' && (tool.category !== 'dev' || tool.component === 'ChineseToPinyin' || tool.component === 'ColorConverter') && (
+    <GeneratorTool client:load {...toolProps} component={tool.component} />
+  )}
+
+  <Fragment slot="seo-content">
+    <h2>{t('tool.what_is', locale).replace('{name}', name)}</h2>
+    <p>{description}</p>
+  </Fragment>
+</ToolPageLayout>

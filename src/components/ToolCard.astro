@@ -1,0 +1,57 @@
+---
+import type { Locale } from '@/i18n/config';
+import { getLocalizedPath } from '@/i18n/utils';
+import type { Tool } from '@/lib/tools';
+import { getToolName, getToolDescription } from '@/lib/tools';
+
+interface Props {
+  tool: Tool;
+  locale: Locale;
+}
+
+const { tool, locale } = Astro.props;
+const name = getToolName(tool, locale);
+const desc = getToolDescription(tool, locale);
+const subtitle = tool.subtitle[locale] || tool.subtitle.en;
+const href = getLocalizedPath(tool.slug, locale);
+
+const categoryIcons: Record<string, string> = {
+  pdf: '📄',
+  image: '🖼️',
+  network: '🌐',
+  email: '📧',
+  dev: '🛠',
+  video: '🎬',
+  password: '🔐',
+  other: '✨',
+};
+const icon = categoryIcons[tool.category] || '🔧';
+---
+
+<a
+  href={href}
+  class="tool-card group block rounded-xl border p-4 transition-all duration-200 hover:shadow-md"
+  style="background-color: var(--color-card-bg); border-color: var(--color-border)"
+  title={name}
+>
+  <div class="flex items-start gap-3">
+    <span class="text-2xl flex-shrink-0 mt-0.5" aria-hidden="true">{icon}</span>
+    <div class="min-w-0 flex-1">
+      <h3
+        class="font-semibold text-base truncate group-hover:underline"
+        style="color: var(--color-text)"
+      >
+        {name}
+      </h3>
+      <p class="text-xs mt-0.5 truncate" style="color: var(--color-primary)">{subtitle}</p>
+      <p class="text-sm mt-1 line-clamp-2" style="color: var(--color-text-secondary)">{desc}</p>
+    </div>
+  </div>
+</a>
+
+<style>
+  .tool-card:hover {
+    background-color: var(--color-card-hover) !important;
+    border-color: var(--color-primary) !important;
+  }
+</style>

@@ -1,0 +1,316 @@
+---
+import type { Locale } from '@/i18n/config';
+import { toolCategories } from '@/i18n/config';
+import { t, getLocalizedPath } from '@/i18n/utils';
+import { getToolsByCategory, getToolName } from '@/lib/tools';
+import Search from '@/components/Search.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const mainCategories = [
+  { key: 'pdf', translationKey: 'nav.category.pdf' },
+  { key: 'image', translationKey: 'nav.category.image' },
+  { key: 'barcode', translationKey: 'nav.category.barcode' },
+  { key: 'dev', translationKey: 'nav.category.dev' },
+  { key: 'network', translationKey: 'nav.category.network' },
+  { key: 'email', translationKey: 'nav.category.email' },
+];
+
+const moreCategories = [
+  { key: 'video', translationKey: 'nav.category.video' },
+  { key: 'password', translationKey: 'nav.category.password' },
+  { key: 'finance', translationKey: 'nav.category.finance' },
+];
+
+const categoryIcons: Record<string, string> = {};
+for (const cat of toolCategories) {
+  categoryIcons[cat.key] = cat.icon;
+}
+---
+
+<header
+  class="sticky top-0 z-50 w-full border-b"
+  style="background-color: var(--color-header-bg); border-color: var(--color-border);"
+>
+  <div class="mx-auto w-full px-4 py-2 lg:px-8" style="max-width: var(--site-shell-max)">
+  <nav class="flex items-center justify-between" aria-label="Main navigation">
+    <!-- Logo + Desktop nav wrapped together -->
+    <div class="flex items-center">
+      <a
+        href={getLocalizedPath('/', locale)}
+        class="flex items-center gap-2 text-xl font-bold min-h-[44px] min-w-[44px]"
+        style="color: var(--color-text);"
+        aria-label="Tool-TL"
+      >
+        <img src="/logo.png" alt="Tool-TL" width="36" height="36" class="rounded-lg" />
+      </a>
+
+    <!-- Desktop category navigation -->
+    <div class="hidden lg:flex items-center gap-0">
+      {mainCategories.map((cat) => {
+        const tools = getToolsByCategory(cat.key);
+        return (
+          <div class="group relative">
+            <button
+              type="button"
+              class="flex items-center gap-1 rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] hover:opacity-80 whitespace-nowrap"
+              style="color: var(--color-text);"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              <span>{categoryIcons[cat.key]}</span>
+              <span>{t(cat.translationKey, locale)}</span>
+              <svg class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              class="invisible absolute left-0 top-full z-50 min-w-[220px] rounded-lg border py-2 shadow-lg opacity-0 transition-all group-hover:visible group-hover:opacity-100"
+              style="background-color: var(--color-bg); border-color: var(--color-border);"
+              role="menu"
+            >
+              {tools.map((tool) => (
+                <a
+                  href={getLocalizedPath(tool.slug, locale)}
+                  class="block px-4 py-2 text-sm transition-colors hover:opacity-80"
+                  style="color: var(--color-text);"
+                  role="menuitem"
+                >
+                  {getToolName(tool, locale)}
+                </a>
+              ))}
+              {tools.length === 0 && (
+                <span class="block px-4 py-2 text-sm" style="color: var(--color-text-secondary);">
+                  {t(cat.translationKey, locale)}
+                </span>
+              )}
+            </div>
+          </div>
+        );
+      })}
+
+      <!-- More dropdown -->
+      <div class="group relative">
+        <button
+          type="button"
+          class="flex items-center gap-1 rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] hover:opacity-80 whitespace-nowrap"
+          style="color: var(--color-text);"
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          <span>{t('nav.more', locale)}</span>
+          <svg class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div
+          class="invisible absolute left-0 top-full z-50 min-w-[220px] rounded-lg border py-2 shadow-lg opacity-0 transition-all group-hover:visible group-hover:opacity-100"
+          style="background-color: var(--color-bg); border-color: var(--color-border);"
+          role="menu"
+        >
+          {moreCategories.map((cat) => {
+            const tools = getToolsByCategory(cat.key);
+            return (
+              <div>
+                <span class="block px-4 py-1 text-xs font-semibold uppercase tracking-wider" style="color: var(--color-text-secondary);">
+                  {categoryIcons[cat.key]} {t(cat.translationKey, locale)}
+                </span>
+                {tools.map((tool) => (
+                  <a
+                    href={getLocalizedPath(tool.slug, locale)}
+                    class="block px-4 py-2 text-sm transition-colors hover:opacity-80"
+                    style="color: var(--color-text);"
+                    role="menuitem"
+                  >
+                    {getToolName(tool, locale)}
+                  </a>
+                ))}
+                {tools.length === 0 && (
+                  <span class="block px-6 py-1 text-sm" style="color: var(--color-text-secondary);">--</span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Top Tools link -->
+      <a
+        href={getLocalizedPath('top-tools', locale)}
+        class="rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] flex items-center hover:opacity-80 whitespace-nowrap"
+        style="color: var(--color-text);"
+      >
+        {t('nav.top_tools', locale)}
+      </a>
+
+      <!-- Blog link -->
+      <a
+        href={getLocalizedPath('blog', locale)}
+        class="rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] flex items-center hover:opacity-80 whitespace-nowrap"
+        style="color: var(--color-text);"
+      >
+        {t('nav.blog', locale)}
+      </a>
+
+      <!-- Changelog link -->
+      <a
+        href={getLocalizedPath('changelog', locale)}
+        class="rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] flex items-center hover:opacity-80 whitespace-nowrap"
+        style="color: var(--color-text);"
+      >
+        {t('nav.changelog', locale)}
+      </a>
+
+    </div>
+    </div><!-- end logo + desktop nav wrapper -->
+
+    <!-- Right section: Search, Language, Theme -->
+    <div class="flex items-center gap-2 shrink-0">
+      <!-- Search (Pagefind) -->
+      <Search locale={locale} />
+
+      <!-- Language switcher slot (desktop) -->
+      <div class="hidden lg:block">
+        <slot name="language-switcher" />
+      </div>
+
+      <!-- Theme toggle -->
+      <ThemeToggle locale={locale} />
+
+      <!-- Mobile hamburger button -->
+      <button
+        type="button"
+        class="lg:hidden flex items-center justify-center rounded-lg p-2 min-h-[44px] min-w-[44px] hover:opacity-80"
+        style="color: var(--color-text);"
+        aria-label="Menu"
+        aria-expanded="false"
+        data-mobile-menu-trigger
+      >
+        <svg class="h-6 w-6 block" data-menu-icon-open fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg class="h-6 w-6 hidden" data-menu-icon-close fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div
+    class="fixed inset-0 top-[57px] z-50 hidden overflow-y-auto lg:hidden"
+    style="background-color: var(--color-bg);"
+    data-mobile-menu
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+  >
+    <div class="flex flex-col px-4 py-4 gap-2">
+      <!-- All category sections expanded -->
+      {[...mainCategories, ...moreCategories].map((cat) => {
+        const tools = getToolsByCategory(cat.key);
+        return (
+          <div class="border-b pb-3" style="border-color: var(--color-border);">
+            <h3 class="flex items-center gap-2 py-2 text-sm font-semibold uppercase tracking-wider" style="color: var(--color-text-secondary);">
+              <span>{categoryIcons[cat.key]}</span>
+              {t(cat.translationKey, locale)}
+            </h3>
+            <div class="flex flex-col gap-1 pl-2">
+              {tools.map((tool) => (
+                <a
+                  href={getLocalizedPath(tool.slug, locale)}
+                  class="block rounded-lg px-3 py-2 text-sm min-h-[44px] flex items-center transition-colors hover:opacity-80"
+                  style="color: var(--color-text);"
+                >
+                  {getToolName(tool, locale)}
+                </a>
+              ))}
+              {tools.length === 0 && (
+                <span class="block px-3 py-2 text-sm" style="color: var(--color-text-secondary);">--</span>
+              )}
+            </div>
+          </div>
+        );
+      })}
+
+      <!-- Top Tools link -->
+      <a
+        href={getLocalizedPath('top-tools', locale)}
+        class="flex items-center rounded-lg px-3 py-3 text-sm font-medium min-h-[44px] transition-colors hover:opacity-80"
+        style="color: var(--color-text);"
+      >
+        {t('nav.top_tools', locale)}
+      </a>
+
+      <!-- Blog link -->
+      <a
+        href={getLocalizedPath('blog', locale)}
+        class="flex items-center rounded-lg px-3 py-3 text-sm font-medium min-h-[44px] transition-colors hover:opacity-80"
+        style="color: var(--color-text);"
+      >
+        {t('nav.blog', locale)}
+      </a>
+
+      <!-- Changelog link -->
+      <a
+        href={getLocalizedPath('changelog', locale)}
+        class="flex items-center rounded-lg px-3 py-3 text-sm font-medium min-h-[44px] transition-colors hover:opacity-80"
+        style="color: var(--color-text);"
+      >
+        {t('nav.changelog', locale)}
+      </a>
+
+      <!-- Language switcher (mobile) -->
+      <div class="border-t pt-3" style="border-color: var(--color-border);">
+        <slot name="language-switcher-mobile" />
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  function initMobileMenu() {
+    const trigger = document.querySelector('[data-mobile-menu-trigger]');
+    const menu = document.querySelector('[data-mobile-menu]');
+    const iconOpen = document.querySelector('[data-menu-icon-open]');
+    const iconClose = document.querySelector('[data-menu-icon-close]');
+
+    if (!trigger || !menu || !iconOpen || !iconClose) return;
+
+    let isOpen = false;
+
+    trigger.addEventListener('click', () => {
+      isOpen = !isOpen;
+      menu.classList.toggle('hidden', !isOpen);
+      iconOpen.classList.toggle('hidden', isOpen);
+      iconOpen.classList.toggle('block', !isOpen);
+      iconClose.classList.toggle('hidden', !isOpen);
+      iconClose.classList.toggle('block', isOpen);
+      trigger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // Close on link click
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        isOpen = false;
+        menu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconOpen.classList.add('block');
+        iconClose.classList.add('hidden');
+        iconClose.classList.remove('block');
+        trigger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  initMobileMenu();
+  document.addEventListener('astro:after-swap', initMobileMenu);
+</script>

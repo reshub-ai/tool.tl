@@ -1,0 +1,127 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import type { Locale } from '@/i18n/config';
+
+const locale: Locale = 'en';
+const lastUpdated = '2026-03-25';
+---
+
+<PageLayout
+  title="Privacy Policy"
+  description="Tool-TL privacy policy: how we collect, use, and protect your data, including information about cookies, Google AdSense, and third-party advertising."
+  locale={locale}
+  canonicalPath="privacy"
+>
+  <h1>Privacy Policy</h1>
+  <p><em>Last updated: {lastUpdated}</em></p>
+
+  <p>
+    This Privacy Policy describes how Tool-TL ("we", "us", or "our") collects, uses, and shares
+    information when you visit or use our website at <strong>tool.tl</strong> (the "Service").
+    By using the Service, you agree to the collection and use of information in accordance with
+    this policy.
+  </p>
+
+  <h2>1. Information We Collect</h2>
+  <h3>Automatically Collected Information</h3>
+  <p>When you visit our website, we automatically collect certain information, including:</p>
+  <ul>
+    <li><strong>IP Address</strong> — Your IP address is logged for security, analytics, and abuse prevention purposes.</li>
+    <li><strong>Browser Information</strong> — We collect your browser type, version, operating system, and device type to optimize your experience.</li>
+    <li><strong>Usage Data</strong> — We record which pages you visit, which tools you use, and how long you spend on the site. This data is aggregated and used to improve our services.</li>
+    <li><strong>Referral Data</strong> — We may collect the URL of the website that referred you to our site.</li>
+  </ul>
+
+  <h3>Files You Upload</h3>
+  <p>
+    Some tools require you to upload files for processing (e.g., PDF conversion, image compression).
+    These files are transmitted to our processing servers, used solely for the requested conversion,
+    and are automatically deleted within one hour of processing. We do not access, read, or store
+    the contents of your files beyond what is technically necessary to perform the conversion.
+  </p>
+
+  <h2>2. Cookies</h2>
+  <p>We use cookies and similar tracking technologies to:</p>
+  <ul>
+    <li>Remember your preferences (such as language and theme settings).</li>
+    <li>Analyze site traffic and usage patterns through Google Analytics.</li>
+    <li>Serve personalized advertisements through Google AdSense.</li>
+  </ul>
+
+  <h3>Google AdSense and Advertising Cookies</h3>
+  <p>
+    We use Google AdSense to display advertisements on our website. Google AdSense uses cookies
+    to serve ads based on your prior visits to our website and other websites on the internet.
+    Google's use of advertising cookies enables it and its partners to serve ads to you based on
+    your browsing history. You may opt out of personalized advertising by visiting
+    <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>.
+  </p>
+  <p>
+    Third-party vendors, including Google, use cookies to serve ads based on your prior visits to
+    this website or other websites. You can opt out of third-party vendor cookies for personalized
+    advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info/choices/</a>.
+  </p>
+
+  <h2>3. Google Analytics</h2>
+  <p>
+    We use Google Analytics 4 to understand how visitors interact with our website. Google Analytics
+    collects information such as how often users visit, what pages they view, and what other sites
+    they visited before coming to our website. We use this information to improve our website and
+    tools. Google Analytics uses cookies to collect this data. You can learn more about how Google
+    uses your data at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.
+  </p>
+
+  <h2>4. How We Use Your Information</h2>
+  <p>We use the information we collect to:</p>
+  <ul>
+    <li>Provide, maintain, and improve our tools and services.</li>
+    <li>Analyze usage patterns to optimize performance and user experience.</li>
+    <li>Display relevant advertisements to support the free nature of our service.</li>
+    <li>Detect and prevent abuse, fraud, and security threats.</li>
+    <li>Respond to your inquiries and support requests.</li>
+  </ul>
+
+  <h2>5. Data Sharing</h2>
+  <p>
+    We do not sell your personal information to third parties. We may share aggregated, anonymized
+    usage statistics that cannot identify individual users. We may share information with third-party
+    service providers (such as Google Analytics and Google AdSense) as described in this policy.
+  </p>
+
+  <h2>6. Data Security</h2>
+  <p>
+    We implement appropriate technical and organizational measures to protect your information,
+    including HTTPS encryption for all data transmission, regular security updates, and access
+    controls on our servers. However, no method of transmission over the Internet is 100% secure,
+    and we cannot guarantee absolute security.
+  </p>
+
+  <h2>7. Your Rights and Choices</h2>
+  <ul>
+    <li>You can disable cookies in your browser settings, although this may affect the functionality of certain tools.</li>
+    <li>You can opt out of personalized ads through Google Ads Settings.</li>
+    <li>You can use browser extensions to block tracking scripts.</li>
+    <li>For tools that process files entirely in your browser (marked as "client-side"), your data never leaves your device.</li>
+  </ul>
+
+  <h2>8. Children's Privacy</h2>
+  <p>
+    Our Service is not directed to children under the age of 13. We do not knowingly collect
+    personal information from children under 13. If you believe we have collected information
+    from a child under 13, please contact us so we can delete it.
+  </p>
+
+  <h2>9. Changes to This Policy</h2>
+  <p>
+    We may update this Privacy Policy from time to time. We will notify you of any changes by
+    posting the new Privacy Policy on this page and updating the "Last updated" date. You are
+    advised to review this Privacy Policy periodically for any changes.
+  </p>
+
+  <h2>10. Contact Us</h2>
+  <p>
+    If you have any questions about this Privacy Policy, please contact us at
+    <a href="mailto:support@tool.tl">support@tool.tl</a> or visit our
+    <a href="/contact">Contact page</a>.
+  </p>
+</PageLayout>

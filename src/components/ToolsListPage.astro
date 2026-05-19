@@ -1,0 +1,131 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
+import ToolCard from '@/components/ToolCard.astro';
+import { t, getLocalizedPath } from '@/i18n/utils';
+import { getAllTools, getToolsByCategory } from '@/lib/tools';
+import { toolCategories, type Locale } from '@/i18n/config';
+
+interface Props {
+  locale: Locale;
+  category?: string;
+  currentPath: string;
+}
+
+const { locale, category, currentPath } = Astro.props;
+
+const categoryIcons: Record<string, string> = {};
+for (const cat of toolCategories) {
+  categoryIcons[cat.key] = cat.icon;
+}
+
+const validCategoryKeys = toolCategories.map((c) => c.key);
+const isValidCategory = category ? validCategoryKeys.includes(category as any) : true;
+
+const tools = category
+  ? getToolsByCategory(category)
+  : getAllTools();
+
+const categoryName = category ? t(`nav.category.${category}`, locale) : t('nav.all_tools', locale);
+const pageTitle = category ? categoryName : t('nav.all_tools', locale);
+const tagline = t('home.tagline', locale);
+const pageDesc = category
+  ? `${categoryName} - ${tagline}`
+  : tagline;
+
+const canonicalPath = category ? `tools/${category}` : 'tools';
+
+const groupedByCategory = !category
+  ? toolCategories.map((cat) => ({
+      key: cat.key,
+      icon: cat.icon,
+      name: t(`nav.category.${cat.key}`, locale),
+      tools: getToolsByCategory(cat.key),
+    })).filter((g) => g.tools.length > 0)
+  : [];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  locale={locale}
+  canonicalPath={canonicalPath}
+  noindex={category ? !isValidCategory : false}
+>
+  <Fragment slot="header">
+    <Header locale={locale}>
+      <LanguageSwitcher slot="language-switcher" locale={locale} currentPath={currentPath} />
+      <LanguageSwitcher slot="language-switcher-mobile" locale={locale} currentPath={currentPath} />
+    </Header>
+  </Fragment>
+
+  <div class="site-shell mx-auto px-4 sm:px-6 py-10">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm mb-6" style="color: var(--color-text-secondary)">
+      <a href={getLocalizedPath('/', locale)} style="color: var(--color-primary)">{t('breadcrumb.home', locale)}</a>
+      <span>/</span>
+      {category ? (
+        <>
+          <a href={getLocalizedPath('tools', locale)} style="color: var(--color-primary)">{t('nav.all_tools', locale)}</a>
+          <span>/</span>
+          <span style="color: var(--color-text)">{categoryName}</span>
+        </>
+      ) : (
+        <span style="color: var(--color-text)">{t('nav.all_tools', locale)}</span>
+      )}
+    </nav>
+
+    <h1 class="text-3xl font-bold mb-2" style="color: var(--color-text)">
+      {category && <span class="mr-2">{categoryIcons[category]}</span>}
+      {pageTitle}
+    </h1>
+    <p class="mb-8" style="color: var(--color-text-secondary)">
+      {tools.length} {tools.length === 1 ? 'tool' : 'tools'}
+    </p>
+
+    {category ? (
+      tools.length === 0 ? (
+        <p class="py-10 text-center" style="color: var(--color-text-secondary)">
+          {t('blog.no_articles', locale)}
+        </p>
+      ) : (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {tools.map((tool) => (
+            <ToolCard tool={tool} locale={locale} />
+          ))}
+        </div>
+      )
+    ) : (
+      <div class="space-y-10">
+        {groupedByCategory.map((group) => (
+          <section>
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-2xl font-bold flex items-center gap-2" style="color: var(--color-text)">
+                <span>{group.icon}</span>
+                <span>{group.name}</span>
+              </h2>
+              <a
+                href={getLocalizedPath(`tools/${group.key}`, locale)}
+                class="text-sm hover:underline"
+                style="color: var(--color-primary)"
+              >
+                {t('nav.all_tools', locale)} →
+              </a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {group.tools.map((tool) => (
+                <ToolCard tool={tool} locale={locale} />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <Fragment slot="footer">
+    <Footer locale={locale} />
+  </Fragment>
+</BaseLayout>

@@ -1,0 +1,202 @@
+---
+import type { Locale } from '@/i18n/config';
+import { locales, localeNames } from '@/i18n/config';
+import { t, getLocalizedPath } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const categoryLinks = [
+  { key: 'nav.category.pdf', path: 'tools/pdf' },
+  { key: 'nav.category.image', path: 'tools/image' },
+  { key: 'nav.category.barcode', path: 'tools/barcode' },
+  { key: 'nav.category.dev', path: 'tools/dev' },
+  { key: 'nav.category.network', path: 'tools/network' },
+  { key: 'nav.category.email', path: 'tools/email' },
+  { key: 'nav.category.video', path: 'tools/video' },
+  { key: 'nav.category.finance', path: 'tools/finance' },
+];
+
+const contentLinks = [
+  { key: 'nav.top_tools', path: 'top-tools' },
+  { key: 'nav.blog', path: 'blog' },
+  { key: 'nav.all_tools', path: 'tools' },
+  { key: 'nav.changelog', path: 'changelog' },
+];
+
+const aboutLinks = [
+  { key: 'footer.about', path: 'about' },
+  { key: 'footer.contact', path: 'contact' },
+];
+
+const legalLinks = [
+  { key: 'footer.privacy', path: 'privacy' },
+  { key: 'footer.terms', path: 'terms' },
+];
+
+const languageShortNames: Record<string, string> = {
+  en: 'EN',
+  'zh-CN': '简体',
+  'zh-TW': '繁體',
+  ja: '日本語',
+};
+
+const currentPath = Astro.url.pathname;
+---
+
+<footer
+  class="border-t mt-16"
+  style="background-color: var(--color-footer-bg); border-color: var(--color-border);"
+>
+  <div class="mx-auto site-shell px-4 py-12 lg:px-8">
+    <!-- 4-column grid -->
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+      <!-- Column 1: Tool Categories -->
+      <div>
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider" style="color: var(--color-text);">
+          {t('footer.category.tools', locale)}
+        </h3>
+        <ul class="space-y-2">
+          {categoryLinks.map((link) => (
+            <li>
+              <a
+                href={getLocalizedPath(link.path, locale)}
+                class="text-sm transition-colors hover:opacity-80"
+                style="color: var(--color-text-secondary);"
+              >
+                {t(link.key, locale)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 2: Content -->
+      <div>
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider" style="color: var(--color-text);">
+          {t('footer.category.content', locale)}
+        </h3>
+        <ul class="space-y-2">
+          {contentLinks.map((link) => (
+            <li>
+              <a
+                href={getLocalizedPath(link.path, locale)}
+                class="text-sm transition-colors hover:opacity-80"
+                style="color: var(--color-text-secondary);"
+              >
+                {t(link.key, locale)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 3: About -->
+      <div>
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider" style="color: var(--color-text);">
+          {t('footer.category.about', locale)}
+        </h3>
+        <ul class="space-y-2">
+          {aboutLinks.map((link) => (
+            <li>
+              <a
+                href={getLocalizedPath(link.path, locale)}
+                class="text-sm transition-colors hover:opacity-80"
+                style="color: var(--color-text-secondary);"
+              >
+                {t(link.key, locale)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 4: Legal -->
+      <div>
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider" style="color: var(--color-text);">
+          {t('footer.category.legal', locale)}
+        </h3>
+        <ul class="space-y-2">
+          {legalLinks.map((link) => (
+            <li>
+              <a
+                href={getLocalizedPath(link.path, locale)}
+                class="text-sm transition-colors hover:opacity-80"
+                style="color: var(--color-text-secondary);"
+              >
+                {t(link.key, locale)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Friendly Links -->
+    <div class="mt-10 border-t pt-8" style="border-color: var(--color-border);">
+      <h3 class="mb-3 text-sm font-semibold uppercase tracking-wider" style="color: var(--color-text);">
+        {t('footer.friendly_links', locale)}
+      </h3>
+      <div class="flex flex-wrap gap-x-5 gap-y-2">
+        {[
+          { label: 'helper.sh',     href: 'https://helper.sh'     },
+          { label: 'exifcheck.com', href: 'https://exifcheck.com' },
+          { label: 'n1wd.com',      href: 'https://n1wd.com'      },
+          { label: 'reshub.ai',     href: 'https://reshub.ai'     },
+        ].map(({ label, href }) => (
+          <a
+            href={href}
+            class="text-sm transition-colors hover:opacity-80"
+            style="color: var(--color-text-secondary);"
+            rel="noopener"
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom section -->
+    <div
+      class="mt-10 flex flex-col items-center gap-4 border-t pt-6 sm:flex-row sm:justify-between"
+      style="border-color: var(--color-border);"
+    >
+      <!-- Copyright + tagline -->
+      <div class="text-sm" style="color: var(--color-text-secondary);">
+        <p>&copy; 2026 Tool-TL. {t('footer.rights', locale)}</p>
+        <p class="mt-1 text-xs">{t('home.tagline', locale)}</p>
+      </div>
+
+      <!-- Language quick links (SEO crawlable text links) -->
+      <nav class="flex items-center gap-1 text-sm" aria-label="Language">
+        {locales.map((loc, index) => (
+          <>
+            {index > 0 && <span style="color: var(--color-text-secondary);">|</span>}
+            <a
+              href={getLocalizedPath(currentPath, loc)}
+              class="px-1 transition-colors hover:opacity-80"
+              style={locale === loc ? 'color: var(--color-primary); font-weight: 600;' : 'color: var(--color-text-secondary);'}
+              hreflang={loc}
+              data-locale={loc}
+            >
+              {languageShortNames[loc] || localeNames[loc]}
+            </a>
+          </>
+        ))}
+      </nav>
+    </div>
+  </div>
+
+<script>
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const link = target.closest('footer a[data-locale]') as HTMLElement | null;
+    const loc = link?.dataset.locale;
+    if (loc) localStorage.setItem('locale-preference', loc);
+  });
+</script>
+</footer>

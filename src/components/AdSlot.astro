@@ -1,0 +1,138 @@
+---
+interface Props {
+  name?: string;
+  slot?: string;
+  format?: 'horizontal' | 'vertical' | 'rectangle' | 'fluid' | 'auto';
+  class?: string;
+}
+
+const {
+  name,
+  slot,
+  format: requestedFormat = 'auto',
+  class: className = '',
+} = Astro.props;
+
+const adName = name ?? slot ?? 'default';
+const publisherId = import.meta.env.PUBLIC_ADSENSE_ID || 'pub-9845089349130720';
+const adClient = publisherId.startsWith('ca-') ? publisherId : `ca-${publisherId}`;
+
+const adSlots: Record<string, {
+  slot: string;
+  format: 'auto' | 'fluid';
+  layout?: string;
+  layoutKey?: string;
+  fullWidthResponsive?: boolean;
+}> = {
+  // Migrated from the Flask templates.
+  'blog-top': { slot: '7624823932', format: 'fluid', layoutKey: '-6t+ed+2i-1n-4w' },
+  'blog-bottom': { slot: '6750725961', format: 'auto', fullWidthResponsive: true },
+  'in-feed': { slot: '7624823932', format: 'fluid', layoutKey: '-6t+ed+2i-1n-4w' },
+  'in-article': { slot: '2396919117', format: 'fluid', layout: 'in-article' },
+  'article-bottom': { slot: '6750725961', format: 'auto', fullWidthResponsive: true },
+
+  // Generic placements used by the Astro tool pages.
+  'tool-top': { slot: '6750725961', format: 'auto', fullWidthResponsive: true },
+  'tool-bottom': { slot: '6750725961', format: 'auto', fullWidthResponsive: true },
+  'in-content': { slot: '2396919117', format: 'fluid', layout: 'in-article' },
+  'sidebar-1': { slot: '6750725961', format: 'auto', fullWidthResponsive: true },
+  'sidebar-2': { slot: '6750725961', format: 'auto', fullWidthResponsive: true },
+  footer: { slot: '6750725961', format: 'auto', fullWidthResponsive: true },
+
+  // Real slot found in the legacy Flask tool template.
+  'png-to-jpg-leaderboard': { slot: '6818805461', format: 'auto', fullWidthResponsive: true },
+};
+
+const config = adSlots[adName] ?? { slot: '6750725961', format: 'auto', fullWidthResponsive: true };
+const format = config.format === 'fluid' ? 'fluid' : requestedFormat;
+const containerId = `ad-${adName.replace(/[^a-z0-9_-]/gi, '-')}-${Math.random().toString(36).slice(2)}`;
+---
+
+<div
+  id={containerId}
+  class:list={['ad-container', `ad-${format}`, config.fullWidthResponsive && 'ad-full-width', className]}
+  data-ad-placement={adName}
+>
+  <ins
+    class="adsbygoogle"
+    style="display:block; text-align:center;"
+    data-ad-client={adClient}
+    data-ad-slot={config.slot}
+    data-ad-format={config.format}
+    data-ad-layout={config.layout}
+    data-ad-layout-key={config.layoutKey}
+    data-full-width-responsive={config.fullWidthResponsive ? 'true' : undefined}
+  />
+</div>
+
+<script is:inline define:vars={{ containerId }}>
+  (function() {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    var ins = container.querySelector('.adsbygoogle');
+    if (!ins) return;
+
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (_) {
+      container.hidden = true;
+      return;
+    }
+
+    var observer = new MutationObserver(function() {
+      if (ins.getAttribute('data-ad-status') === 'unfilled') {
+        container.hidden = true;
+        container.style.margin = '0';
+        container.style.padding = '0';
+      }
+      observer.disconnect();
+    });
+    observer.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
+  })();
+</script>
+
+<style>
+  .ad-container {
+    overflow: hidden;
+    text-align: center;
+    margin: 1.25rem auto;
+    transition: margin 0.2s ease, padding 0.2s ease;
+  }
+
+  .ad-container[hidden] {
+    display: none !important;
+  }
+
+  .ad-horizontal,
+  .ad-auto {
+    max-width: 728px;
+    min-height: 90px;
+  }
+
+  .ad-full-width {
+    max-width: 100%;
+  }
+
+  .ad-fluid {
+    width: 100%;
+    min-height: 140px;
+  }
+
+  .ad-vertical {
+    max-width: 160px;
+    min-height: 600px;
+  }
+
+  .ad-rectangle {
+    max-width: 336px;
+    min-height: 280px;
+  }
+
+  @media (max-width: 640px) {
+    .ad-horizontal,
+    .ad-auto {
+      max-width: 100%;
+      min-height: 100px;
+    }
+  }
+</style>

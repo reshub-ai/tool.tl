@@ -1,0 +1,186 @@
+---
+/**
+ * ThemeToggle — cycles through light / dark / system modes.
+ * Stores preference in localStorage('theme') as 'light' | 'dark' | 'system'.
+ * Applies html.dark class accordingly.
+ */
+import type { Locale } from '@/i18n/config';
+import { t } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<div class="relative" data-theme-toggle>
+  <button
+    type="button"
+    class="flex items-center justify-center rounded-lg p-2 min-h-[44px] min-w-[44px] hover:opacity-80 transition-colors"
+    style="color: var(--color-text);"
+    aria-label="Toggle theme"
+    data-theme-btn
+  >
+    <!-- Sun icon (light mode) -->
+    <svg data-icon-light class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+    <!-- Moon icon (dark mode) -->
+    <svg data-icon-dark class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+    </svg>
+    <!-- System icon (auto mode) -->
+    <svg data-icon-system class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  </button>
+
+  <!-- Dropdown menu -->
+  <div
+    class="invisible absolute right-0 top-full z-50 mt-1 min-w-[140px] rounded-lg border py-1 shadow-lg opacity-0 transition-all"
+    style="background-color: var(--color-bg); border-color: var(--color-border);"
+    data-theme-menu
+  >
+    <button
+      type="button"
+      class="flex w-full items-center gap-2 px-4 py-2 text-sm transition-colors hover:opacity-80"
+      style="color: var(--color-text);"
+      data-set-theme="light"
+    >
+      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+      <span>{t('theme.light', locale)}</span>
+      <span data-check-light class="ml-auto hidden text-xs">✓</span>
+    </button>
+    <button
+      type="button"
+      class="flex w-full items-center gap-2 px-4 py-2 text-sm transition-colors hover:opacity-80"
+      style="color: var(--color-text);"
+      data-set-theme="dark"
+    >
+      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+      <span>{t('theme.dark', locale)}</span>
+      <span data-check-dark class="ml-auto hidden text-xs">✓</span>
+    </button>
+    <button
+      type="button"
+      class="flex w-full items-center gap-2 px-4 py-2 text-sm transition-colors hover:opacity-80"
+      style="color: var(--color-text);"
+      data-set-theme="system"
+    >
+      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+      <span>{t('theme.system', locale)}</span>
+      <span data-check-system class="ml-auto hidden text-xs">✓</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  function initThemeToggle() {
+    const containers = document.querySelectorAll('[data-theme-toggle]');
+    if (!containers.length) return;
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function getStored(): 'light' | 'dark' | 'system' {
+      const v = localStorage.getItem('theme');
+      if (v === 'light' || v === 'dark') return v;
+      return 'system';
+    }
+
+    function applyTheme(mode: 'light' | 'dark' | 'system') {
+      const isDark =
+        mode === 'dark' || (mode === 'system' && prefersDark.matches);
+      document.documentElement.classList.toggle('dark', isDark);
+    }
+
+    function updateUI(mode: 'light' | 'dark' | 'system') {
+      containers.forEach((container) => {
+        // Toggle button icon
+        const iconLight = container.querySelector('[data-icon-light]');
+        const iconDark = container.querySelector('[data-icon-dark]');
+        const iconSystem = container.querySelector('[data-icon-system]');
+        if (iconLight && iconDark && iconSystem) {
+          iconLight.classList.toggle('hidden', mode !== 'light');
+          iconDark.classList.toggle('hidden', mode !== 'dark');
+          iconSystem.classList.toggle('hidden', mode !== 'system');
+        }
+
+        // Checkmarks in dropdown
+        const checkLight = container.querySelector('[data-check-light]');
+        const checkDark = container.querySelector('[data-check-dark]');
+        const checkSystem = container.querySelector('[data-check-system]');
+        if (checkLight) checkLight.classList.toggle('hidden', mode !== 'light');
+        if (checkDark) checkDark.classList.toggle('hidden', mode !== 'dark');
+        if (checkSystem) checkSystem.classList.toggle('hidden', mode !== 'system');
+      });
+    }
+
+    function setTheme(mode: 'light' | 'dark' | 'system') {
+      if (mode === 'system') {
+        localStorage.removeItem('theme');
+      } else {
+        localStorage.setItem('theme', mode);
+      }
+      applyTheme(mode);
+      updateUI(mode);
+    }
+
+    // Initialize
+    const current = getStored();
+    applyTheme(current);
+    updateUI(current);
+
+    // Listen for system preference changes (when in system mode)
+    prefersDark.addEventListener('change', () => {
+      if (getStored() === 'system') {
+        applyTheme('system');
+      }
+    });
+
+    // Wire up dropdown buttons
+    containers.forEach((container) => {
+      const btn = container.querySelector('[data-theme-btn]');
+      const menu = container.querySelector('[data-theme-menu]');
+      if (!btn || !menu) return;
+
+      // Toggle dropdown
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isVisible = !menu.classList.contains('invisible');
+        // Close all other menus first
+        document.querySelectorAll('[data-theme-menu]').forEach((m) => {
+          m.classList.add('invisible', 'opacity-0');
+        });
+        if (!isVisible) {
+          menu.classList.remove('invisible', 'opacity-0');
+        }
+      });
+
+      // Theme selection buttons
+      container.querySelectorAll('[data-set-theme]').forEach((item) => {
+        item.addEventListener('click', () => {
+          const mode = (item as HTMLElement).dataset.setTheme as 'light' | 'dark' | 'system';
+          setTheme(mode);
+          menu.classList.add('invisible', 'opacity-0');
+        });
+      });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+      document.querySelectorAll('[data-theme-menu]').forEach((m) => {
+        m.classList.add('invisible', 'opacity-0');
+      });
+    });
+  }
+
+  initThemeToggle();
+  document.addEventListener('astro:after-swap', initThemeToggle);
+</script>

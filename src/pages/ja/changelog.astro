@@ -1,0 +1,35 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import type { Locale } from '@/i18n/config';
+import { CHANGELOG, getChangelogLines, changelogI18n } from '@/data/changelog';
+
+const locale: Locale = 'ja';
+const cl = changelogI18n[locale];
+---
+
+<PageLayout
+  title={cl.title}
+  description={cl.intro}
+  locale={locale}
+  canonicalPath="ja/changelog"
+>
+  <h1>{cl.title}</h1>
+  <p style="color: var(--color-text-secondary); margin-bottom: 2rem;">{cl.intro}</p>
+
+  <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+    {CHANGELOG.map((item) => {
+      const lines = getChangelogLines(item, locale);
+      if (!lines.length) return null;
+      return (
+        <article style="background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.25rem; border-left: 4px solid var(--color-primary);">
+          <h2 style="margin: 0 0 0.75rem; font-size: 1rem; font-weight: 700; color: var(--color-primary);">{item.date}</h2>
+          <ul style="margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem;">
+            {lines.map((line) => (
+              <li style="color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.6;">{line}</li>
+            ))}
+          </ul>
+        </article>
+      );
+    })}
+  </div>
+</PageLayout>

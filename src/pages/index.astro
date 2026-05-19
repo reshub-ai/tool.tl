@@ -1,0 +1,84 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
+import ToolCard from '@/components/ToolCard.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import TimestampWidget from '@/components/TimestampWidget';
+import { t } from '@/i18n/utils';
+import { getToolGroups, getAllTools, getToolName } from '@/lib/tools';
+import type { Locale } from '@/i18n/config';
+
+const locale: Locale = 'en';
+const groups = getToolGroups();
+const allTools = getAllTools();
+const toolsBySlug = Object.fromEntries(allTools.map((t) => [t.slug, t]));
+---
+
+<BaseLayout
+  title={t('home.title', locale)}
+  description={t('site.description', locale)}
+  locale={locale}
+  canonicalPath=""
+>
+  <Fragment slot="header">
+    <Header locale={locale}>
+      <LanguageSwitcher slot="language-switcher" locale={locale} currentPath={Astro.url.pathname} />
+      <LanguageSwitcher slot="language-switcher-mobile" locale={locale} currentPath={Astro.url.pathname} />
+    </Header>
+  </Fragment>
+
+  <!-- Hero section -->
+  <section class="site-shell mx-auto px-4 sm:px-6 pt-10 pb-6 text-center">
+    <h1 class="text-3xl sm:text-4xl font-bold mb-3" style="color: var(--color-text)">
+      {t('home.title', locale)}
+    </h1>
+    <p class="text-sm sm:text-base font-medium mb-3" style="color: var(--color-primary)">
+      {t('home.tagline', locale)}
+    </p>
+    <p class="text-base sm:text-lg max-w-5xl mx-auto 2xl:whitespace-nowrap" style="color: var(--color-text-secondary)">
+      {t('home.subtitle', locale).replace('{count}', String(allTools.length))}
+    </p>
+  </section>
+
+  <!-- Timestamp quick widget -->
+  <div class="site-shell mx-auto px-4 sm:px-6 pb-8">
+    <div class="max-w-2xl mx-auto">
+      <TimestampWidget client:load locale={locale} toolPath="/timestamp-converter" />
+    </div>
+  </div>
+
+  <!-- Tool groups -->
+  <div class="site-shell mx-auto px-4 sm:px-6 pb-16">
+    {groups.map((group, gi) => {
+      const groupTools = group.tools
+        .map((slug) => toolsBySlug[slug])
+        .filter(Boolean);
+      if (groupTools.length === 0) return null;
+      const groupName = group.name[locale] || group.name.en;
+
+      return (
+        <section class="mb-10" id={`cat-${group.key}`}>
+          <h2 class="text-xl font-bold mb-4 flex items-center gap-2" style="color: var(--color-text)">
+            <span aria-hidden="true">{group.icon}</span>
+            {groupName}
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {groupTools.map((tool) => (
+              <ToolCard tool={tool} locale={locale} />
+            ))}
+          </div>
+          {/* Insert ad after every 2 groups */}
+          {gi > 0 && gi % 2 === 1 && <AdSlot name="in-feed" format="horizontal" class="mt-6" />}
+        </section>
+      );
+    })}
+  </div>
+
+  <AdSlot name="footer" format="horizontal" />
+
+  <Fragment slot="footer">
+    <Footer locale={locale} />
+  </Fragment>
+</BaseLayout>

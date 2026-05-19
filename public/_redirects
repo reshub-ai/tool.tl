@@ -1,0 +1,170 @@
+# ============================================================
+# 301 Redirects for tool.tl (Cloudflare Pages)
+# ============================================================
+# Handles:
+#   1. Old language prefix mapping: /zh/* → /zh-CN/*
+#   2. Legacy routes from tool.tl that differ from new paths
+#   3. Removed pages redirected to closest equivalent
+# ============================================================
+
+# --- Language prefix mapping (old zh → new zh-CN) ---
+/zh/  /zh-CN/  301
+/zh/about/  /zh-CN/about  301
+/zh/privacy/  /zh-CN/privacy  301
+/zh/contact/  /zh-CN/contact  301
+
+# Tool routes: /zh/<tool> → /zh-CN/<tool>
+/zh/pdf-to-word/  /zh-CN/pdf-to-word  301
+/zh/pdf-to-jpg/  /zh-CN/pdf-to-jpg  301
+/zh/compress-pdf/  /zh-CN/compress-pdf  301
+/zh/jpg-to-pdf/  /zh-CN/jpg-to-pdf  301
+/zh/png-to-jpg/  /zh-CN/png-to-jpg  301
+/zh/to-favicon/  /zh-CN/to-favicon  301
+/zh/favicon-inspect/  /zh-CN/favicon-inspect  301
+/zh/png-to-icns/  /zh-CN/png-to-icns  301
+/zh/webp-to/  /zh-CN/webp-to  301
+/zh/svg-to-png/  /zh-CN/svg-to-png  301
+/zh/png-to-svg/  /zh-CN/png-to-svg  301
+/zh/gif-split/  /zh-CN/gif-split  301
+/zh/barcode-decoder/  /zh-CN/barcode-decoder  301
+/zh/json-formatter/  /zh-CN/json-formatter  301
+/zh/jwt-debugger/  /zh-CN/jwt-debugger  301
+/zh/text-case/  /zh-CN/text-case  301
+/zh/base64-decoder/  /zh-CN/base64-decoder  301
+/zh/base64-encoder/  /zh-CN/base64-encoder  301
+/zh/base64-decoder-img/  /zh-CN/base64-decoder-img  301
+/zh/base64-encoder-img/  /zh-CN/base64-encoder-img  301
+/zh/url-decoder/  /zh-CN/url-decoder  301
+/zh/url-encoder/  /zh-CN/url-encoder  301
+/zh/uuid-generator/  /zh-CN/uuid-generator  301
+/zh/timestamp-converter/  /zh-CN/timestamp-converter  301
+/zh/regex-tester/  /zh-CN/regex-tester  301
+/zh/base-converter/  /zh-CN/base-converter  301
+/zh/file-size-converter/  /zh-CN/file-size-converter  301
+/zh/color-converter/  /zh-CN/color-converter  301
+/zh/chinese-to-pinyin/  /zh-CN/chinese-to-pinyin  301
+/zh/password-generator/  /zh-CN/password-generator  301
+/zh/totp-generator/  /zh-CN/totp-generator  301
+/zh/qrcode/  /zh-CN/qrcode  301
+/zh/exif-viewer/  /zh-CN/exif-viewer  301
+/zh/exif-auto-orient/  /zh-CN/exif-auto-orient  301
+/zh/to-mp4/  /zh-CN/to-mp4  301
+/zh/ping/  /zh-CN/ping  301
+/zh/traceroute/  /zh-CN/traceroute  301
+/zh/dns/  /zh-CN/dns  301
+/zh/whois/  /zh-CN/whois  301
+/zh/portscan/  /zh-CN/portscan  301
+/zh/cdncheck/  /zh-CN/cdncheck  301
+/zh/asn/  /zh-CN/asn  301
+/zh/http-header/  /zh-CN/http-header  301
+/zh/email-diagnostics/  /zh-CN/email-diagnostics  301
+/zh/mx-checker/  /zh-CN/mx-checker  301
+/zh/spf-checker/  /zh-CN/spf-checker  301
+/zh/dkim-checker/  /zh-CN/dkim-checker  301
+/zh/dmarc-checker/  /zh-CN/dmarc-checker  301
+/zh/email-port-checker/  /zh-CN/email-port-checker  301
+/zh/tls-handshake-test/  /zh-CN/tls-handshake-test  301
+/zh/dnsbl-checker/  /zh-CN/dnsbl-checker  301
+/zh/ptr-lookup/  /zh-CN/ptr-lookup  301
+
+# --- Old /en/* prefix → root (en is default, no prefix) ---
+/en/  /  301
+/en/tools  /tools  301
+/en/tools/  /tools  301
+/en/topics  /topics  301
+/en/topics/:cat  /topics/:cat  301
+/en/topics/:cat/  /topics/:cat  301
+/en/topics/:cat/:slug  /topics/:cat/:slug  301
+/en/topics/:cat/:slug/  /topics/:cat/:slug  301
+/en/about/  /about  301
+/en/privacy/  /privacy  301
+/en/contact/  /contact  301
+/en/pdf-to-word/  /pdf-to-word  301
+/en/pdf-to-jpg/  /pdf-to-jpg  301
+/en/compress-pdf/  /compress-pdf  301
+/en/jpg-to-pdf/  /jpg-to-pdf  301
+/en/png-to-jpg/  /png-to-jpg  301
+/en/to-favicon/  /to-favicon  301
+/en/favicon-inspect/  /favicon-inspect  301
+/en/png-to-icns/  /png-to-icns  301
+/en/webp-to/  /webp-to  301
+/en/svg-to-png/  /svg-to-png  301
+/en/png-to-svg/  /png-to-svg  301
+/en/gif-split/  /gif-split  301
+/en/barcode-decoder/  /barcode-decoder  301
+/en/json-formatter/  /json-formatter  301
+/en/jwt-debugger/  /jwt-debugger  301
+/en/text-case/  /text-case  301
+/en/base64-decoder/  /base64-decoder  301
+/en/base64-encoder/  /base64-encoder  301
+/en/base64-decoder-img/  /base64-decoder-img  301
+/en/base64-encoder-img/  /base64-encoder-img  301
+/en/url-decoder/  /url-decoder  301
+/en/url-encoder/  /url-encoder  301
+/en/uuid-generator/  /uuid-generator  301
+/en/timestamp-converter/  /timestamp-converter  301
+/en/regex-tester/  /regex-tester  301
+/en/base-converter/  /base-converter  301
+/en/file-size-converter/  /file-size-converter  301
+/en/color-converter/  /color-converter  301
+/en/chinese-to-pinyin/  /chinese-to-pinyin  301
+/en/password-generator/  /password-generator  301
+/en/totp-generator/  /totp-generator  301
+/en/qrcode/  /qrcode  301
+/en/exif-viewer/  /exif-viewer  301
+/en/exif-auto-orient/  /exif-auto-orient  301
+/en/to-mp4/  /to-mp4  301
+/en/ping/  /ping  301
+/en/traceroute/  /traceroute  301
+/en/dns/  /dns  301
+/en/whois/  /whois  301
+/en/portscan/  /portscan  301
+/en/cdncheck/  /cdncheck  301
+/en/asn/  /asn  301
+/en/http-header/  /http-header  301
+/en/email-diagnostics/  /email-diagnostics  301
+/en/mx-checker/  /mx-checker  301
+/en/spf-checker/  /spf-checker  301
+/en/dkim-checker/  /dkim-checker  301
+/en/dmarc-checker/  /dmarc-checker  301
+/en/email-port-checker/  /email-port-checker  301
+/en/tls-handshake-test/  /tls-handshake-test  301
+/en/dnsbl-checker/  /dnsbl-checker  301
+/en/ptr-lookup/  /ptr-lookup  301
+
+# --- Legacy routes that no longer exist ---
+/all  /tools  301
+/all/  /tools  301
+/en/all  /en/tools  301
+/en/all/  /en/tools  301
+/zh/all  /zh-CN/tools  301
+/zh/all/  /zh-CN/tools  301
+/zh/top-tools  /zh-CN/top-tools  301
+/zh/top-tools/  /zh-CN/top-tools  301
+/en/changelog  /changelog  301
+/en/changelog/  /changelog  301
+/zh/changelog  /zh-CN/changelog  301
+/zh/changelog/  /zh-CN/changelog  301
+/categories  /topics  301
+/en/categories  /topics  301
+/zh/categories  /zh-CN/topics  301
+/zh/topics  /zh-CN/topics  301
+/zh/topics/:cat  /zh-CN/topics/:cat  301
+/zh/topics/:cat/  /zh-CN/topics/:cat  301
+/zh/topics/:cat/:slug  /zh-CN/topics/:cat/:slug  301
+/zh/topics/:cat/:slug/  /zh-CN/topics/:cat/:slug  301
+/index.html  /  301
+
+
+# --- Topics /articles/ suffix → handled by Astro middleware (Worker) ---
+# Old zh/ prefix still needs _redirects since zh/* goes to zh-CN/* before Worker
+/zh/topics/:slug/articles    /zh-CN/topics/:slug  301
+/zh/topics/:slug/articles/   /zh-CN/topics/:slug  301
+
+# --- Article routes → blog ---
+/articles  /blog  301
+/en/articles  /blog  301
+/zh/articles  /zh-CN/blog  301
+
+# --- Old sitemap ---
+/sitemap.xml  /sitemap-index.xml  301

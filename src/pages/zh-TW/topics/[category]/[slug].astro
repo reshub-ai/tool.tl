@@ -1,0 +1,130 @@
+---
+export const prerender = false;
+
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import { fetchArticleBySlug, fetchCategories } from '@/lib/content-api';
+import { t, getLocalizedPath } from '@/i18n/utils';
+import type { Locale } from '@/i18n/config';
+
+const locale: Locale = 'zh-TW';
+const { category: categorySlug, slug } = Astro.params;
+
+if (!slug || !categorySlug) return Astro.redirect('/zh-TW/topics');
+
+const [article, categories] = await Promise.all([
+  fetchArticleBySlug(slug, locale).catch(() => null),
+  fetchCategories(locale).catch(() => []),
+]);
+
+if (!article) return Astro.redirect('/zh-TW/topics');
+
+const category = categories.find((c: any) => c.slug === categorySlug);
+
+
+function splitContent(html: string): string[] {
+  if (!html) return [''];
+  const parts = html.split(/(<\/p\s*>)/i);
+  if (parts.length < 7) return [html];
+  return [parts.slice(0, 6).join(''), parts.slice(6).join('')];
+}
+const articleParts = splitContent(article.content);
+
+const canonicalPath = 'zh-TW/topics/${categorySlug}/${slug}';
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: article.title,
+  description: article.summary,
+  datePublished: article.created_at,
+  dateModified: article.updated_at,
+  url: `https://tool.tl/${canonicalPath}`,
+  publisher: { '@type': 'Organization', name: 'Tool-TL', url: 'https://tool.tl' },
+};
+---
+
+<BlogLayout
+  title={article.title}
+  description={article.summary || article.title}
+  locale={locale}
+  canonicalPath={canonicalPath}
+  ogImage={article.cover_image}
+  jsonLd={articleJsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="flex items-center gap-2 text-sm mb-6" style="color: var(--color-text-secondary)">
+    <a href="/zh-TW" style="color: var(--color-primary)">{t('breadcrumb.home', locale)}</a>
+    <span>/</span>
+    <a href="/zh-TW/topics" style="color: var(--color-primary)">{t('topics.title', locale)}</a>
+    <span>/</span>
+    <a href="/zh-TW/topics/{categorySlug}" style="color: var(--color-primary)">{category?.name || categorySlug}</a>
+    <span>/</span>
+    <span style="color: var(--color-text)">{article.title}</span>
+  </nav>
+
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold mb-3" style="color: var(--color-text)">{article.title}</h1>
+    <div class="flex items-center gap-4 text-sm" style="color: var(--color-text-secondary)">
+      <time>{t('blog.published', locale)} {article.created_at?.slice(0, 10)}</time>
+      {category?.name && <span>{category.name}</span>}
+      <span><span class="view-count" data-slug={slug}>—</span> {t('blog.views', locale)}</span>
+    </div>
+  </header>
+
+  {articleParts.length > 1 ? (
+    <>
+      <div class="article-content" set:html={articleParts[0]} />
+      <AdSlot name="in-article" format="fluid" />
+      <div class="article-content" set:html={articleParts[1]} />
+    </>
+  ) : (
+    <div class="article-content" set:html={article.content} />
+  )}
+
+  <footer class="mt-10 pt-6 border-t flex items-center gap-6" style="border-color: var(--color-border)">
+    <a href="/zh-TW/topics/{categorySlug}" class="text-sm" style="color: var(--color-primary)">
+      ← {category?.name || categorySlug}
+    </a>
+    <button class="like-btn flex items-center gap-1 px-4 py-2 rounded border text-sm"
+      style="border-color: var(--color-border); color: var(--color-text)"
+      data-slug={slug} data-action="like">
+      👍 {t('blog.like', locale)} <span class="like-count">{article.likes}</span>
+    </button>
+    <button class="dislike-btn flex items-center gap-1 px-4 py-2 rounded border text-sm"
+      style="border-color: var(--color-border); color: var(--color-text)"
+      data-slug={slug} data-action="dislike">
+      👎 {t('blog.dislike', locale)} <span class="dislike-count">{article.dislikes}</span>
+    </button>
+  </footer>
+</BlogLayout>
+
+<script>
+  const CONTENT_API = import.meta.env.PUBLIC_CONTENT_API_BASE || `${import.meta.env.PUBLIC_API_BASE || 'https://api.tool.tl'}/content`;
+
+  // Track page view client-side so CDN cache doesn't break counting
+  (async () => {
+    const vcEl = document.querySelector('.view-count');
+    const slug = vcEl && vcEl.dataset.slug;
+    if (!slug) return;
+    try {
+      const r = await fetch(CONTENT_API + '/api/articles/' + encodeURIComponent(slug) + '/view?site_id=2', { method: 'POST' });
+      const j = await r.json();
+      if (vcEl && j.view_count !== undefined) vcEl.textContent = j.view_count;
+    } catch (e) { /* silently ignore */ }
+  })();
+  document.querySelectorAll('[data-action]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const el = btn as HTMLElement;
+      const slug = el.dataset.slug;
+      const action = el.dataset.action;
+      if (!slug || !action) return;
+      try {
+        await fetch(`${CONTENT_API}/api/articles/${slug}/${action}?site_id=2`, { method: 'POST' });
+        const countEl = el.querySelector(`.${action}-count`);
+        if (countEl) countEl.textContent = String(Number(countEl.textContent) + 1);
+        el.setAttribute('disabled', 'true');
+        el.style.opacity = '0.5';
+      } catch {}
+    });
+  });
+</script>

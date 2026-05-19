@@ -1,0 +1,59 @@
+---
+/**
+ * BlogLayout — for article/blog pages (SSR).
+ * Single-column centered layout with Header/Footer + ad slots.
+ */
+import BaseLayout from './BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
+import type { Locale } from '@/i18n/config';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  canonicalPath: string;
+  ogImage?: string;
+  jsonLd?: object;
+}
+
+const { title, description, locale, canonicalPath, ogImage, jsonLd } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalPath={canonicalPath}
+  ogType="article"
+  ogImage={ogImage}
+  jsonLd={jsonLd}
+>
+  <Fragment slot="header">
+    <Header locale={locale}>
+      <LanguageSwitcher slot="language-switcher" locale={locale} currentPath={Astro.url.pathname} />
+      <LanguageSwitcher slot="language-switcher-mobile" locale={locale} currentPath={Astro.url.pathname} />
+    </Header>
+  </Fragment>
+
+  <div class="site-shell mx-auto px-4 sm:px-6 py-10">
+    <AdSlot name="blog-top" format="horizontal" />
+
+    <article
+      class="blog-article prose mt-6"
+      style="color: var(--color-text)"
+      data-pagefind-body
+      data-pagefind-filter={`lang:${locale}`}
+    >
+      <slot />
+    </article>
+
+    <AdSlot name="blog-bottom" format="horizontal" />
+  </div>
+
+  <Fragment slot="footer">
+    <Footer locale={locale} />
+  </Fragment>
+</BaseLayout>

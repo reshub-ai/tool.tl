@@ -1,0 +1,45 @@
+---
+/**
+ * PageLayout — for static content pages (about, privacy, terms, contact).
+ * Single-column centered layout with Header/Footer.
+ */
+import BaseLayout from './BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
+import type { Locale } from '@/i18n/config';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  canonicalPath: string;
+  noAds?: boolean;
+}
+
+const { title, description, locale, canonicalPath, noAds = true } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalPath={canonicalPath}
+>
+  <Fragment slot="header">
+    <Header locale={locale}>
+      <LanguageSwitcher slot="language-switcher" locale={locale} currentPath={Astro.url.pathname} />
+      <LanguageSwitcher slot="language-switcher-mobile" locale={locale} currentPath={Astro.url.pathname} />
+    </Header>
+  </Fragment>
+
+  <div class="site-shell mx-auto px-4 sm:px-6 py-10">
+    <article class="prose" style="color: var(--color-text)" data-pagefind-body data-pagefind-filter={`lang:${locale}`}>
+      <slot />
+    </article>
+  </div>
+
+  <Fragment slot="footer">
+    <Footer locale={locale} />
+  </Fragment>
+</BaseLayout>

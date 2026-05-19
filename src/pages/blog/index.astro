@@ -1,0 +1,124 @@
+---
+export const prerender = false;
+
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import { fetchArticles, fetchCategories } from '@/lib/content-api';
+import { t } from '@/i18n/utils';
+import type { Locale } from '@/i18n/config';
+
+const locale: Locale = 'en';
+
+const page = Number(Astro.url.searchParams.get('page')) || 1;
+const categorySlug = Astro.url.searchParams.get('category') || undefined;
+
+let articles = { articles: [] as any[], total: 0, pages: 0 };
+let categories: any[] = [];
+
+try {
+  [articles, categories] = await Promise.all([
+    fetchArticles(page, 20, categorySlug, locale),
+    fetchCategories(locale),
+  ]);
+} catch (e) {
+  // API unavailable — render empty state
+}
+---
+
+<BlogLayout
+  title={t('blog.title', locale)}
+  description={t('blog.subtitle', locale)}
+  locale={locale}
+  canonicalPath="blog"
+>
+  <div class="flex items-center justify-between gap-4 flex-wrap">
+    <div>
+      <h1>{t('blog.title', locale)}</h1>
+      <p style="color: var(--color-text-secondary)">{t('blog.subtitle', locale)}</p>
+    </div>
+    <a href="/topics" class="text-sm font-medium px-4 py-2 rounded-lg border" style="color: var(--color-primary); border-color: var(--color-primary)">
+      {t('nav.topics', locale)} →
+    </a>
+  </div>
+
+  {categories.length > 0 && (
+    <nav class="flex flex-wrap gap-2 my-6">
+      <a
+        href="/blog"
+        class:list={['px-3 py-1 rounded-full text-sm border', !categorySlug && 'font-bold']}
+        style={`border-color: var(--color-border); color: var(--color-primary)`}
+      >
+        All
+      </a>
+      {categories.map((cat: any) => (
+        <a
+          href={`/blog?category=${cat.slug}`}
+          class:list={[
+            'px-3 py-1 rounded-full text-sm border',
+            categorySlug === cat.slug && 'font-bold',
+          ]}
+          style={`border-color: var(--color-border); color: var(--color-primary)`}
+        >
+          {cat.name} ({cat.article_count})
+        </a>
+      ))}
+    </nav>
+  )}
+
+  {articles.articles.length === 0 ? (
+    <p class="py-10 text-center" style="color: var(--color-text-secondary)">
+      {t('blog.no_articles', locale)}
+    </p>
+  ) : (
+    <div class="space-y-8 mt-6">
+      {articles.articles.map((article: any) => (
+        <article
+          class="rounded-xl border p-6"
+          style="background-color: var(--color-card-bg); border-color: var(--color-border)"
+        >
+          <h2 class="text-xl font-bold mb-2">
+            <a
+              href={`/blog/${article.slug}`}
+              class="hover:underline"
+              style="color: var(--color-text)"
+            >
+              {article.title}
+            </a>
+          </h2>
+          {article.summary && (
+            <p class="mb-3" style="color: var(--color-text-secondary)">
+              {article.summary}
+            </p>
+          )}
+          <div class="flex items-center gap-4 text-sm" style="color: var(--color-text-secondary)">
+            <time>{article.created_at?.slice(0, 10)}</time>
+            {article.category_name && <span>{article.category_name}</span>}
+            <span>{article.views} {t('blog.views', locale)}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  )}
+
+  {articles.pages > 1 && (
+    <nav class="flex justify-center gap-4 mt-10">
+      {page > 1 && (
+        <a
+          href={`/blog?page=${page - 1}${categorySlug ? `&category=${categorySlug}` : ''}`}
+          class="px-4 py-2 rounded border"
+          style="border-color: var(--color-border); color: var(--color-primary)"
+        >
+          {t('blog.prev', locale)}
+        </a>
+      )}
+      {page < articles.pages && (
+        <a
+          href={`/blog?page=${page + 1}${categorySlug ? `&category=${categorySlug}` : ''}`}
+          class="px-4 py-2 rounded border"
+          style="border-color: var(--color-border); color: var(--color-primary)"
+        >
+          {t('blog.next', locale)}
+        </a>
+      )}
+    </nav>
+  )}
+</BlogLayout>

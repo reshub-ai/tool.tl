@@ -1,0 +1,188 @@
+---
+import { getAlternateLinks, getLocalizedPath } from '@/i18n/utils';
+import type { Locale } from '@/i18n/config';
+import CookieConsent from '@/components/CookieConsent';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  locale?: string;
+  canonicalPath: string;
+  ogImage?: string;
+  ogType?: string;
+  noindex?: boolean;
+  jsonLd?: object | object[];
+}
+
+const {
+  title,
+  description,
+  locale = 'en',
+  canonicalPath,
+  ogImage,
+  ogType = 'website',
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const siteUrl = 'https://tool.tl';
+const fullTitle = `${title} | Tool-TL`;
+
+const _adsenseRaw = import.meta.env.PUBLIC_ADSENSE_ID || '';
+const adClient = _adsenseRaw.startsWith('ca-') ? _adsenseRaw : _adsenseRaw ? `ca-pub-${_adsenseRaw}` : '';
+
+const canonicalUrl =
+  locale === 'en'
+    ? `${siteUrl}/${canonicalPath}`
+    : `${siteUrl}/${locale}/${canonicalPath}`;
+
+const alternateLinks = getAlternateLinks(canonicalPath);
+
+const ogImageUrl = ogImage ?? `${siteUrl}/og-default.png`;
+const ogHasDimensions = true;
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Tool-TL',
+  url: siteUrl,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${siteUrl}/search?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    {
+      alternateLinks.map(({ hreflang, href }) => (
+        <link rel="alternate" hreflang={hreflang} href={href} />
+      ))
+    }
+
+    <!-- OpenGraph -->
+    <meta property="og:site_name" content="Tool-TL" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content={locale === 'zh-CN' ? 'zh_CN' : locale === 'zh-TW' ? 'zh_TW' : locale === 'ja' ? 'ja_JP' : 'en_US'} />
+    <meta property="og:image" content={ogImageUrl} />
+    {ogHasDimensions && <meta property="og:image:width" content="1200" />}
+    {ogHasDimensions && <meta property="og:image:height" content="630" />}
+    <meta property="og:image:alt" content={title} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@tooltl" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={title} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Theme initialization (must be inline and synchronous to prevent FOUC) -->
+    <script is:inline>
+      (function() {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isDark = stored === 'dark' || (stored !== 'light' && prefersDark);
+        if (isDark) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      })();
+    </script>
+
+    <!-- Browser language auto-redirect (only on English/default pages) -->
+    <script is:inline define:vars={{ pageLocale: locale }}>
+      (function() {
+        if (pageLocale !== 'en') return;
+        if (localStorage.getItem('locale-preference')) return;
+        var m = {
+          ja: 'ja',
+          'zh-cn': 'zh-CN', 'zh-sg': 'zh-CN', 'zh-my': 'zh-CN', 'zh-hans': 'zh-CN', zh: 'zh-CN',
+          'zh-tw': 'zh-TW', 'zh-hk': 'zh-TW', 'zh-mo': 'zh-TW', 'zh-hant': 'zh-TW',
+        };
+        var langs = (navigator.languages && navigator.languages.length)
+          ? Array.from(navigator.languages) : [navigator.language || ''];
+        var target = null;
+        for (var i = 0; i < langs.length; i++) {
+          var l = langs[i].toLowerCase();
+          if (m[l]) { target = m[l]; break; }
+          var p = l.split('-')[0];
+          if (m[p]) { target = m[p]; break; }
+        }
+        if (target) {
+          var path = window.location.pathname;
+          // Prevent loop: skip if path already starts with a non-English locale prefix
+          var locales = ['/zh-CN/', '/zh-TW/', '/ja/'];
+          for (var j = 0; j < locales.length; j++) {
+            if (path.startsWith(locales[j]) || path === locales[j].slice(0, -1)) return;
+          }
+          // Strip existing /en/ prefix before prepending target locale
+          var cleanPath = path.replace(/^\/en(\/|$)/, '/');
+          window.location.replace('/' + target + (cleanPath === '/' ? '/' : cleanPath));
+        }
+      })();
+    </script>
+
+    <!-- Google Analytics via self-hosted proxy -->
+    <script is:inline async src={`/beacon/gtag/js?id=${import.meta.env.PUBLIC_GA_ID}`}></script>
+    <script is:inline define:vars={{ gaId: import.meta.env.PUBLIC_GA_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      var proxyUrl = window.location.protocol + "//" + window.location.hostname + "/beacon/";
+      gtag('config', gaId, {
+        'transport_url': proxyUrl
+      });
+    </script>
+
+    <!-- Google AdSense -->
+    {adClient && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`} crossorigin="anonymous"></script>}
+
+    <!-- Structured Data: WebSite -->
+    <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+
+    {jsonLd && (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((ld) => (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(ld)} />
+    ))}
+  </head>
+
+  <body
+    class="min-h-screen flex flex-col"
+    style="background-color: var(--color-bg); color: var(--color-text)"
+  >
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <slot name="header" />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <slot name="footer" />
+
+    <CookieConsent client:idle locale={locale} privacyPath={getLocalizedPath('privacy', locale as Locale)} />
+  </body>
+</html>

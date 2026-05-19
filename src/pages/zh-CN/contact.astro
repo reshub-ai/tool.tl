@@ -1,0 +1,50 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import type { Locale } from '@/i18n/config';
+const locale: Locale = 'zh-CN';
+---
+
+<PageLayout title="联系我们" description="与 Tool-TL 团队取得联系，发送反馈、报告 bug 或请求新工具。" locale={locale} canonicalPath="contact">
+  <h1>联系我们</h1>
+
+  <p>
+    我们重视您的反馈，并始终致力于改进 Tool-TL。无论您有问题、发现了 bug、想建议新工具，
+    还是有商务合作意向，我们都很乐意听到您的声音。
+  </p>
+
+  <h2>邮箱</h2>
+  <p>
+    联系我们最快的方式是发送邮件。我们使用单一邮箱处理所有咨询——通用问题、bug 反馈、
+    功能建议以及隐私相关问题：
+  </p>
+  <p>
+    <a href="mailto:support@tool.tl"><strong>support@tool.tl</strong></a>
+  </p>
+
+  <h2>回复时间</h2>
+  <p>
+    我们通常会在 1–2 个工作日内回复所有咨询。对于紧急的技术问题，请在邮件主题中加入"URGENT"，
+    并详细描述问题，包括您当时使用的工具、浏览器以及设备。
+  </p>
+
+  <h2>功能建议</h2>
+  <p>
+    有新工具或改进建议？我们会根据用户需求来安排功能优先级。在提出建议时，最好包含以下信息：
+  </p>
+  <ul>
+    <li>工具应该完成什么功能。</li>
+    <li>为什么有用（您的具体使用场景）。</li>
+    <li>您在其他地方见过的类似工具或参考案例。</li>
+  </ul>
+
+  <h2>Bug 反馈</h2>
+  <p>
+    如果您遇到问题，请提供以下信息以便我们排查：
+  </p>
+  <ul>
+    <li>您当时使用的是哪个工具。</li>
+    <li>预期的结果与实际发生的情况。</li>
+    <li>您的浏览器和操作系统。</li>
+    <li>您看到的任何错误提示。</li>
+  </ul>
+</PageLayout>

@@ -1,0 +1,194 @@
+---
+import type { Locale } from '@/i18n/config';
+import { t } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const searchPlaceholder: Record<string, string> = {
+  en: 'Search tools and articles',
+  'zh-CN': '搜索工具和文章',
+  'zh-TW': '搜尋工具和文章',
+  ja: 'ツールと記事を検索',
+};
+
+const noResultsText: Record<string, string> = {
+  en: 'No results found',
+  'zh-CN': '未找到结果',
+  'zh-TW': '未找到結果',
+  ja: '結果が見つかりません',
+};
+
+const placeholder = searchPlaceholder[locale] || searchPlaceholder.en;
+const noResults = noResultsText[locale] || noResultsText.en;
+
+// Pagefind filter values are case-sensitive — must match data-pagefind-filter exactly
+const pagefindLang = locale;
+---
+
+<div class="relative flex items-center">
+  <!-- Desktop search trigger -->
+  <button
+    type="button"
+    class="hidden sm:flex flex-shrink-0 items-center justify-center gap-2 rounded-lg border p-2 text-sm transition-colors min-h-[40px] min-w-[40px] 2xl:px-3 2xl:min-h-[44px] 2xl:min-w-[44px] whitespace-nowrap hover:opacity-80"
+    style="color: var(--color-text-secondary); border-color: var(--color-border);"
+    aria-label={placeholder}
+    data-search-toggle
+  >
+    <svg class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.3-4.3"/>
+    </svg>
+    <span class="hidden 2xl:inline text-xs whitespace-nowrap" style="color: var(--color-text-secondary);">
+      {placeholder}
+    </span>
+    <kbd class="hidden 2xl:inline-flex flex-shrink-0 items-center rounded border px-1.5 py-0.5 text-[10px] font-mono" style="border-color: var(--color-border); color: var(--color-text-secondary);">
+      ⌘K
+    </kbd>
+  </button>
+
+  <!-- Mobile search trigger -->
+  <button
+    type="button"
+    class="sm:hidden flex items-center justify-center rounded-lg p-2 min-h-[40px] min-w-[40px] hover:opacity-80"
+    style="color: var(--color-text);"
+    aria-label={placeholder}
+    data-search-toggle
+  >
+    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.3-4.3"/>
+    </svg>
+  </button>
+
+  <!-- Search modal -->
+  <div id="search-modal" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" id="search-backdrop"></div>
+    <div class="fixed inset-x-0 top-10 sm:top-24 max-w-2xl mx-auto px-4">
+      <div
+        class="rounded-2xl shadow-2xl border overflow-hidden"
+        style="background-color: var(--color-bg); border-color: var(--color-border);"
+      >
+        <div class="p-4 border-b flex items-center gap-3" style="border-color: var(--color-border);">
+          <svg class="w-5 h-5 flex-shrink-0" style="color: var(--color-primary);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.3-4.3"/>
+          </svg>
+          <input
+            type="text"
+            id="search-input"
+            placeholder={placeholder}
+            class="flex-1 bg-transparent border-none outline-none text-base font-medium"
+            style="color: var(--color-text);"
+          />
+          <kbd
+            class="hidden sm:block text-[10px] font-bold px-2 py-1 rounded border uppercase tracking-widest"
+            style="border-color: var(--color-border); color: var(--color-text-secondary);"
+          >ESC</kbd>
+        </div>
+        <div id="search-results" class="max-h-[60vh] overflow-y-auto p-2 empty:hidden">
+          <!-- Results injected here -->
+        </div>
+        <div
+          id="search-empty"
+          class="p-4 text-center text-sm hidden"
+          style="color: var(--color-text-secondary);"
+        >
+          {noResults}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ pagefindLang, noResults }}>
+  let pagefind;
+  let pagefindReady;
+  const toggleBtns = document.querySelectorAll('[data-search-toggle]');
+  const modal = document.getElementById('search-modal');
+  const backdrop = document.getElementById('search-backdrop');
+  const input = document.getElementById('search-input');
+  const resultsDiv = document.getElementById('search-results');
+  const emptyDiv = document.getElementById('search-empty');
+
+  function initPagefind() {
+    if (!pagefindReady) {
+      pagefindReady = (async function() {
+        try {
+          pagefind = await import('/pagefind/pagefind.js');
+          await pagefind.options({
+            ranking: {
+              termSimilarity: 0.1,
+              pageLength: 0.3
+            }
+          });
+        } catch (e) {
+          console.error('Pagefind not available.', e);
+        }
+      })();
+    }
+    return pagefindReady;
+  }
+
+  function openModal() {
+    modal.classList.remove('hidden');
+    input.focus();
+    input.value = '';
+    resultsDiv.innerHTML = '';
+    emptyDiv.classList.add('hidden');
+    initPagefind();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  toggleBtns.forEach(function(btn) { btn.addEventListener('click', openModal); });
+  backdrop.addEventListener('click', closeModal);
+
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      modal.classList.contains('hidden') ? openModal() : closeModal();
+    }
+  });
+
+  input.addEventListener('input', async function(e) {
+    var query = e.target.value.trim();
+    if (!query) {
+      resultsDiv.innerHTML = '';
+      emptyDiv.classList.add('hidden');
+      return;
+    }
+
+    await initPagefind();
+    if (!pagefind) {
+      resultsDiv.innerHTML = '';
+      emptyDiv.classList.add('hidden');
+      return;
+    }
+
+    var search = await pagefind.search(query, {
+      filters: { lang: pagefindLang }
+    });
+
+    if (search.results.length === 0) {
+      resultsDiv.innerHTML = '';
+      emptyDiv.classList.remove('hidden');
+      return;
+    }
+
+    emptyDiv.classList.add('hidden');
+    var results = await Promise.all(search.results.slice(0, 8).map(function(r) { return r.data(); }));
+
+    resultsDiv.innerHTML = results.map(function(r) {
+      return '<a href="' + r.url + '" class="block p-3 rounded-xl transition-colors hover:opacity-80" style="color: var(--color-text);">' +
+        '<h4 class="font-semibold text-sm mb-1">' + (r.meta.title || '') + '</h4>' +
+        '<p class="text-xs line-clamp-2" style="color: var(--color-text-secondary);">' + (r.excerpt || '') + '</p>' +
+      '</a>';
+    }).join('');
+  });
+</script>

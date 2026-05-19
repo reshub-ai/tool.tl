@@ -1,0 +1,64 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import type { Locale } from '@/i18n/config';
+
+const locale: Locale = 'en';
+---
+
+<PageLayout
+  title="About Us"
+  description="Learn about Tool-TL, a free online toolbox providing 40+ tools for developers, designers, and everyday users."
+  locale={locale}
+  canonicalPath="about"
+>
+  <h1>About Tool-TL</h1>
+
+  <section>
+    <h2>What is Tool-TL?</h2>
+    <p>
+      Tool-TL is a comprehensive free online toolbox designed to simplify everyday digital tasks.
+      We provide over 40 carefully crafted tools spanning PDF processing, image conversion, developer
+      utilities, network diagnostics, email configuration analysis, and more. Every tool is built with
+      a focus on speed, simplicity, and privacy — your files are processed securely and never stored
+      on our servers longer than necessary.
+    </p>
+    <p>
+      Whether you need to convert a PDF to Word, format JSON data, generate a secure password, run
+      a DNS lookup, or split a GIF into individual frames, Tool-TL has you covered. All tools are
+      accessible directly in your browser with no software installation required. Our goal is to be
+      the single bookmark you need for common digital utility tasks.
+    </p>
+  </section>
+
+  <section>
+    <h2>Our Mission</h2>
+    <p>
+      We believe powerful tools should be free and accessible to everyone. Tool-TL was created to
+      replace the scattered collection of ad-heavy, slow, or unreliable online tools with a single,
+      clean, fast platform. We focus on three core principles:
+    </p>
+    <ul>
+      <li><strong>Speed</strong> — Tools load instantly and process your data as fast as possible.</li>
+      <li><strong>Privacy</strong> — Many of our tools run entirely in your browser. For tools that require server processing, files are automatically deleted after conversion.</li>
+      <li><strong>Simplicity</strong> — Clean interfaces with no clutter. Every tool does one thing well.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Who Built This?</h2>
+    <p>
+      Tool-TL is maintained by a small team of developers who were tired of searching for reliable
+      online utilities across dozens of different websites. We built the tools we wanted to use ourselves,
+      and decided to share them with everyone. The project is continuously improved based on user
+      feedback and real-world usage patterns.
+    </p>
+  </section>
+
+  <section>
+    <h2>Get in Touch</h2>
+    <p>
+      Have a suggestion, found a bug, or want to request a new tool? We'd love to hear from you.
+      Visit our <a href="/contact">Contact page</a> to reach out.
+    </p>
+  </section>
+</PageLayout>

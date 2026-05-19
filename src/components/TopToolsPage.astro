@@ -1,0 +1,175 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import { fetchToolUsageRanked } from '@/lib/content-api';
+import { getAllTools, getToolName, getToolDescription } from '@/lib/tools';
+import { t } from '@/i18n/utils';
+import { getLocalizedPath } from '@/i18n/utils';
+import type { Locale } from '@/i18n/config';
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+
+Astro.response.headers.set('Cache-Control', 'no-store');
+
+const FEATURED_IDS = [
+  'compress-pdf',
+  'pdf-to-word',
+  'chinese-to-pinyin',
+  'exif-viewer',
+  'favicon-inspect',
+  'jpg-to-pdf',
+];
+
+let rankedTools: Array<{ tool_id: string; usage_count: number; recent_usage_count: number }> = [];
+try {
+  rankedTools = await fetchToolUsageRanked(12);
+} catch (e) {}
+
+const allTools = getAllTools();
+const toolsMap = Object.fromEntries(allTools.map((tool) => [tool.slug, tool]));
+const rankedToolIds = new Set(rankedTools.map((r) => r.tool_id));
+
+const mostUsedTools = rankedTools
+  .map((r) => {
+    const tool = toolsMap[r.tool_id];
+    if (!tool) return null;
+    return { tool, usage_count: r.usage_count, recent_usage_count: r.recent_usage_count };
+  })
+  .filter(Boolean) as Array<{
+    tool: ReturnType<typeof getAllTools>[0];
+    usage_count: number;
+    recent_usage_count: number;
+  }>;
+
+const featuredTools = FEATURED_IDS
+  .filter((id) => toolsMap[id] && !rankedToolIds.has(id))
+  .map((id) => toolsMap[id]);
+
+function fmtLabel(tpl: string, count: number) {
+  return tpl.replace('{count}', String(count));
+}
+---
+
+<BaseLayout
+  title={t('top_tools.seo_title', locale)}
+  description={t('top_tools.seo_desc', locale)}
+  locale={locale}
+  canonicalPath="top-tools"
+>
+  <Fragment slot="header">
+    <Header locale={locale}>
+      <LanguageSwitcher slot="language-switcher" locale={locale} currentPath={currentPath} />
+      <LanguageSwitcher slot="language-switcher-mobile" locale={locale} currentPath={currentPath} />
+    </Header>
+  </Fragment>
+
+  <div class="site-shell mx-auto px-4 sm:px-6 py-10">
+    <AdSlot name="blog-top" format="horizontal" />
+
+    <!-- Hero -->
+    <div class="mt-6 mb-8">
+      <h1 class="text-3xl font-bold mb-2" style="color: var(--color-text)">{t('top_tools.title', locale)}</h1>
+      <p class="mb-5" style="color: var(--color-text-secondary)">{t('top_tools.subtitle', locale)}</p>
+      <div class="flex gap-3 flex-wrap">
+        <a
+          href={getLocalizedPath('all-tools', locale)}
+          class="inline-block px-4 py-2 rounded-xl border text-sm font-medium transition-colors hover:opacity-80"
+          style="background: linear-gradient(180deg,rgba(47,128,237,.14),rgba(47,128,237,.05)); border-color: rgba(47,128,237,.3); color: var(--color-primary)"
+        >
+          {t('top_tools.cta_all', locale)}
+        </a>
+        <a
+          href={getLocalizedPath('topics', locale)}
+          class="inline-block px-4 py-2 rounded-xl border text-sm font-medium transition-colors hover:opacity-80"
+          style="border-color: var(--color-border); color: var(--color-text)"
+        >
+          {t('top_tools.cta_guides', locale)}
+        </a>
+      </div>
+    </div>
+
+    <!-- Most Used -->
+    {mostUsedTools.length > 0 && (
+      <section class="rounded-2xl border p-6 mb-6" style="background: var(--color-card-bg); border-color: var(--color-border)">
+        <h2 class="flex items-center gap-2 text-xl font-bold mb-1" style="color: var(--color-text)">
+          <span aria-hidden="true">🔥</span>
+          {t('top_tools.most_used_title', locale)}
+        </h2>
+        <p class="text-sm mb-5" style="color: var(--color-text-secondary)">{t('top_tools.most_used_subtitle', locale)}</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {mostUsedTools.map(({ tool, usage_count, recent_usage_count }) => (
+            <a
+              href={getLocalizedPath(tool.slug, locale)}
+              class="top-card flex flex-col rounded-2xl border p-4 transition-all hover:-translate-y-0.5"
+              style="text-decoration: none; border-color: rgba(191,219,254,.6); background: linear-gradient(180deg,#f8fbff,#fff); box-shadow: 0 6px 18px rgba(15,23,42,.05)"
+            >
+              <strong class="block text-base font-semibold mb-1 leading-snug" style="color: var(--color-text)">
+                {getToolName(tool, locale)}
+              </strong>
+              <span class="block text-sm mb-3 leading-relaxed" style="color: var(--color-text-secondary)">
+                {getToolDescription(tool, locale)}
+              </span>
+              <em class="mt-auto self-start inline-flex items-center px-2.5 py-1 rounded-full text-xs font-normal not-italic" style="background: rgba(47,128,237,.08); color: #2f80ed">
+                {fmtLabel(t('top_tools.recent_usage_label', locale), recent_usage_count)}
+                &nbsp;·&nbsp;
+                {fmtLabel(t('top_tools.usage_count_label', locale), usage_count)}
+              </em>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Featured -->
+    {featuredTools.length > 0 && (
+      <section class="rounded-2xl border p-6 mb-6" style="background: var(--color-card-bg); border-color: var(--color-border)">
+        <h2 class="flex items-center gap-2 text-xl font-bold mb-1" style="color: var(--color-text)">
+          <span aria-hidden="true">⭐</span>
+          {t('top_tools.featured_title', locale)}
+        </h2>
+        <p class="text-sm mb-5" style="color: var(--color-text-secondary)">{t('top_tools.featured_subtitle', locale)}</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {featuredTools.map((tool) => (
+            <a
+              href={getLocalizedPath(tool.slug, locale)}
+              class="top-card flex flex-col rounded-2xl border p-4 transition-all hover:-translate-y-0.5"
+              style="text-decoration: none; border-color: rgba(191,219,254,.6); background: linear-gradient(180deg,#f8fbff,#fff); box-shadow: 0 6px 18px rgba(15,23,42,.05)"
+            >
+              <strong class="block text-base font-semibold mb-1 leading-snug" style="color: var(--color-text)">
+                {getToolName(tool, locale)}
+              </strong>
+              <span class="block text-sm leading-relaxed" style="color: var(--color-text-secondary)">
+                {getToolDescription(tool, locale)}
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <AdSlot name="blog-bottom" format="horizontal" />
+  </div>
+
+  <Fragment slot="footer">
+    <Footer locale={locale} />
+  </Fragment>
+</BaseLayout>
+
+<style>
+  html.dark .top-card {
+    background: linear-gradient(180deg, #172131, #111827) !important;
+    border-color: rgba(71, 85, 105, .52) !important;
+    box-shadow: none !important;
+  }
+  html.dark .top-card:hover {
+    border-color: rgba(96, 165, 250, .6) !important;
+  }
+</style>

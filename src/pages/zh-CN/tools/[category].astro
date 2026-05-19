@@ -1,0 +1,11 @@
+---
+import ToolsListPage from '@/components/ToolsListPage.astro';
+import { toolCategories } from '@/i18n/config';
+
+export function getStaticPaths() {
+  return toolCategories.map((cat) => ({ params: { category: cat.key } }));
+}
+
+const { category } = Astro.params;
+---
+<ToolsListPage locale="zh-CN" category={category} currentPath={Astro.url.pathname} />
