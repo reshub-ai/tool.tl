@@ -11,6 +11,7 @@ export interface ToolVariant {
 
 export interface Tool {
   slug: string;
+  featured?: boolean;
   name: Record<string, string>;
   description: Record<string, string>;
   subtitle: Record<string, string>;
@@ -35,6 +36,10 @@ const data = toolsData as { groups: ToolGroup[]; tools: Tool[] };
 
 export function getAllTools(): Tool[] {
   return data.tools;
+}
+
+export function getFeaturedTools(limit = 6): Tool[] {
+  return data.tools.filter((t) => t.featured).slice(0, limit);
 }
 
 export function getToolBySlug(slug: string): Tool | undefined {

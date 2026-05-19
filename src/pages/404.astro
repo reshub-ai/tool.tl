@@ -5,15 +5,11 @@ import Footer from '@/components/Footer.astro';
 import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
 import ToolCard from '@/components/ToolCard.astro';
 import { t } from '@/i18n/utils';
-import { getAllTools } from '@/lib/tools';
+import { getFeaturedTools } from '@/lib/tools';
 import type { Locale } from '@/i18n/config';
 
 const locale: Locale = 'en';
-const popularSlugs = ['json-formatter', 'compress-pdf', 'pdf-to-word', 'png-to-jpg', 'uuid-generator', 'password-generator'];
-const allTools = getAllTools();
-const popularTools = popularSlugs
-  .map((slug) => allTools.find((t) => t.slug === slug))
-  .filter(Boolean);
+const popularTools = getFeaturedTools();
 ---
 
 <BaseLayout

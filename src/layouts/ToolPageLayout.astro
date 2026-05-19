@@ -61,26 +61,31 @@ const softwareAppLd: Record<string, any> = {
 };
 
 // HowTo structured data
+const toolOgImageUrl = `https://tool.tl/og/${tool.slug}.png`;
 const howToLd = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
   name: t('tool.howto_name', locale).replace('{name}', title),
   description: description,
+  image: toolOgImageUrl,
   step: [
     {
       '@type': 'HowToStep',
       name: t('tool.howto_step1_name', locale),
       text: t('tool.howto_step1_text', locale).replace('{name}', title),
+      image: toolOgImageUrl,
     },
     {
       '@type': 'HowToStep',
       name: t('tool.howto_step2_name', locale),
       text: t('tool.howto_step2_text', locale),
+      image: toolOgImageUrl,
     },
     {
       '@type': 'HowToStep',
       name: t('tool.howto_step3_name', locale),
       text: t('tool.howto_step3_text', locale),
+      image: toolOgImageUrl,
     },
   ],
 };

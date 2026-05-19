@@ -221,6 +221,7 @@
   "tools": [
     {
       "slug": "pdf-to-word",
+      "featured": true,
       "name": {
         "en": "PDF to Word",
         "zh-CN": "PDF 转 Word",
@@ -365,6 +366,7 @@
     },
     {
       "slug": "compress-pdf",
+      "featured": true,
       "name": {
         "en": "Compress PDF",
         "zh-CN": "压缩 PDF",
@@ -761,6 +763,7 @@
     },
     {
       "slug": "png-to-jpg",
+      "featured": true,
       "name": {
         "en": "PNG to JPG",
         "zh-CN": "PNG 转 JPG",
@@ -3005,6 +3008,7 @@
     },
     {
       "slug": "json-formatter",
+      "featured": true,
       "name": {
         "en": "JSON Formatter",
         "zh-CN": "JSON 格式化工具",
@@ -3360,6 +3364,7 @@
     },
     {
       "slug": "uuid-generator",
+      "featured": true,
       "name": {
         "en": "UUID Generator",
         "zh-CN": "UUID 生成器",
@@ -3956,6 +3961,7 @@
     },
     {
       "slug": "password-generator",
+      "featured": true,
       "name": {
         "en": "Password Generator",
         "zh-CN": "密码生成器",
