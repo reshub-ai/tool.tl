@@ -240,5 +240,18 @@ const toolProps = {
   <Fragment slot="seo-content">
     <h2>{t('tool.what_is', locale).replace('{name}', name)}</h2>
     <p>{description}</p>
+
+    <h2>{t('tool.how_to_use', locale)}</h2>
+    <ol>
+      <li><strong>{t('tool.howto_step1_name', locale)}</strong> — {t('tool.howto_step1_text', locale).replace('{name}', name)}</li>
+      <li><strong>{t('tool.howto_step2_name', locale)}</strong> — {t('tool.howto_step2_text', locale)}</li>
+      <li><strong>{t('tool.howto_step3_name', locale)}</strong> — {t('tool.howto_step3_text', locale)}</li>
+    </ol>
+
+    <h2>{t('tool.faq', locale)}</h2>
+    <h3>{t('tool.faq_free_q', locale).replace('{name}', name)}</h3>
+    <p>{t('tool.faq_free_a', locale).replace('{name}', name)}</p>
+    <h3>{t('tool.faq_safe_q', locale).replace('{name}', name)}</h3>
+    <p>{t('tool.faq_safe_a', locale)}</p>
   </Fragment>
 </ToolPageLayout>
