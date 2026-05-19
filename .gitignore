@@ -5,6 +5,10 @@ __pycache__/
 # Build output
 dist/
 
+# Generated OG images (rebuilt by generate-og.mjs before each build)
+public/og/
+public/og-default.png
+
 # Astro
 .astro/
 

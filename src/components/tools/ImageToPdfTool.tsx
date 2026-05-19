@@ -294,7 +294,7 @@ export default function ImageToPdfTool({ slug, locale }: Props) {
                   background: 'var(--color-bg)',
                 }}
               >
-                <img src={item.url} alt="" style={{ width: '100%', height: '80px', objectFit: 'cover', display: 'block' }} />
+                <img src={item.url} alt={item.name} style={{ width: '100%', height: '80px', objectFit: 'cover', display: 'block' }} />
                 <div style={{ padding: '0.25rem 0.35rem', fontSize: '0.68rem', color: 'var(--color-text-secondary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {item.name}
                 </div>

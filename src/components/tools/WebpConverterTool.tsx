@@ -204,7 +204,7 @@ export default function WebpConverterTool({ slug, apiEndpoint, locale, defaultMo
       ) : (
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', ...card }}>
           {previewUrl && (
-            <img src={previewUrl} alt="" style={{
+            <img src={previewUrl} alt={file.name} style={{
               width: '60px', height: '60px', objectFit: 'contain', borderRadius: '6px',
               border: '1px solid var(--color-border)', flexShrink: 0,
               background: 'repeating-conic-gradient(#ccc 0% 25%,transparent 0% 50%) 0 0/12px 12px',

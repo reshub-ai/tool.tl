@@ -18,6 +18,7 @@ const i18n: Record<string, Record<string, string>> = {
     errEmpty: 'Please paste Base64 image data first.',
     errInvalid: 'Invalid Base64 data. Could not render image.',
     switchText: '→ Decode Base64 text',
+    imgAlt: 'Decoded image preview',
   },
   'zh-CN': {
     placeholder: '粘贴 Base64 图片数据（支持带或不带 data: 前缀）…',
@@ -29,6 +30,7 @@ const i18n: Record<string, Record<string, string>> = {
     errEmpty: '请先粘贴 Base64 图片数据。',
     errInvalid: '无效的 Base64 数据，无法渲染图片。',
     switchText: '→ 解码 Base64 文本',
+    imgAlt: '解码图片预览',
   },
   'zh-TW': {
     placeholder: '貼上 Base64 圖片資料（支援帶或不帶 data: 前綴）…',
@@ -40,6 +42,7 @@ const i18n: Record<string, Record<string, string>> = {
     errEmpty: '請先貼上 Base64 圖片資料。',
     errInvalid: '無效的 Base64 資料，無法渲染圖片。',
     switchText: '→ 解碼 Base64 文字',
+    imgAlt: '解碼圖片預覽',
   },
   ja: {
     placeholder: 'Base64画像データを貼り付けてください（data: プレフィックス有無どちらも可）…',
@@ -51,6 +54,7 @@ const i18n: Record<string, Record<string, string>> = {
     errEmpty: 'まずBase64画像データを貼り付けてください。',
     errInvalid: '無効なBase64データです。画像を表示できません。',
     switchText: '→ Base64テキストをデコード',
+    imgAlt: 'デコードされた画像プレビュー',
   },
 };
 
@@ -170,7 +174,7 @@ export default function Base64DecoderImgTool({ locale }: Props) {
           <img
             ref={imgRef}
             src={dataUrl}
-            alt="decoded"
+            alt={t.imgAlt}
             onError={handleImgError}
             style={{
               maxWidth: '100%',
