@@ -1706,20 +1706,20 @@
         "ja": "DNS検索"
       },
       "description": {
-        "en": "Query universal DNS records for any domain.",
-        "zh-CN": "查询任意域名的全部 DNS 记录。",
-        "zh-TW": "查詢任意網域的全部 DNS 記錄。",
-        "ja": "任意のドメインのDNSレコードを照会します。"
+        "en": "Free online DNS lookup tool. Query A, AAAA, MX, CNAME, TXT, and all other DNS record types for any domain instantly.",
+        "zh-CN": "免费在线 DNS 查询工具。即时查询任意域名的 A、AAAA、MX、CNAME、TXT 等全部 DNS 记录类型。",
+        "zh-TW": "免費線上 DNS 查詢工具。即時查詢任意網域的 A、AAAA、MX、CNAME、TXT 等全部 DNS 記錄類型。",
+        "ja": "無料オンラインDNS検索ツール。任意のドメインのA・AAAA・MX・CNAME・TXT等全DNSレコードタイプを即時照会。"
       },
       "subtitle": {
-        "en": "Universal DNS Records",
-        "zh-CN": "DNS 全记录查询",
-        "zh-TW": "DNS 全記錄查詢",
-        "ja": "DNS全レコード照会"
+        "en": "Free Online DNS Record Lookup Tool",
+        "zh-CN": "免费在线 DNS 记录查询工具",
+        "zh-TW": "免費線上 DNS 記錄查詢工具",
+        "ja": "無料オンラインDNSレコード検索ツール"
       },
       "category": "network",
       "component": "Dns",
-      "keywords": "dns lookup query record domain a aaaa mx cname txt",
+      "keywords": "dns lookup query record domain a aaaa mx cname txt free online checker",
       "apiType": "network",
       "apiEndpoint": "/dns/api",
       "variants": [
@@ -1850,20 +1850,20 @@
         "ja": "ポートスキャナー"
       },
       "description": {
-        "en": "Check for open ports on a target host.",
-        "zh-CN": "检查目标主机的开放端口。",
-        "zh-TW": "檢查目標主機的開放埠。",
-        "ja": "ターゲットホストのオープンポートを確認します。"
+        "en": "Free online port scanner. Check open ports on any host or IP address. Detect exposed services and potential security vulnerabilities.",
+        "zh-CN": "免费在线端口扫描工具。检查任意主机或 IP 地址的开放端口，检测暴露的服务和潜在安全漏洞。",
+        "zh-TW": "免費線上埠掃描工具。檢查任意主機或 IP 位址的開放埠，偵測暴露的服務和潛在安全漏洞。",
+        "ja": "無料オンラインポートスキャナー。任意のホストまたはIPアドレスの開放ポートを確認。公開サービスとセキュリティ脆弱性を検出。"
       },
       "subtitle": {
-        "en": "Open Port Detection",
-        "zh-CN": "开放端口检测",
-        "zh-TW": "開放埠檢測",
-        "ja": "オープンポート検出"
+        "en": "Free Online Port Scanner & Checker",
+        "zh-CN": "免费在线端口扫描与检测工具",
+        "zh-TW": "免費線上埠掃描與檢測工具",
+        "ja": "無料オンラインポートスキャナー＆チェッカー"
       },
       "category": "network",
       "component": "Portscan",
-      "keywords": "port scan open check network security",
+      "keywords": "port scan open check network security free online scanner",
       "apiType": "network",
       "apiEndpoint": "/portscan/api",
       "variants": [
@@ -2066,20 +2066,20 @@
         "ja": "HTTPヘッダー"
       },
       "description": {
-        "en": "Inspect HTTP response headers from any URL.",
-        "zh-CN": "检查任意 URL 的 HTTP 响应头。",
-        "zh-TW": "檢查任意 URL 的 HTTP 回應標頭。",
-        "ja": "任意のURLのHTTPレスポンスヘッダーを検査します。"
+        "en": "Free online HTTP header checker. Inspect response headers from any URL. Analyze security headers, cache policy, and server configuration.",
+        "zh-CN": "免费在线 HTTP 头部检测工具。检查任意 URL 的响应头，分析安全头、缓存策略和服务器配置信息。",
+        "zh-TW": "免費線上 HTTP 標頭檢測工具。檢查任意 URL 的回應標頭，分析安全標頭、快取策略和伺服器配置資訊。",
+        "ja": "無料オンラインHTTPヘッダーチェッカー。任意URLのレスポンスヘッダーを検査。セキュリティヘッダー・キャッシュポリシー・サーバー設定を分析。"
       },
       "subtitle": {
-        "en": "Response Header Sniffing",
-        "zh-CN": "响应头嗅探",
-        "zh-TW": "回應標頭嗅探",
-        "ja": "レスポンスヘッダースニッフィング"
+        "en": "Free Online HTTP Response Header Checker",
+        "zh-CN": "免费在线 HTTP 响应头检测工具",
+        "zh-TW": "免費線上 HTTP 回應標頭檢測工具",
+        "ja": "無料オンラインHTTPレスポンスヘッダーチェッカー"
       },
       "category": "network",
       "component": "HttpHeader",
-      "keywords": "http header response inspect sniff security",
+      "keywords": "http header response inspect sniff security free online checker",
       "apiType": "network",
       "apiEndpoint": "/http-header/api",
       "variants": [
@@ -4204,20 +4204,20 @@
         "ja": "QRコードジェネレーター"
       },
       "description": {
-        "en": "Generate QR codes from text or URLs.",
-        "zh-CN": "从文本或网址生成二维码。",
-        "zh-TW": "從文字或網址產生二維碼。",
-        "ja": "テキストやURLからQRコードを生成します。"
+        "en": "Free online QR code generator. Create QR codes from text, URLs, or any data instantly. Download in PNG or SVG format, no signup needed.",
+        "zh-CN": "免费在线二维码生成器。从文本、网址或任意数据即时生成二维码，可下载 PNG 或 SVG 格式，无需注册。",
+        "zh-TW": "免費線上二維碼產生器。從文字、網址或任意資料即時產生二維碼，可下載 PNG 或 SVG 格式，無需註冊。",
+        "ja": "無料オンラインQRコードジェネレーター。テキスト・URL・任意のデータから即時QRコードを作成。PNG・SVG形式でダウンロード可能。登録不要。"
       },
       "subtitle": {
-        "en": "QR Code Creator",
-        "zh-CN": "二维码生成",
-        "zh-TW": "二維碼產生",
-        "ja": "QRコード作成"
+        "en": "Free Online QR Code Generator",
+        "zh-CN": "免费在线二维码生成器",
+        "zh-TW": "免費線上二維碼產生器",
+        "ja": "無料オンラインQRコードジェネレーター"
       },
       "category": "barcode",
       "component": "QrCode",
-      "keywords": "qr qrcode generate create barcode",
+      "keywords": "qr qrcode generate create free online generator png svg download",
       "apiType": "frontend",
       "apiEndpoint": "/qrcode/api",
       "variants": [
