@@ -909,22 +909,22 @@
     {
       "slug": "favicon-inspect",
       "name": {
-        "en": "Favicon Inspector",
-        "zh-CN": "Favicon 解包工具",
-        "zh-TW": "Favicon 解包工具",
-        "ja": "Faviconインスペクター"
+        "en": "ICO to PNG JPG",
+        "zh-CN": "ICO 转 PNG JPG",
+        "zh-TW": "ICO 轉 PNG JPG",
+        "ja": "ICO → PNG/JPG 変換"
       },
       "description": {
-        "en": "Inspect and extract layers from favicon.ico files.",
-        "zh-CN": "解析并提取 favicon.ico 文件中的各层图标。",
-        "zh-TW": "解析並提取 favicon.ico 檔案中的各層圖示。",
-        "ja": "favicon.icoファイルのレイヤーを検査・抽出します。"
+        "en": "Convert favicon.ico to PNG or JPG. Extract all sizes from an ICO file and download individually or as a ZIP.",
+        "zh-CN": "将 favicon.ico 转换为 PNG 或 JPG。提取 ICO 文件中的所有尺寸，可单独下载或打包下载。",
+        "zh-TW": "將 favicon.ico 轉換為 PNG 或 JPG。提取 ICO 檔案中的所有尺寸，可單獨下載或打包下載。",
+        "ja": "favicon.icoをPNGまたはJPGに変換。ICOファイルの全サイズを抽出して個別またはZIPでダウンロード。"
       },
       "subtitle": {
-        "en": "Favicon ICO Inspector",
-        "zh-CN": "Favicon ICO 解包",
-        "zh-TW": "Favicon ICO 解包",
-        "ja": "Favicon ICOインスペクター"
+        "en": "Favicon ICO to PNG / JPG Converter",
+        "zh-CN": "Favicon ICO 转 PNG/JPG",
+        "zh-TW": "Favicon ICO 轉 PNG/JPG",
+        "ja": "Favicon ICO → PNG/JPG 変換"
       },
       "category": "image",
       "component": "FaviconInspect",

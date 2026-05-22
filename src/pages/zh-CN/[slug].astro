@@ -23,6 +23,7 @@ import JwtDebuggerTool from '@/components/tools/JwtDebuggerTool';
 import WebpConverterTool from '@/components/tools/WebpConverterTool';
 import CompressPdfTool from '@/components/tools/CompressPdfTool';
 import GifSplitTool from '@/components/tools/GifSplitTool';
+import FaviconInspectTool from '@/components/tools/FaviconInspectTool';
 import TotpGeneratorTool from '@/components/tools/TotpGeneratorTool';
 import TextCaseTool from '@/components/tools/TextCaseTool';
 import Base64EncoderImgTool from '@/components/tools/Base64EncoderImgTool';
@@ -98,7 +99,7 @@ const toolProps = {
   {tool.apiType === 'network' && tool.category !== 'email' && tool.component !== 'DnsLeakTest' && (
     <NetworkTool client:load {...toolProps} />
   )}
-  {tool.apiType === 'convert' && tool.category !== 'email' && tool.component !== 'ToMp4' && tool.component !== 'WebpTo' && tool.component !== 'CompressPdf' && tool.component !== 'GifSplit' && tool.component !== 'MergePdf' && tool.component !== 'SplitPdf' && (
+  {tool.apiType === 'convert' && tool.category !== 'email' && tool.component !== 'ToMp4' && tool.component !== 'WebpTo' && tool.component !== 'CompressPdf' && tool.component !== 'GifSplit' && tool.component !== 'MergePdf' && tool.component !== 'SplitPdf' && tool.component !== 'FaviconInspect' && (
     <FileUploadTool client:load {...toolProps} />
   )}
   {tool.component === 'FileSizeConverter' && (
@@ -124,6 +125,9 @@ const toolProps = {
   )}
   {tool.component === 'GifSplit' && (
     <GifSplitTool client:load {...toolProps} />
+  )}
+  {tool.component === 'FaviconInspect' && (
+    <FaviconInspectTool client:load {...toolProps} />
   )}
   {tool.component === 'TotpGenerator' && (
     <TotpGeneratorTool client:load {...toolProps} />
