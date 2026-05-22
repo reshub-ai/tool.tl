@@ -5,6 +5,23 @@ export interface ChangelogItem {
 
 export const CHANGELOG: ChangelogItem[] = [
   {
+    date: '2026-05-21',
+    lines: {
+      en: [
+        '✅ New tool: ICO to PNG / JPG — upload a favicon.ico, extract all embedded sizes (16×16 up to 256×256) as PNG or JPG, download individually or as a ZIP. Checkerboard preview shows transparency. Files saved with tool.tl- prefix.',
+      ],
+      'zh-CN': [
+        '✅ 新增工具：ICO 转 PNG/JPG —— 上传 favicon.ico，提取其中所有尺寸（16×16 至 256×256），支持导出为 PNG 或 JPG，可单独下载或打包为 ZIP。棋盘格预览透明通道，下载文件带 tool.tl- 前缀。',
+      ],
+      'zh-TW': [
+        '✅ 新增工具：ICO 轉 PNG/JPG —— 上傳 favicon.ico，提取所有內嵌尺寸，支援匯出 PNG 或 JPG，可單獨或打包下載。',
+      ],
+      ja: [
+        '✅ 新ツール：ICO → PNG/JPG 変換 —— favicon.icoをアップロードして全サイズを抽出。PNGまたはJPGで個別またはZIPでダウンロード可能。',
+      ],
+    },
+  },
+  {
     date: '2026-05-18',
     lines: {
       en: [

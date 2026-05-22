@@ -158,19 +158,18 @@ export default function FaviconInspectTool({ slug, apiEndpoint, locale }: Props)
   };
 
   const downloadFrame = async (preview: Preview) => {
-    const sizePart = preview.size.replace('x', '_');
     if (format === 'png') {
-      downloadBlob(dataUriToBlob(preview.data), `favicon_${sizePart}.png`);
+      downloadBlob(dataUriToBlob(preview.data), `tool.tl-favicon-${preview.size}.png`);
     } else {
       const blob = await pngDataUriToJpgBlob(preview.data);
-      downloadBlob(blob, `favicon_${sizePart}.jpg`);
+      downloadBlob(blob, `tool.tl-favicon-${preview.size}.jpg`);
     }
   };
 
   const downloadAll = () => {
     if (!zipDataUri) return;
     const blob = dataUriToBlob(zipDataUri);
-    downloadBlob(blob, 'favicons.zip');
+    downloadBlob(blob, 'tool.tl-favicons.zip');
   };
 
   const clear = () => {
