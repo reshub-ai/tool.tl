@@ -58,14 +58,14 @@ body {
 }
 
 .site-header-shell {
-  width: min(100%, var(--site-shell-max));
+  width: fit-content;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
 @media (min-width: 1180px) {
-  .site-shell,
-  .site-header-shell {
+  .site-shell {
     width: min(var(--site-shell-max), calc(100vw - (var(--site-ad-gutter) * 2)));
   }
 }
