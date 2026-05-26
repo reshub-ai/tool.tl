@@ -27,7 +27,11 @@ const {
 } = Astro.props;
 
 const siteUrl = 'https://tool.tl';
-const fullTitle = `${title} | tool.tl`;
+const siteName = 'tool.tl';
+const normalizedTitle = title.trim();
+const fullTitle = normalizedTitle.toLowerCase().endsWith(`| ${siteName}`)
+  ? normalizedTitle
+  : `${normalizedTitle} | ${siteName}`;
 
 const _adsenseRaw = import.meta.env.PUBLIC_ADSENSE_ID || '';
 // PUBLIC_ADSENSE_ID 实际形如 'pub-9845089349130720'（已含 pub-），只需补 'ca-' 前缀。
