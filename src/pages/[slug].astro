@@ -261,24 +261,3 @@ const toolProps = {
     <p>{t('tool.faq_safe_a', locale)}</p>
   </Fragment>
 </ToolPageLayout>
-
-<script is:inline>
-(function () {
-  // Only auto-redirect once per session; skip if user explicitly chose English
-  var SK = 'tl_locale_redirect';
-  if (sessionStorage.getItem(SK)) return;
-
-  var lang = (navigator.language || navigator.languages && navigator.languages[0] || '').toLowerCase();
-  var slug = location.pathname.replace(/^\/|\/$/g, '');
-
-  var prefix =
-    /^zh-(tw|hk|hant)/i.test(lang) ? 'zh-TW' :
-    /^zh/i.test(lang)              ? 'zh-CN' :
-    /^ja/i.test(lang)              ? 'ja'    : null;
-
-  if (prefix) {
-    sessionStorage.setItem(SK, '1');
-    location.replace('/' + prefix + '/' + slug + location.search);
-  }
-})();
-</script>

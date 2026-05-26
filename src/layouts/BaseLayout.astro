@@ -127,31 +127,39 @@ const websiteJsonLd = {
       (function() {
         if (pageLocale !== 'en') return;
         if (localStorage.getItem('locale-preference')) return;
-        var m = {
-          ja: 'ja',
-          'zh-cn': 'zh-CN', 'zh-sg': 'zh-CN', 'zh-my': 'zh-CN', 'zh-hans': 'zh-CN', zh: 'zh-CN',
-          'zh-tw': 'zh-TW', 'zh-hk': 'zh-TW', 'zh-mo': 'zh-TW', 'zh-hant': 'zh-TW',
-        };
+
+        var path = window.location.pathname;
+        var localizedPrefixes = ['/zh-CN/', '/zh-TW/', '/ja/'];
+        for (var i = 0; i < localizedPrefixes.length; i++) {
+          if (path.startsWith(localizedPrefixes[i]) || path === localizedPrefixes[i].slice(0, -1)) return;
+        }
+
         var langs = (navigator.languages && navigator.languages.length)
-          ? Array.from(navigator.languages) : [navigator.language || ''];
-        var target = null;
-        for (var i = 0; i < langs.length; i++) {
-          var l = langs[i].toLowerCase();
-          if (m[l]) { target = m[l]; break; }
-          var p = l.split('-')[0];
-          if (m[p]) { target = m[p]; break; }
+          ? Array.from(navigator.languages)
+          : [navigator.language || ''];
+
+        function resolveLocale(lang) {
+          var l = String(lang || '').toLowerCase();
+          if (!l) return '';
+          if (l === 'ja' || l.startsWith('ja-')) return 'ja';
+          if (l === 'zh-tw' || l === 'zh-hk' || l === 'zh-mo' || l === 'zh-hant' || l.startsWith('zh-hant-')) return 'zh-TW';
+          if (l === 'zh' || l === 'zh-cn' || l === 'zh-sg' || l === 'zh-my' || l === 'zh-hans' || l.startsWith('zh-hans-')) return 'zh-CN';
+          return '';
         }
-        if (target) {
-          var path = window.location.pathname;
-          // Prevent loop: skip if path already starts with a non-English locale prefix
-          var locales = ['/zh-CN/', '/zh-TW/', '/ja/'];
-          for (var j = 0; j < locales.length; j++) {
-            if (path.startsWith(locales[j]) || path === locales[j].slice(0, -1)) return;
-          }
-          // Strip existing /en/ prefix before prepending target locale
-          var cleanPath = path.replace(/^\/en(\/|$)/, '/');
-          window.location.replace('/' + target + (cleanPath === '/' ? '/' : cleanPath));
+
+        var target = '';
+        for (var j = 0; j < langs.length; j++) {
+          target = resolveLocale(langs[j]);
+          if (target) break;
         }
+        if (!target) return;
+
+        var key = 'tl_locale_redirect';
+        var nextPath = '/' + target + path.replace(/^\/en(?=\/|$)/, '');
+        if (nextPath === window.location.pathname) return;
+        if (sessionStorage.getItem(key) === nextPath) return;
+        sessionStorage.setItem(key, nextPath);
+        window.location.replace(nextPath + window.location.search + window.location.hash);
       })();
     </script>
 
