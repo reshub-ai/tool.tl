@@ -41,10 +41,10 @@ const pagefindLang = locale;
     <svg class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.3-4.3"/>
     </svg>
-    <span class="hidden 2xl:inline text-xs whitespace-nowrap" style="color: var(--color-text-secondary);">
+    <span class="search-wide-label text-xs whitespace-nowrap" style="color: var(--color-text-secondary);">
       {placeholder}
     </span>
-    <kbd class="hidden 2xl:inline-flex flex-shrink-0 items-center rounded border px-1.5 py-0.5 text-[10px] font-mono" style="border-color: var(--color-border); color: var(--color-text-secondary);">
+    <kbd class="search-wide-shortcut flex-shrink-0 items-center rounded border px-1.5 py-0.5 text-[10px] font-mono" style="border-color: var(--color-border); color: var(--color-text-secondary);">
       ⌘K
     </kbd>
   </button>
@@ -100,6 +100,23 @@ const pagefindLang = locale;
     </div>
   </div>
 </div>
+
+<style>
+  .search-wide-label,
+  .search-wide-shortcut {
+    display: none;
+  }
+
+  @media (min-width: 1800px) {
+    .search-wide-label {
+      display: inline;
+    }
+
+    .search-wide-shortcut {
+      display: inline-flex;
+    }
+  }
+</style>
 
 <script is:inline define:vars={{ pagefindLang, noResults }}>
   let pagefind;
