@@ -38,9 +38,9 @@ for (const cat of toolCategories) {
   style="background-color: var(--color-header-bg); border-color: var(--color-border);"
 >
   <div class="site-header-shell px-4 py-2 sm:px-6">
-  <nav class="flex items-center justify-between" aria-label="Main navigation">
+  <nav class="header-nav mx-auto flex max-w-full items-center justify-center gap-2" aria-label="Main navigation">
     <!-- Logo + Desktop nav wrapped together -->
-    <div class="flex items-center">
+    <div class="header-main flex min-w-0 items-center">
       <a
         href={getLocalizedPath('/', locale)}
         class="flex items-center gap-2 text-xl font-bold min-h-[44px] min-w-[44px]"
@@ -51,7 +51,7 @@ for (const cat of toolCategories) {
       </a>
 
     <!-- Desktop category navigation -->
-    <div class="hidden lg:flex items-center gap-0">
+    <div class="header-categories hidden min-w-0 items-center gap-0 xl:flex">
       {mainCategories.map((cat) => {
         const tools = getToolsByCategory(cat.key);
         return (
@@ -142,7 +142,7 @@ for (const cat of toolCategories) {
       <!-- Top Tools link -->
       <a
         href={getLocalizedPath('top-tools', locale)}
-        class="rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] flex items-center hover:opacity-80 whitespace-nowrap"
+        class="header-secondary-link rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] flex items-center hover:opacity-80 whitespace-nowrap"
         style="color: var(--color-text);"
       >
         {t('nav.top_tools', locale)}
@@ -151,7 +151,7 @@ for (const cat of toolCategories) {
       <!-- Blog link -->
       <a
         href={getLocalizedPath('blog', locale)}
-        class="rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] flex items-center hover:opacity-80 whitespace-nowrap"
+        class="header-secondary-link rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] flex items-center hover:opacity-80 whitespace-nowrap"
         style="color: var(--color-text);"
       >
         {t('nav.blog', locale)}
@@ -160,7 +160,7 @@ for (const cat of toolCategories) {
       <!-- Changelog link -->
       <a
         href={getLocalizedPath('changelog', locale)}
-        class="rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] flex items-center hover:opacity-80 whitespace-nowrap"
+        class="header-secondary-link header-changelog-link rounded-lg px-2 py-2 text-xs font-medium transition-colors min-h-[44px] flex items-center hover:opacity-80 whitespace-nowrap"
         style="color: var(--color-text);"
       >
         {t('nav.changelog', locale)}
@@ -170,12 +170,12 @@ for (const cat of toolCategories) {
     </div><!-- end logo + desktop nav wrapper -->
 
     <!-- Right section: Search, Language, Theme -->
-    <div class="flex items-center gap-2 shrink-0">
+    <div class="header-actions flex items-center gap-2 shrink-0">
       <!-- Search (Pagefind) -->
       <Search locale={locale} />
 
       <!-- Language switcher slot (desktop) -->
-      <div class="hidden lg:block">
+      <div class="hidden xl:block">
         <slot name="language-switcher" />
       </div>
 
@@ -185,7 +185,7 @@ for (const cat of toolCategories) {
       <!-- Mobile hamburger button -->
       <button
         type="button"
-        class="lg:hidden flex items-center justify-center rounded-lg p-2 min-h-[44px] min-w-[44px] hover:opacity-80"
+        class="xl:hidden flex items-center justify-center rounded-lg p-2 min-h-[44px] min-w-[44px] hover:opacity-80"
         style="color: var(--color-text);"
         aria-label="Menu"
         aria-expanded="false"
@@ -204,7 +204,7 @@ for (const cat of toolCategories) {
 
   <!-- Mobile menu overlay -->
   <div
-    class="fixed inset-0 top-[57px] z-50 hidden overflow-y-auto lg:hidden"
+    class="fixed inset-0 top-[57px] z-50 hidden overflow-y-auto xl:hidden"
     style="background-color: var(--color-bg);"
     data-mobile-menu
     role="dialog"
@@ -273,6 +273,33 @@ for (const cat of toolCategories) {
     </div>
   </div>
 </header>
+
+<style>
+  .header-nav {
+    width: max-content;
+  }
+
+  @media (max-width: 1535px) {
+    .header-nav {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .header-categories {
+      overflow: hidden;
+    }
+
+    .header-changelog-link {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1220px) {
+    .header-secondary-link {
+      display: none;
+    }
+  }
+</style>
 
 <script>
   function initMobileMenu() {
