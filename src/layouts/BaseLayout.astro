@@ -27,7 +27,7 @@ const {
 } = Astro.props;
 
 const siteUrl = 'https://tool.tl';
-const fullTitle = `${title} | Tool-TL`;
+const fullTitle = `${title} | tool.tl`;
 
 const _adsenseRaw = import.meta.env.PUBLIC_ADSENSE_ID || '';
 // PUBLIC_ADSENSE_ID 实际形如 'pub-9845089349130720'（已含 pub-），只需补 'ca-' 前缀。
@@ -50,7 +50,7 @@ const ogHasDimensions = true;
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Tool-TL',
+  name: 'tool.tl',
   url: siteUrl,
   potentialAction: {
     '@type': 'SearchAction',
@@ -83,7 +83,7 @@ const websiteJsonLd = {
     }
 
     <!-- OpenGraph -->
-    <meta property="og:site_name" content="Tool-TL" />
+    <meta property="og:site_name" content="tool.tl" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />

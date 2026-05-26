@@ -1,5 +1,5 @@
 {
-  "site.title": "Tool-TL: Free Online Tools",
+  "site.title": "tool.tl: Free Online Tools",
   "site.description": "Free online tools for text processing, image conversion, PDF tools, developer utilities, network diagnostics and more. No installation required.",
   "nav.home": "Home",
   "nav.tools": "Tools",
@@ -70,7 +70,7 @@
   "cookie.learn_more": "Learn More",
   "tool.howto_name": "How to use {name}",
   "tool.howto_step1_name": "Open the tool",
-  "tool.howto_step1_text": "Navigate to {name} on Tool-TL.",
+  "tool.howto_step1_text": "Navigate to {name} on tool.tl.",
   "tool.howto_step2_name": "Enter your data",
   "tool.howto_step2_text": "Provide the input data or upload your file.",
   "tool.howto_step3_name": "Get results",

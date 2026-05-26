@@ -1,4 +1,4 @@
-# Tool-TL — Free Online Tools
+# tool.tl — Free Online Tools
 
 **Live site:** [tool.tl](https://tool.tl) · [tool-tl.com](https://tool-tl.com) · [中文文档 README.zh-CN.md](./README.zh-CN.md)
 
@@ -6,9 +6,9 @@
 
 ---
 
-## What is Tool-TL?
+## What is tool.tl?
 
-Tool-TL is a free, privacy-first online toolbox. All tools that can run in the browser do so locally — no files are uploaded to any server unless the conversion explicitly requires it (e.g. PDF processing).
+tool.tl is a free, privacy-first online toolbox. All tools that can run in the browser do so locally — no files are uploaded to any server unless the conversion explicitly requires it (e.g. PDF processing).
 
 **87 tools** across 10 categories, fully localized in 4 languages (English, 简体中文, 繁體中文, 日本語).
 
@@ -95,6 +95,6 @@ Issues and pull requests are welcome. If you want to add a new tool, open an iss
 
 ## License
 
-MIT © Tool-TL Team
+MIT © tool.tl Team
 
 The MIT license applies to the source code in this repository. Third-party libraries retain their own licenses.

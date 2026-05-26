@@ -1,5 +1,5 @@
 {
-  "site.title": "Tool-TL: 無料オンラインツール",
+  "site.title": "tool.tl: 無料オンラインツール",
   "site.description": "テキスト処理、画像変換、PDFツール、開発者ユーティリティ、ネットワーク診断など、無料のオンラインツール集。インストール不要。",
   "nav.home": "ホーム",
   "nav.tools": "ツール",
@@ -70,7 +70,7 @@
   "cookie.learn_more": "詳細を見る",
   "tool.howto_name": "{name}の使い方",
   "tool.howto_step1_name": "ツールを開く",
-  "tool.howto_step1_text": "Tool-TLで{name}を開きます。",
+  "tool.howto_step1_text": "tool.tlで{name}を開きます。",
   "tool.howto_step2_name": "データを入力",
   "tool.howto_step2_text": "入力データを入力するか、ファイルをアップロードします。",
   "tool.howto_step3_name": "結果を取得",

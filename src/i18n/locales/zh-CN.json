@@ -1,5 +1,5 @@
 {
-  "site.title": "Tool-TL: 免费在线工具",
+  "site.title": "tool.tl: 免费在线工具",
   "site.description": "免费在线工具合集：文本处理、图片转换、PDF工具、开发者实用工具、网络诊断等。无需安装，即开即用。",
   "nav.home": "首页",
   "nav.tools": "工具",
@@ -70,7 +70,7 @@
   "cookie.learn_more": "了解更多",
   "tool.howto_name": "如何使用{name}",
   "tool.howto_step1_name": "打开工具",
-  "tool.howto_step1_text": "在 Tool-TL 上打开 {name}。",
+  "tool.howto_step1_text": "在 tool.tl 上打开 {name}。",
   "tool.howto_step2_name": "输入数据",
   "tool.howto_step2_text": "提供输入数据或上传文件。",
   "tool.howto_step3_name": "获取结果",

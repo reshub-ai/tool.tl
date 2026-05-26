@@ -1,5 +1,5 @@
 {
-  "site.title": "Tool-TL: 免費線上工具",
+  "site.title": "tool.tl: 免費線上工具",
   "site.description": "免費線上工具合集：文字處理、圖片轉換、PDF工具、開發者實用工具、網路診斷等。無需安裝，即開即用。",
   "nav.home": "首頁",
   "nav.tools": "工具",
@@ -70,7 +70,7 @@
   "cookie.learn_more": "瞭解更多",
   "tool.howto_name": "如何使用{name}",
   "tool.howto_step1_name": "開啟工具",
-  "tool.howto_step1_text": "在 Tool-TL 上開啟 {name}。",
+  "tool.howto_step1_text": "在 tool.tl 上開啟 {name}。",
   "tool.howto_step2_name": "輸入資料",
   "tool.howto_step2_text": "提供輸入資料或上傳檔案。",
   "tool.howto_step3_name": "取得結果",

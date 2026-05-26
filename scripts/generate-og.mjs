@@ -87,7 +87,7 @@ function makeToolSvg(name, category, description) {
   <line x1="80" y1="445" x2="1120" y2="445" stroke="#334155" stroke-width="1"/>
 
   <rect x="80" y="466" width="130" height="44" rx="8" fill="url(#accent)" opacity="0.9"/>
-  <text x="145" y="488" font-family="system-ui,Arial,sans-serif" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle" font-weight="700">Tool-TL</text>
+  <text x="145" y="488" font-family="system-ui,Arial,sans-serif" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle" font-weight="700">tool.tl</text>
 
   <rect x="228" y="466" width="150" height="44" rx="8" fill="#1e293b"/>
   <text x="303" y="488" font-family="system-ui,Arial,sans-serif" font-size="18" fill="#60a5fa" text-anchor="middle" dominant-baseline="middle" font-weight="600">Free · Online</text>
@@ -138,7 +138,7 @@ const defaultSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height=
   <rect x="80" y="210" width="120" height="120" rx="24" fill="url(#accent)"/>
   <text x="140" y="296" font-family="system-ui,Arial,sans-serif" font-size="64" font-weight="900" fill="white" text-anchor="middle" letter-spacing="-2">TL</text>
 
-  <text x="230" y="264" font-family="system-ui,Arial,sans-serif" font-size="58" font-weight="800" fill="white" dominant-baseline="middle" letter-spacing="-1">Tool-TL</text>
+  <text x="230" y="264" font-family="system-ui,Arial,sans-serif" font-size="58" font-weight="800" fill="white" dominant-baseline="middle" letter-spacing="-1">tool.tl</text>
 
   <text x="230" y="314" font-family="system-ui,Arial,sans-serif" font-size="26" font-weight="400" fill="#94a3b8" dominant-baseline="middle">Free Online Tools · Privacy-First · No Installation</text>
 
