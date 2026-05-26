@@ -30,7 +30,12 @@ const siteUrl = 'https://tool.tl';
 const fullTitle = `${title} | Tool-TL`;
 
 const _adsenseRaw = import.meta.env.PUBLIC_ADSENSE_ID || '';
-const adClient = _adsenseRaw.startsWith('ca-') ? _adsenseRaw : _adsenseRaw ? `ca-pub-${_adsenseRaw}` : '';
+// PUBLIC_ADSENSE_ID 实际形如 'pub-9845089349130720'（已含 pub-），只需补 'ca-' 前缀。
+// 之前错写成 `ca-pub-${...}` 会拼出 'ca-pub-pub-9845...'，导致页面级脚本 client 参数错位，
+// AdSense 后台 page view 计数为 0（impression 仍正常，因为 ad unit 的 data-ad-client 是对的）。
+const adClient = _adsenseRaw
+  ? (_adsenseRaw.startsWith('ca-') ? _adsenseRaw : `ca-${_adsenseRaw}`)
+  : '';
 
 const canonicalUrl =
   locale === 'en'
