@@ -141,7 +141,8 @@
         "url-decoder",
         "timestamp-converter",
         "regex-tester",
-        "og-image-generator"
+        "og-image-generator",
+        "rsa-encrypt-decrypt"
       ]
     },
     {
@@ -7203,6 +7204,37 @@
         "profit-margin",
         "break-even-calculator",
         "roi-calculator"
+      ],
+      "variants": []
+    },
+    {
+      "slug": "rsa-encrypt-decrypt",
+      "name": {
+        "en": "RSA Encrypt & Decrypt",
+        "zh-CN": "RSA 加密解密",
+        "zh-TW": "RSA 加密解密",
+        "ja": "RSA 暗号化・復号"
+      },
+      "description": {
+        "en": "Online RSA encryption and decryption tool. Generate RSA key pairs (1024/2048/4096 bit), encrypt plaintext with a public key, and decrypt ciphertext with a private key. Supports PEM format. Runs entirely in your browser — no data is sent to any server.",
+        "zh-CN": "在线 RSA 加密解密工具。生成 RSA 密钥对（1024/2048/4096 位），用公钥加密明文，用私钥解密密文。支持 PEM 格式，完全在浏览器本地运行，数据不上传服务器。",
+        "zh-TW": "線上 RSA 加密解密工具。生成 RSA 金鑰對（1024/2048/4096 位），用公鑰加密明文，用私鑰解密密文。支援 PEM 格式，完全在瀏覽器本地執行，資料不上傳伺服器。",
+        "ja": "オンラインRSA暗号化・復号ツール。RSA鍵ペア（1024/2048/4096ビット）を生成し、公開鍵で平文を暗号化、秘密鍵で暗号文を復号します。PEM形式対応。ブラウザ内で完結し、データはサーバーに送信されません。"
+      },
+      "subtitle": {
+        "en": "Public Key Encrypt · Private Key Decrypt · PEM Format · Browser-Only",
+        "zh-CN": "公钥加密 · 私钥解密 · PEM 格式 · 纯本地运行",
+        "zh-TW": "公鑰加密 · 私鑰解密 · PEM 格式 · 純本地執行",
+        "ja": "公開鍵暗号化 · 秘密鍵復号 · PEM形式 · ブラウザ完結"
+      },
+      "category": "dev",
+      "component": "RsaEncryptDecrypt",
+      "keywords": "RSA encrypt decrypt public key private key PEM PKCS1 cryptography online",
+      "apiType": "frontend",
+      "relatedTools": [
+        "checksum-calculator",
+        "base64-encoder",
+        "totp-generator"
       ],
       "variants": []
     }

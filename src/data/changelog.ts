@@ -5,6 +5,23 @@ export interface ChangelogItem {
 
 export const CHANGELOG: ChangelogItem[] = [
   {
+    date: '2026-05-29',
+    lines: {
+      en: [
+        '✅ New tool: RSA Encrypt & Decrypt — generate RSA key pairs (1024/2048/4096-bit), encrypt plaintext with a public key, decrypt ciphertext with a private key. PEM format, PKCS1 padding. Runs entirely in your browser — no data leaves your device.',
+      ],
+      'zh-CN': [
+        '✅ 新增工具：RSA 加密解密 —— 生成 RSA 密钥对（1024/2048/4096 位），公钥加密、私钥解密，支持 PEM 格式和 PKCS1 填充，完全在浏览器本地运行，数据不上传服务器。',
+      ],
+      'zh-TW': [
+        '✅ 新增工具：RSA 加密解密 —— 生成 RSA 金鑰對（1024/2048/4096 位），公鑰加密、私鑰解密，支援 PEM 格式，純瀏覽器執行，資料不離開裝置。',
+      ],
+      ja: [
+        '✅ 新ツール：RSA 暗号化・復号 —— RSA鍵ペア（1024/2048/4096ビット）を生成し、公開鍵で暗号化・秘密鍵で復号。PEM形式・PKCS1パディング対応。ブラウザ内で完結。',
+      ],
+    },
+  },
+  {
     date: '2026-05-21',
     lines: {
       en: [

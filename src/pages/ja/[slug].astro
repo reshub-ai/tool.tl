@@ -52,6 +52,7 @@ import RetirementCalculatorTool from '@/components/tools/RetirementCalculatorToo
 import NetWorthCalculatorTool from '@/components/tools/NetWorthCalculatorTool';
 import BMICalculatorTool from '@/components/tools/BMICalculatorTool';
 import InvoiceGeneratorTool from '@/components/tools/InvoiceGeneratorTool';
+import RsaEncryptDecryptTool from '@/components/tools/RsaEncryptDecryptTool';
 
 const locale: Locale = 'ja';
 
@@ -231,7 +232,10 @@ const toolProps = {
   {tool.component === 'BaseConverter' && (
     <BaseConverterTool client:load {...toolProps} />
   )}
-  {tool.apiType === 'frontend' && (tool.component === 'UrlDecoder' || tool.component === 'UrlEncoder' || (tool.category === 'dev' && tool.component !== 'ChineseToPinyin' && tool.component !== 'ColorConverter' && tool.component !== 'BaseConverter' && tool.component !== 'ChecksumCalculator' && tool.component !== 'HexArithmetic' && tool.component !== 'CrcCalculator' && tool.component !== 'TextStats' && tool.component !== 'TextProcessor' && tool.component !== 'FileSizeConverter' && tool.component !== 'JsonFormatter' && tool.component !== 'JwtDebugger' && tool.component !== 'TextCase' && tool.component !== 'OgImageGenerator')) && (
+  {tool.component === 'RsaEncryptDecrypt' && (
+    <RsaEncryptDecryptTool client:load {...toolProps} />
+  )}
+  {tool.apiType === 'frontend' && (tool.component === 'UrlDecoder' || tool.component === 'UrlEncoder' || (tool.category === 'dev' && tool.component !== 'ChineseToPinyin' && tool.component !== 'ColorConverter' && tool.component !== 'BaseConverter' && tool.component !== 'ChecksumCalculator' && tool.component !== 'HexArithmetic' && tool.component !== 'CrcCalculator' && tool.component !== 'TextStats' && tool.component !== 'TextProcessor' && tool.component !== 'FileSizeConverter' && tool.component !== 'JsonFormatter' && tool.component !== 'JwtDebugger' && tool.component !== 'TextCase' && tool.component !== 'OgImageGenerator' && tool.component !== 'RsaEncryptDecrypt')) && (
     <TextProcessTool client:load {...toolProps} component={tool.component} />
   )}
   {tool.component === 'ExchangeRate' && (

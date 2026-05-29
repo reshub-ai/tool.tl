@@ -52,6 +52,7 @@ import DnsLeakTestTool from '@/components/tools/DnsLeakTestTool';
 import CompoundInterestTool from '@/components/tools/CompoundInterestTool';
 import CreditCardPayoffTool from '@/components/tools/CreditCardPayoffTool';
 import TaxBracketTool from '@/components/tools/TaxBracketTool';
+import RsaEncryptDecryptTool from '@/components/tools/RsaEncryptDecryptTool';
 
 const locale: Locale = 'zh-TW';
 
@@ -210,7 +211,10 @@ const toolProps = {
     {tool.component === 'BaseConverter' && (
     <BaseConverterTool client:load {...toolProps} />
   )}
-  {tool.apiType === 'frontend' && (tool.component === 'UrlDecoder' || tool.component === 'UrlEncoder' || (tool.category === 'dev' && tool.component !== 'ChineseToPinyin' && tool.component !== 'ColorConverter' && tool.component !== 'BaseConverter' && tool.component !== 'FileSizeConverter' && tool.component !== 'JsonFormatter' && tool.component !== 'JwtDebugger' && tool.component !== 'TextCase' && tool.component !== 'OgImageGenerator')) && (
+  {tool.component === 'RsaEncryptDecrypt' && (
+    <RsaEncryptDecryptTool client:load {...toolProps} />
+  )}
+  {tool.apiType === 'frontend' && (tool.component === 'UrlDecoder' || tool.component === 'UrlEncoder' || (tool.category === 'dev' && tool.component !== 'ChineseToPinyin' && tool.component !== 'ColorConverter' && tool.component !== 'BaseConverter' && tool.component !== 'FileSizeConverter' && tool.component !== 'JsonFormatter' && tool.component !== 'JwtDebugger' && tool.component !== 'TextCase' && tool.component !== 'OgImageGenerator' && tool.component !== 'RsaEncryptDecrypt')) && (
     <TextProcessTool client:load {...toolProps} component={tool.component} />
   )}
   {tool.apiType === 'frontend' && tool.component !== 'MortgageCalculator' && tool.component !== 'ROICalculator' && tool.component !== 'ProfitMargin' && tool.component !== 'BreakEven' && tool.component !== 'SalaryAfterTax' && tool.component !== 'ImageCompressor' && tool.component !== 'SaasChurn' && tool.component !== 'LtvCalculator' && tool.component !== 'WebRTCLeakTest' && tool.component !== 'ResizeImage' && tool.component !== 'LoanAmortization' && tool.component !== 'BrowserFingerprint' && tool.component !== 'ImageToPdf' && tool.component !== 'OgImageGenerator' && tool.component !== 'CarInsuranceCalculator' && tool.component !== 'TaxBracket' && tool.component !== 'CreditCardPayoff' && tool.component !== 'CompoundInterest' && (tool.category !== 'dev' || tool.component === 'ChineseToPinyin' || tool.component === 'ColorConverter') && (
