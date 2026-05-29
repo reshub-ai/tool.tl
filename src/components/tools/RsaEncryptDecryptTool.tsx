@@ -274,7 +274,7 @@ export default function RsaEncryptDecryptTool({ slug, locale }: Props) {
         <div style={card}>
           <label style={label}>{t.publicKey}</label>
           <textarea
-            rows={6}
+            rows={10}
             style={textarea}
             placeholder={t.publicKeyPlaceholder}
             value={publicKey}
@@ -284,7 +284,7 @@ export default function RsaEncryptDecryptTool({ slug, locale }: Props) {
         <div style={card}>
           <label style={label}>{t.privateKey}</label>
           <textarea
-            rows={6}
+            rows={10}
             style={textarea}
             placeholder={t.privateKeyPlaceholder}
             value={privateKey}
@@ -316,7 +316,7 @@ export default function RsaEncryptDecryptTool({ slug, locale }: Props) {
             <button style={{ ...btn, padding: '0.2rem 0.7rem', fontSize: '0.75rem' }} onClick={() => { setInput(''); setOutput(''); setError(''); }}>{t.clear}</button>
           </div>
           <textarea
-            rows={8}
+            rows={14}
             style={textarea}
             placeholder={mode === 'encrypt' ? t.inputPlaceholder : t.ciphertextPlaceholder}
             value={input}
@@ -339,7 +339,7 @@ export default function RsaEncryptDecryptTool({ slug, locale }: Props) {
             </button>
           </div>
           <textarea
-            rows={8}
+            rows={14}
             style={{ ...textarea, resize: 'none' }}
             readOnly
             placeholder={t.outputPlaceholder}
