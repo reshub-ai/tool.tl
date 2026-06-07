@@ -47,6 +47,7 @@ import CarInsuranceCalculatorTool from '@/components/tools/CarInsuranceCalculato
 import MergePdfTool from '@/components/tools/MergePdfTool';
 import SplitPdfTool from '@/components/tools/SplitPdfTool';
 import DnsLeakTestTool from '@/components/tools/DnsLeakTestTool';
+import IpBlockTestTool from '@/components/tools/IpBlockTestTool';
 import CompoundInterestTool from '@/components/tools/CompoundInterestTool';
 import CreditCardPayoffTool from '@/components/tools/CreditCardPayoffTool';
 import TaxBracketTool from '@/components/tools/TaxBracketTool';
@@ -99,7 +100,7 @@ const toolProps = {
   {tool.category === 'email' && (
     <EmailDiagnosticsTool client:load {...toolProps} />
   )}
-  {tool.apiType === 'network' && tool.category !== 'email' && tool.component !== 'DnsLeakTest' && (
+  {tool.apiType === 'network' && tool.category !== 'email' && tool.component !== 'DnsLeakTest' && tool.component !== 'IpBlockTest' && (
     <NetworkTool client:load {...toolProps} />
   )}
   {tool.apiType === 'convert' && tool.category !== 'email' && tool.component !== 'ToMp4' && tool.component !== 'WebpTo' && tool.component !== 'CompressPdf' && tool.component !== 'GifSplit' && tool.component !== 'MergePdf' && tool.component !== 'SplitPdf' && tool.component !== 'FaviconInspect' && (
@@ -194,6 +195,9 @@ const toolProps = {
   )}
   {tool.component === 'DnsLeakTest' && (
     <DnsLeakTestTool client:load {...toolProps} />
+  )}
+  {tool.component === 'IpBlockTest' && (
+    <IpBlockTestTool client:load {...toolProps} />
   )}
   {tool.component === 'CompoundInterest' && (
     <CompoundInterestTool client:load {...toolProps} />

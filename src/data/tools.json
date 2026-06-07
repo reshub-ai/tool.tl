@@ -86,7 +86,8 @@
         "http-header",
         "webrtc-leak-test",
         "browser-fingerprint",
-        "dns-leak-test"
+        "dns-leak-test",
+        "ip-blocktest"
       ]
     },
     {
@@ -7237,6 +7238,61 @@
         "totp-generator"
       ],
       "variants": []
+    },
+    {
+      "slug": "ip-blocktest",
+      "name": {
+        "en": "IP Block Test (GFW)",
+        "zh-CN": "IP 被墙检测",
+        "zh-TW": "IP 被牆檢測",
+        "ja": "IP遮断チェック（GFW）"
+      },
+      "description": {
+        "en": "Check whether an IP and port are blocked by China's Great Firewall (GFW). We probe TCP and ICMP from both a domestic (China) node and an overseas node, then compare to tell if the IP is reachable, blocked, or down.",
+        "zh-CN": "检测某个 IP 和端口是否被中国防火墙（GFW）封锁。我们从国内节点和国外节点分别做 TCP 与 ICMP 探测并对比，判断该 IP 是正常、被墙还是宕机。",
+        "zh-TW": "檢測某個 IP 和埠是否被中國防火牆（GFW）封鎖。我們從國內節點和國外節點分別做 TCP 與 ICMP 探測並對比，判斷該 IP 是正常、被牆還是當機。",
+        "ja": "IP とポートが中国のグレートファイアウォール（GFW）にブロックされているか検査。国内ノードと国外ノードから TCP・ICMP を探測し比較して、到達可能・ブロック・停止を判定します。"
+      },
+      "subtitle": {
+        "en": "Domestic vs Overseas · TCP & ICMP · GFW Block Detection",
+        "zh-CN": "国内外对比 · TCP 与 ICMP · 被墙检测",
+        "zh-TW": "國內外對比 · TCP 與 ICMP · 被牆檢測",
+        "ja": "国内外比較 · TCP・ICMP · GFW遮断検出"
+      },
+      "category": "network",
+      "component": "IpBlockTest",
+      "keywords": "ip blocked gfw great firewall test tcp icmp ping china domestic overseas port reachability 被墙检测",
+      "apiType": "network",
+      "apiEndpoint": "/network/ip-blocktest/api",
+      "variants": [
+        {
+          "slug": "gfw-check",
+          "name": {
+            "en": "GFW Check",
+            "zh-CN": "被墙检测",
+            "zh-TW": "被牆檢測",
+            "ja": "GFWチェック"
+          },
+          "defaultMode": "",
+          "title": {
+            "en": "IP Block Test — Check If Your IP Is Blocked by the GFW",
+            "zh-CN": "IP 被墙检测 — 检查你的 IP 是否被 GFW 封锁",
+            "zh-TW": "IP 被牆檢測 — 檢查你的 IP 是否被 GFW 封鎖",
+            "ja": "IP遮断チェック — IP が GFW にブロックされているか確認"
+          },
+          "description": {
+            "en": "Test whether an IP and port are blocked by China's Great Firewall. Compare TCP and ICMP reachability from inside and outside China.",
+            "zh-CN": "检测某个 IP 和端口是否被中国防火墙封锁，对比国内外的 TCP 与 ICMP 可达性。",
+            "zh-TW": "檢測某個 IP 和埠是否被中國防火牆封鎖，對比國內外的 TCP 與 ICMP 可達性。",
+            "ja": "IP とポートが中国のファイアウォールにブロックされているか検査し、国内外の TCP・ICMP 到達性を比較します。"
+          }
+        }
+      ],
+      "relatedTools": [
+        "ping",
+        "portscan",
+        "traceroute"
+      ]
     }
   ]
 }
