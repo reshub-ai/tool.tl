@@ -1,0 +1,214 @@
+---
+// 文本分享落地页（www.tool.tl/q?id=xxx&lang=xx）
+// 纯静态页：客户端读取 id/lang，跨域 fetch api.tool.tl 拿内容并渲染。
+// 二维码扫码后 URL 全程留在 www.tool.tl。
+const apiBase = import.meta.env.PUBLIC_API_BASE || 'https://api.tool.tl';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>tool.tl</title>
+  <style>
+    :root {
+      --bg1: #f8fafc; --bg2: #eff6ff; --card: #ffffff; --border: #e2e8f0;
+      --text: #1e293b; --muted: #94a3b8; --box: #f8fafc;
+      --primary: #2563eb; --primary-hover: #1d4ed8; --primary-shadow: rgba(37,99,235,.25);
+      --ok: #059669;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg1: #0f172a; --bg2: #0f172a; --card: #1e293b; --border: #334155;
+        --text: #e2e8f0; --muted: #94a3b8; --box: #0f172a;
+        --primary: #3b82f6; --primary-hover: #2563eb; --primary-shadow: rgba(59,130,246,.3);
+        --ok: #34d399;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { scrollbar-width: none; -ms-overflow-style: none; }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+    body {
+      margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 20px;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .wrap { width: 100%; max-width: 384px; animation: fadeIn .3s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pop { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+    .pop { animation: pop .25s ease-out; }
+    .head { text-align: center; margin-bottom: 24px; }
+    .badge {
+      width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--primary); color: #fff; transform: rotate(3deg);
+      box-shadow: 0 10px 20px var(--primary-shadow);
+    }
+    .badge svg { transform: rotate(-3deg); }
+    h1 { font-size: 20px; font-weight: 800; margin: 0; }
+    .sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 24px; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    }
+    .box {
+      background: var(--box); border: 1px solid var(--border); border-radius: 16px;
+      padding: 16px; margin-bottom: 20px; max-height: 45vh; overflow: auto;
+    }
+    pre { margin: 0; white-space: pre-wrap; word-break: break-word; font-size: 14px; line-height: 1.6;
+      font-family: inherit; color: var(--text); }
+    button {
+      width: 100%; padding: 16px; border: none; border-radius: 16px;
+      background: var(--primary); color: #fff; font-size: 16px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 8px 16px var(--primary-shadow); transition: background .15s, transform .1s;
+    }
+    button:hover { background: var(--primary-hover); }
+    button:active { transform: scale(.97); }
+    button.done { background: var(--ok); box-shadow: none; }
+    .status { text-align: center; font-size: 14px; margin-top: 16px; min-height: 20px; font-weight: 500; color: var(--muted); }
+    .status.ok { color: var(--ok); }
+    .status.err { color: #ef4444; }
+    .foot { text-align: center; margin-top: 20px; font-size: 12px; color: var(--muted); }
+    .foot a { color: var(--primary); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+    .center { text-align: center; padding: 40px 0; color: var(--muted); font-size: 14px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <div class="badge">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+          <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+          <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+          <rect x="14" y="14" width="3" height="3" fill="currentColor"/>
+          <rect x="18" y="14" width="3" height="3" fill="currentColor"/>
+          <rect x="14" y="18" width="3" height="3" fill="currentColor"/>
+          <rect x="18" y="18" width="3" height="3" fill="currentColor"/>
+        </svg>
+      </div>
+      <h1 id="pageTitle">tool.tl</h1>
+      <p class="sub" id="pageHint"></p>
+    </div>
+
+    <div class="card">
+      <div id="loading" class="center">…</div>
+
+      <div id="content" class="hidden">
+        <div class="box"><pre id="rawText"></pre></div>
+        <button id="copyBtn">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+          <span id="copyLabel"></span>
+        </button>
+        <p id="copyStatus" class="status"></p>
+      </div>
+
+      <div id="expired" class="hidden center"></div>
+    </div>
+
+    <div class="foot">
+      <span id="footTtl"></span> &nbsp;·&nbsp; <a href="/text-qrcode" id="footMake"></a>
+    </div>
+  </div>
+
+  <script define:vars={{ apiBase }}>
+    const I18N = {
+      en:    { title: 'Scanned Content', hint: 'Tap the button to copy the content below', copy: 'Copy', copied: 'Copied!', copyOk: 'Copied to clipboard', copyFail: 'Auto-copy failed, long-press to copy manually', ttl: 'Content expires in 2 hours', make: 'Create my own QR code', loading: 'Loading…', expired: 'This link has expired. The content was cleared after 2 hours.', missing: 'Invalid link.', error: 'Failed to load content, please try again later.' },
+      'zh-CN': { title: '扫码内容', hint: '点击按钮一键复制以下内容', copy: '一键复制', copied: '复制成功！', copyOk: '内容已复制到剪贴板', copyFail: '自动复制失败，请长按内容手动复制', ttl: '内容有效期 2 小时', make: '生成我的二维码', loading: '加载中…', expired: '此链接已过期，内容在 2 小时后已自动清除。', missing: '链接无效。', error: '内容加载失败，请稍后重试。' },
+      'zh-TW': { title: '掃碼內容', hint: '點擊按鈕一鍵複製以下內容', copy: '一鍵複製', copied: '複製成功！', copyOk: '內容已複製到剪貼簿', copyFail: '自動複製失敗，請長按內容手動複製', ttl: '內容有效期 2 小時', make: '產生我的二維碼', loading: '載入中…', expired: '此連結已過期，內容在 2 小時後已自動清除。', missing: '連結無效。', error: '內容載入失敗，請稍後重試。' },
+      ja:    { title: 'スキャン内容', hint: 'ボタンをタップして下の内容をコピー', copy: 'コピー', copied: 'コピー完了！', copyOk: 'クリップボードにコピーしました', copyFail: '自動コピーに失敗しました。長押しして手動でコピーしてください', ttl: '内容の有効期限は2時間です', make: '自分のQRコードを作成', loading: '読み込み中…', expired: 'このリンクは有効期限が切れています。内容は2時間後に消去されました。', missing: '無効なリンクです。', error: '内容の読み込みに失敗しました。後でもう一度お試しください。' },
+    };
+
+    const params = new URLSearchParams(location.search);
+    const id = (params.get('id') || '').trim();
+    let lang = (params.get('lang') || '').trim();
+    if (!I18N[lang]) lang = 'en';
+    const t = I18N[lang];
+
+    document.documentElement.lang = lang;
+    document.getElementById('pageTitle').textContent = t.title;
+    document.getElementById('pageHint').textContent = t.hint;
+    document.getElementById('copyLabel').textContent = t.copy;
+    document.getElementById('footTtl').textContent = t.ttl;
+    document.getElementById('footMake').textContent = t.make;
+    document.getElementById('footMake').href = lang === 'en' ? '/text-qrcode' : '/' + lang + '/text-qrcode';
+    document.getElementById('loading').textContent = t.loading;
+    document.title = t.title + ' · tool.tl';
+
+    const $loading = document.getElementById('loading');
+    const $content = document.getElementById('content');
+    const $expired = document.getElementById('expired');
+    const $raw = document.getElementById('rawText');
+    const $btn = document.getElementById('copyBtn');
+    const $label = document.getElementById('copyLabel');
+    const $status = document.getElementById('copyStatus');
+
+    function showExpired(msg) {
+      $loading.classList.add('hidden');
+      $expired.textContent = msg;
+      $expired.classList.remove('hidden');
+    }
+
+    async function load() {
+      if (!id || !/^[a-z0-9]+$/i.test(id)) { showExpired(t.missing); return; }
+      try {
+        const res = await fetch(apiBase + '/qrcode/share/' + encodeURIComponent(id));
+        if (res.status === 410 || res.status === 404) { showExpired(t.expired); return; }
+        if (!res.ok) { showExpired(t.error); return; }
+        const data = await res.json();
+        if (data.status !== 'success' || typeof data.content !== 'string') { showExpired(t.expired); return; }
+        $raw.textContent = data.content;
+        $loading.classList.add('hidden');
+        $content.classList.remove('hidden');
+      } catch (_) {
+        showExpired(t.error);
+      }
+    }
+
+    $btn.addEventListener('click', async () => {
+      const text = $raw.textContent || '';
+      let ok = false;
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          ok = true;
+        } else { throw new Error('insecure'); }
+      } catch (_) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        try { ok = document.execCommand('copy'); } catch (_2) { ok = false; }
+        document.body.removeChild(ta);
+      }
+      if (ok) {
+        $btn.classList.add('pop', 'done');
+        setTimeout(() => $btn.classList.remove('pop'), 300);
+        $label.textContent = t.copied;
+        $status.textContent = t.copyOk;
+        $status.className = 'status ok';
+        setTimeout(() => {
+          $btn.classList.remove('done');
+          $label.textContent = t.copy;
+          $status.textContent = '';
+          $status.className = 'status';
+        }, 2500);
+      } else {
+        $status.textContent = t.copyFail;
+        $status.className = 'status err';
+      }
+    });
+
+    load();
+  </script>
+</body>
+</html>

@@ -22,7 +22,7 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.includes('/404'),
+      filter: (page) => !page.includes('/404') && !page.endsWith('/q/'),
       i18n: {
         defaultLocale: 'en',
         locales: {
