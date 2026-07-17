@@ -21,6 +21,7 @@ const i18n: Record<Lang, Record<string, string>> = {
     emptyError: 'Please enter some text before generating the QR code',
     passwordLabel: 'Access password (optional)',
     passwordPlaceholder: 'If set, viewers must enter it to see the content',
+    randomPw: 'Random',
     scanHint: 'Scan with your phone → view the content and copy it in one tap',
     ttl: 'Link valid for',
     ttlValue: '2 hours',
@@ -40,6 +41,7 @@ const i18n: Record<Lang, Record<string, string>> = {
     emptyError: '请先输入内容再生成二维码',
     passwordLabel: '访问密码（可选）',
     passwordPlaceholder: '设置后，扫码需输入此密码才能查看',
+    randomPw: '随机生成',
     scanHint: '用手机扫一扫 → 查看内容并一键复制',
     ttl: '链接有效期',
     ttlValue: '2 小时',
@@ -59,6 +61,7 @@ const i18n: Record<Lang, Record<string, string>> = {
     emptyError: '請先輸入內容再產生二維碼',
     passwordLabel: '存取密碼（可選）',
     passwordPlaceholder: '設定後，掃碼需輸入此密碼才能查看',
+    randomPw: '隨機產生',
     scanHint: '用手機掃一掃 → 查看內容並一鍵複製',
     ttl: '連結有效期',
     ttlValue: '2 小時',
@@ -78,6 +81,7 @@ const i18n: Record<Lang, Record<string, string>> = {
     emptyError: 'QRコードを生成する前に内容を入力してください',
     passwordLabel: 'アクセスパスワード（任意）',
     passwordPlaceholder: '設定すると、閲覧時にこのパスワードが必要です',
+    randomPw: 'ランダム生成',
     scanHint: 'スマホでスキャン → 内容を確認してワンタップでコピー',
     ttl: 'リンクの有効期限',
     ttlValue: '2時間',
@@ -144,6 +148,16 @@ export default function TextQrcodeTool({ slug, locale }: Props) {
       setLoading(false);
     }
   }, [content, password, locale, slug, t]);
+
+  const randomizePassword = () => {
+    // 去掉易混淆字符（0/O、1/l/I）
+    const chars = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+    const arr = new Uint32Array(10);
+    crypto.getRandomValues(arr);
+    let pw = '';
+    for (let i = 0; i < arr.length; i++) pw += chars[arr[i] % chars.length];
+    setPassword(pw);
+  };
 
   const handleCopy = useCallback(
     async (type: 'content' | 'link') => {
@@ -261,9 +275,18 @@ export default function TextQrcodeTool({ slug, locale }: Props) {
             {content.length} / {MAX_LENGTH}
           </span>
         </div>
-        <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-text-secondary)', marginTop: '0.5rem', marginBottom: '0.3rem' }}>
-          🔒 {t.passwordLabel}
-        </label>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem', marginBottom: '0.3rem' }}>
+          <label style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>
+            🔒 {t.passwordLabel}
+          </label>
+          <button
+            type="button"
+            onClick={randomizePassword}
+            style={{ fontSize: '0.75rem', color: 'var(--color-primary)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontWeight: 600 }}
+          >
+            🎲 {t.randomPw}
+          </button>
+        </div>
         <input
           type="text"
           value={password}
