@@ -19,6 +19,8 @@ const i18n: Record<Lang, Record<string, string>> = {
     generate: 'Generate QR Code',
     generating: 'Generating…',
     emptyError: 'Please enter some text before generating the QR code',
+    passwordLabel: 'Access password (optional)',
+    passwordPlaceholder: 'If set, viewers must enter it to see the content',
     scanHint: 'Scan with your phone → view the content and copy it in one tap',
     ttl: 'Link valid for',
     ttlValue: '2 hours',
@@ -36,6 +38,8 @@ const i18n: Record<Lang, Record<string, string>> = {
     generate: '生成二维码',
     generating: '生成中…',
     emptyError: '请先输入内容再生成二维码',
+    passwordLabel: '访问密码（可选）',
+    passwordPlaceholder: '设置后，扫码需输入此密码才能查看',
     scanHint: '用手机扫一扫 → 查看内容并一键复制',
     ttl: '链接有效期',
     ttlValue: '2 小时',
@@ -53,6 +57,8 @@ const i18n: Record<Lang, Record<string, string>> = {
     generate: '產生二維碼',
     generating: '產生中…',
     emptyError: '請先輸入內容再產生二維碼',
+    passwordLabel: '存取密碼（可選）',
+    passwordPlaceholder: '設定後，掃碼需輸入此密碼才能查看',
     scanHint: '用手機掃一掃 → 查看內容並一鍵複製',
     ttl: '連結有效期',
     ttlValue: '2 小時',
@@ -70,6 +76,8 @@ const i18n: Record<Lang, Record<string, string>> = {
     generate: 'QRコードを生成',
     generating: '生成中…',
     emptyError: 'QRコードを生成する前に内容を入力してください',
+    passwordLabel: 'アクセスパスワード（任意）',
+    passwordPlaceholder: '設定すると、閲覧時にこのパスワードが必要です',
     scanHint: 'スマホでスキャン → 内容を確認してワンタップでコピー',
     ttl: 'リンクの有効期限',
     ttlValue: '2時間',
@@ -87,6 +95,7 @@ export default function TextQrcodeTool({ slug, locale }: Props) {
   const t = i18n[(locale as Lang)] || i18n.en;
 
   const [content, setContent] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [qrUrl, setQrUrl] = useState('');
@@ -109,7 +118,7 @@ export default function TextQrcodeTool({ slug, locale }: Props) {
       const createRes = await fetch(`${API_BASE}/qrcode/share/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: text, lang: locale }),
+        body: JSON.stringify({ content: text, lang: locale, password: password.trim() }),
       });
       const data = await createRes.json();
       if (!createRes.ok || data.status !== 'success') {
@@ -134,7 +143,7 @@ export default function TextQrcodeTool({ slug, locale }: Props) {
     } finally {
       setLoading(false);
     }
-  }, [content, locale, slug, t]);
+  }, [content, password, locale, slug, t]);
 
   const handleCopy = useCallback(
     async (type: 'content' | 'link') => {
@@ -252,6 +261,26 @@ export default function TextQrcodeTool({ slug, locale }: Props) {
             {content.length} / {MAX_LENGTH}
           </span>
         </div>
+        <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-text-secondary)', marginTop: '0.5rem', marginBottom: '0.3rem' }}>
+          🔒 {t.passwordLabel}
+        </label>
+        <input
+          type="text"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder={t.passwordPlaceholder}
+          autoComplete="off"
+          style={{
+            width: '100%',
+            borderRadius: '10px',
+            border: '1px solid var(--color-border)',
+            backgroundColor: 'var(--color-bg)',
+            color: 'var(--color-text)',
+            padding: '0.6rem 0.75rem',
+            fontSize: '0.85rem',
+            boxSizing: 'border-box',
+          }}
+        />
         <button onClick={generate} disabled={loading} style={{ ...primaryBtn, marginTop: '0.6rem' }}>
           {loading ? t.generating : t.generate}
         </button>

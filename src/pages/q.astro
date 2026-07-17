@@ -110,6 +110,15 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || 'https://api.tool.tl';
         <p id="copyStatus" class="status"></p>
       </div>
 
+      <div id="password" class="hidden">
+        <p id="pwTitle" style="text-align:center;font-weight:700;margin:0 0 6px;"></p>
+        <p id="pwHint" class="sub" style="text-align:center;margin:0 0 16px;"></p>
+        <input id="pwInput" type="password" autocomplete="off"
+          style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:16px;background:var(--box);color:var(--text);font-size:16px;box-sizing:border-box;margin-bottom:12px;" />
+        <button id="unlockBtn"><span id="unlockLabel"></span></button>
+        <p id="pwStatus" class="status"></p>
+      </div>
+
       <div id="expired" class="hidden center"></div>
     </div>
 
@@ -120,10 +129,10 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || 'https://api.tool.tl';
 
   <script define:vars={{ apiBase }}>
     const I18N = {
-      en:    { title: 'Scanned Content', hint: 'Tap the button to copy the content below', copy: 'Copy', copied: 'Copied!', copyOk: 'Copied to clipboard', copyFail: 'Auto-copy failed, long-press to copy manually', ttl: 'Content expires in 2 hours', make: 'Create my own QR code', loading: 'Loading…', expired: 'This link has expired. The content was cleared after 2 hours.', missing: 'Invalid link.', error: 'Failed to load content, please try again later.' },
-      'zh-CN': { title: '扫码内容', hint: '点击按钮一键复制以下内容', copy: '一键复制', copied: '复制成功！', copyOk: '内容已复制到剪贴板', copyFail: '自动复制失败，请长按内容手动复制', ttl: '内容有效期 2 小时', make: '生成我的二维码', loading: '加载中…', expired: '此链接已过期，内容在 2 小时后已自动清除。', missing: '链接无效。', error: '内容加载失败，请稍后重试。' },
-      'zh-TW': { title: '掃碼內容', hint: '點擊按鈕一鍵複製以下內容', copy: '一鍵複製', copied: '複製成功！', copyOk: '內容已複製到剪貼簿', copyFail: '自動複製失敗，請長按內容手動複製', ttl: '內容有效期 2 小時', make: '產生我的二維碼', loading: '載入中…', expired: '此連結已過期，內容在 2 小時後已自動清除。', missing: '連結無效。', error: '內容載入失敗，請稍後重試。' },
-      ja:    { title: 'スキャン内容', hint: 'ボタンをタップして下の内容をコピー', copy: 'コピー', copied: 'コピー完了！', copyOk: 'クリップボードにコピーしました', copyFail: '自動コピーに失敗しました。長押しして手動でコピーしてください', ttl: '内容の有効期限は2時間です', make: '自分のQRコードを作成', loading: '読み込み中…', expired: 'このリンクは有効期限が切れています。内容は2時間後に消去されました。', missing: '無効なリンクです。', error: '内容の読み込みに失敗しました。後でもう一度お試しください。' },
+      en:    { title: 'Scanned Content', hint: 'Tap the button to copy the content below', copy: 'Copy', copied: 'Copied!', copyOk: 'Copied to clipboard', copyFail: 'Auto-copy failed, long-press to copy manually', ttl: 'Content expires in 2 hours', make: 'Create my own QR code', loading: 'Loading…', expired: 'This link has expired. The content was cleared after 2 hours.', missing: 'Invalid link.', error: 'Failed to load content, please try again later.', passwordTitle: 'Password required', passwordHint: 'This content is password-protected', passwordPlaceholder: 'Enter password', unlock: 'Unlock', unlocking: 'Unlocking…', wrongPassword: 'Wrong password, please try again' },
+      'zh-CN': { title: '扫码内容', hint: '点击按钮一键复制以下内容', copy: '一键复制', copied: '复制成功！', copyOk: '内容已复制到剪贴板', copyFail: '自动复制失败，请长按内容手动复制', ttl: '内容有效期 2 小时', make: '生成我的二维码', loading: '加载中…', expired: '此链接已过期，内容在 2 小时后已自动清除。', missing: '链接无效。', error: '内容加载失败，请稍后重试。', passwordTitle: '需要密码', passwordHint: '此内容受密码保护', passwordPlaceholder: '请输入密码', unlock: '解锁查看', unlocking: '验证中…', wrongPassword: '密码错误，请重试' },
+      'zh-TW': { title: '掃碼內容', hint: '點擊按鈕一鍵複製以下內容', copy: '一鍵複製', copied: '複製成功！', copyOk: '內容已複製到剪貼簿', copyFail: '自動複製失敗，請長按內容手動複製', ttl: '內容有效期 2 小時', make: '產生我的二維碼', loading: '載入中…', expired: '此連結已過期，內容在 2 小時後已自動清除。', missing: '連結無效。', error: '內容載入失敗，請稍後重試。', passwordTitle: '需要密碼', passwordHint: '此內容受密碼保護', passwordPlaceholder: '請輸入密碼', unlock: '解鎖查看', unlocking: '驗證中…', wrongPassword: '密碼錯誤，請重試' },
+      ja:    { title: 'スキャン内容', hint: 'ボタンをタップして下の内容をコピー', copy: 'コピー', copied: 'コピー完了！', copyOk: 'クリップボードにコピーしました', copyFail: '自動コピーに失敗しました。長押しして手動でコピーしてください', ttl: '内容の有効期限は2時間です', make: '自分のQRコードを作成', loading: '読み込み中…', expired: 'このリンクは有効期限が切れています。内容は2時間後に消去されました。', missing: '無効なリンクです。', error: '内容の読み込みに失敗しました。後でもう一度お試しください。', passwordTitle: 'パスワードが必要', passwordHint: 'この内容はパスワードで保護されています', passwordPlaceholder: 'パスワードを入力', unlock: 'ロック解除', unlocking: '確認中…', wrongPassword: 'パスワードが違います。もう一度お試しください' },
     };
 
     const params = new URLSearchParams(location.search);
@@ -149,11 +158,32 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || 'https://api.tool.tl';
     const $btn = document.getElementById('copyBtn');
     const $label = document.getElementById('copyLabel');
     const $status = document.getElementById('copyStatus');
+    const $password = document.getElementById('password');
+    const $pwInput = document.getElementById('pwInput');
+    const $pwStatus = document.getElementById('pwStatus');
+    const $unlockBtn = document.getElementById('unlockBtn');
+    const $unlockLabel = document.getElementById('unlockLabel');
+    document.getElementById('pwTitle').textContent = t.passwordTitle;
+    document.getElementById('pwHint').textContent = t.passwordHint;
+    $pwInput.placeholder = t.passwordPlaceholder;
+    $unlockLabel.textContent = t.unlock;
 
     function showExpired(msg) {
       $loading.classList.add('hidden');
+      $password.classList.add('hidden');
       $expired.textContent = msg;
       $expired.classList.remove('hidden');
+    }
+    function showContent(text) {
+      $raw.textContent = text;
+      $loading.classList.add('hidden');
+      $password.classList.add('hidden');
+      $content.classList.remove('hidden');
+    }
+    function showPassword() {
+      $loading.classList.add('hidden');
+      $password.classList.remove('hidden');
+      $pwInput.focus();
     }
 
     async function load() {
@@ -163,14 +193,46 @@ const apiBase = import.meta.env.PUBLIC_API_BASE || 'https://api.tool.tl';
         if (res.status === 410 || res.status === 404) { showExpired(t.expired); return; }
         if (!res.ok) { showExpired(t.error); return; }
         const data = await res.json();
+        if (data.status === 'password_required') { showPassword(); return; }
         if (data.status !== 'success' || typeof data.content !== 'string') { showExpired(t.expired); return; }
-        $raw.textContent = data.content;
-        $loading.classList.add('hidden');
-        $content.classList.remove('hidden');
+        showContent(data.content);
       } catch (_) {
         showExpired(t.error);
       }
     }
+
+    async function submitPassword() {
+      const pw = $pwInput.value;
+      if (!pw) { $pwInput.focus(); return; }
+      $unlockBtn.disabled = true;
+      $unlockLabel.textContent = t.unlocking;
+      $pwStatus.textContent = '';
+      $pwStatus.className = 'status';
+      try {
+        const res = await fetch(apiBase + '/qrcode/share/' + encodeURIComponent(id), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw }),
+        });
+        if (res.status === 410 || res.status === 404) { showExpired(t.expired); return; }
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.status === 'success' && typeof data.content === 'string') {
+          showContent(data.content);
+          return;
+        }
+        $pwStatus.textContent = t.wrongPassword;
+        $pwStatus.className = 'status err';
+        $pwInput.select();
+      } catch (_) {
+        $pwStatus.textContent = t.error;
+        $pwStatus.className = 'status err';
+      } finally {
+        $unlockBtn.disabled = false;
+        $unlockLabel.textContent = t.unlock;
+      }
+    }
+    $unlockBtn.addEventListener('click', submitPassword);
+    $pwInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitPassword(); });
 
     $btn.addEventListener('click', async () => {
       const text = $raw.textContent || '';
