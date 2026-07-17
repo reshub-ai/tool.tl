@@ -56,6 +56,7 @@ import NetWorthCalculatorTool from '@/components/tools/NetWorthCalculatorTool';
 import BMICalculatorTool from '@/components/tools/BMICalculatorTool';
 import InvoiceGeneratorTool from '@/components/tools/InvoiceGeneratorTool';
 import RsaEncryptDecryptTool from '@/components/tools/RsaEncryptDecryptTool';
+import TextQrcodeTool from '@/components/tools/TextQrcodeTool';
 
 const locale: Locale = 'en';
 
@@ -241,13 +242,16 @@ const toolProps = {
   {tool.component === 'RsaEncryptDecrypt' && (
     <RsaEncryptDecryptTool client:load {...toolProps} />
   )}
+  {tool.component === 'TextQrcode' && (
+    <TextQrcodeTool client:load {...toolProps} />
+  )}
   {tool.apiType === 'frontend' && (tool.component === 'UrlDecoder' || tool.component === 'UrlEncoder' || (tool.category === 'dev' && tool.component !== 'ChineseToPinyin' && tool.component !== 'ColorConverter' && tool.component !== 'BaseConverter' && tool.component !== 'ChecksumCalculator' && tool.component !== 'HexArithmetic' && tool.component !== 'CrcCalculator' && tool.component !== 'TextStats' && tool.component !== 'TextProcessor' && tool.component !== 'FileSizeConverter' && tool.component !== 'JsonFormatter' && tool.component !== 'JwtDebugger' && tool.component !== 'TextCase' && tool.component !== 'OgImageGenerator' && tool.component !== 'RsaEncryptDecrypt')) && (
     <TextProcessTool client:load {...toolProps} component={tool.component} />
   )}
   {tool.component === 'ExchangeRate' && (
     <ExchangeRateTool client:load {...toolProps} />
   )}
-  {tool.apiType === 'frontend' && tool.component !== 'ExchangeRate' && tool.component !== 'Base64DecoderImg' && tool.component !== 'Base64EncoderImg' && tool.component !== 'UrlDecoder' && tool.component !== 'UrlEncoder' && tool.component !== 'TotpGenerator' && tool.component !== 'MortgageCalculator' && tool.component !== 'ROICalculator' && tool.component !== 'ProfitMargin' && tool.component !== 'BreakEven' && tool.component !== 'SalaryAfterTax' && tool.component !== 'ImageCompressor' && tool.component !== 'SaasChurn' && tool.component !== 'LtvCalculator' && tool.component !== 'WebRTCLeakTest' && tool.component !== 'ResizeImage' && tool.component !== 'LoanAmortization' && tool.component !== 'BrowserFingerprint' && tool.component !== 'ImageToPdf' && tool.component !== 'OgImageGenerator' && tool.component !== 'CarInsuranceCalculator' && tool.component !== 'TaxBracket' && tool.component !== 'CreditCardPayoff' && tool.component !== 'CompoundInterest' && tool.component !== 'RetirementCalculator' && tool.component !== 'NetWorthCalculator' && tool.component !== 'BMICalculator' && tool.component !== 'InvoiceGenerator' && (tool.category !== 'dev' || tool.component === 'ChineseToPinyin' || tool.component === 'ColorConverter') && (
+  {tool.apiType === 'frontend' && tool.component !== 'ExchangeRate' && tool.component !== 'Base64DecoderImg' && tool.component !== 'Base64EncoderImg' && tool.component !== 'UrlDecoder' && tool.component !== 'UrlEncoder' && tool.component !== 'TotpGenerator' && tool.component !== 'MortgageCalculator' && tool.component !== 'ROICalculator' && tool.component !== 'ProfitMargin' && tool.component !== 'BreakEven' && tool.component !== 'SalaryAfterTax' && tool.component !== 'ImageCompressor' && tool.component !== 'SaasChurn' && tool.component !== 'LtvCalculator' && tool.component !== 'WebRTCLeakTest' && tool.component !== 'ResizeImage' && tool.component !== 'LoanAmortization' && tool.component !== 'BrowserFingerprint' && tool.component !== 'ImageToPdf' && tool.component !== 'OgImageGenerator' && tool.component !== 'CarInsuranceCalculator' && tool.component !== 'TaxBracket' && tool.component !== 'CreditCardPayoff' && tool.component !== 'CompoundInterest' && tool.component !== 'RetirementCalculator' && tool.component !== 'NetWorthCalculator' && tool.component !== 'BMICalculator' && tool.component !== 'InvoiceGenerator' && tool.component !== 'TextQrcode' && (tool.category !== 'dev' || tool.component === 'ChineseToPinyin' || tool.component === 'ColorConverter') && (
     <GeneratorTool client:load {...toolProps} component={tool.component} />
   )}
 

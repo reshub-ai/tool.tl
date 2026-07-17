@@ -59,6 +59,7 @@
       "order": 3,
       "tools": [
         "qrcode",
+        "text-qrcode",
         "barcode-generator",
         "barcode-decoder",
         "barcode-reader",
@@ -4287,6 +4288,56 @@
             "zh-CN": "为URL和网站链接生成二维码。适合营销和名片。",
             "zh-TW": "為URL和網站連結產生QR Code。適合行銷和名片。",
             "ja": "URLやウェブサイトリンク用QRコードを生成。マーケティングや名刺に最適。"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "text-qrcode",
+      "name": {
+        "en": "Text to QR Code",
+        "zh-CN": "文本转二维码",
+        "zh-TW": "文字轉二維碼",
+        "ja": "テキストをQRコードに変換"
+      },
+      "description": {
+        "en": "Turn any text into a QR code you can scan on your phone to copy the content in one tap. Great for moving text, links, or Wi-Fi passwords from PC to phone. Links expire after 2 hours.",
+        "zh-CN": "把任意文本转成二维码，手机扫码即可查看并一键复制内容。适合把文字、链接或 WiFi 密码从电脑传到手机，链接 2 小时后自动失效。",
+        "zh-TW": "把任意文字轉成二維碼，手機掃碼即可查看並一鍵複製內容。適合把文字、連結或 WiFi 密碼從電腦傳到手機，連結 2 小時後自動失效。",
+        "ja": "任意のテキストをQRコードに変換し、スマホでスキャンしてワンタップでコピー。PCからスマホへテキスト・リンク・WiFiパスワードを移すのに最適。リンクは2時間で失効します。"
+      },
+      "subtitle": {
+        "en": "Scan to Copy Text on Your Phone",
+        "zh-CN": "扫码在手机上一键复制文本",
+        "zh-TW": "掃碼在手機上一鍵複製文字",
+        "ja": "スキャンしてスマホでテキストをコピー"
+      },
+      "category": "barcode",
+      "component": "TextQrcode",
+      "keywords": "text to qr code qrcode share copy phone scan clipboard wifi password link transfer pc to mobile",
+      "apiType": "frontend",
+      "apiEndpoint": "/qrcode/share/create",
+      "variants": [
+        {
+          "slug": "free-online",
+          "name": {
+            "en": "Free Online",
+            "zh-CN": "免费在线",
+            "zh-TW": "免費線上",
+            "ja": "無料オンライン"
+          },
+          "defaultMode": "",
+          "title": {
+            "en": "Text to QR Code — Scan to Copy on Phone",
+            "zh-CN": "文本转二维码 —— 手机扫码一键复制",
+            "zh-TW": "文字轉二維碼 —— 手機掃碼一鍵複製",
+            "ja": "テキストをQRコードに — スマホでスキャンしてコピー"
+          },
+          "description": {
+            "en": "Enter text, generate a QR code, and scan it with your phone to copy the content instantly. Free, no signup.",
+            "zh-CN": "输入文本生成二维码，用手机扫码即可一键复制内容。免费，无需注册。",
+            "zh-TW": "輸入文字產生二維碼，用手機掃碼即可一鍵複製內容。免費，無需註冊。",
+            "ja": "テキストを入力してQRコードを生成し、スマホでスキャンして即座にコピー。無料・登録不要。"
           }
         }
       ]

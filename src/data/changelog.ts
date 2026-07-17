@@ -5,6 +5,23 @@ export interface ChangelogItem {
 
 export const CHANGELOG: ChangelogItem[] = [
   {
+    date: '2026-07-17',
+    lines: {
+      en: [
+        '✅ New tool: Text to QR Code — turn any text into a QR code, then scan it with your phone to view the content and copy it in one tap. Perfect for moving text, links, or Wi-Fi passwords from PC to phone. The QR encodes a short share link (not the raw text), so it stays small even for long content. Share links auto-expire after 2 hours and the content is then cleared.',
+      ],
+      'zh-CN': [
+        '✅ 新增工具：文本转二维码 —— 把任意文本转成二维码，手机扫码即可查看内容并一键复制。适合把文字、链接或 WiFi 密码从电脑快速传到手机。二维码里存的是短分享链接（而非原始文本），因此即使内容很长二维码也很小巧。分享链接 2 小时后自动失效并清除内容。',
+      ],
+      'zh-TW': [
+        '✅ 新增工具：文字轉二維碼 —— 把任意文字轉成二維碼，手機掃碼即可查看內容並一鍵複製。適合把文字、連結或 WiFi 密碼從電腦快速傳到手機。二維碼內存的是短分享連結（而非原始文字），內容再長二維碼也很小巧。分享連結 2 小時後自動失效並清除內容。',
+      ],
+      ja: [
+        '✅ 新ツール：テキストをQRコードに変換 —— 任意のテキストをQRコードに変換し、スマホでスキャンして内容を確認・ワンタップでコピー。PCからスマホへテキスト・リンク・WiFiパスワードを移すのに最適。QRには生テキストではなく短い共有リンクを埋め込むため、長文でもQRは小さいまま。共有リンクは2時間で自動失効し、内容も消去されます。',
+      ],
+    },
+  },
+  {
     date: '2026-05-29',
     lines: {
       en: [
