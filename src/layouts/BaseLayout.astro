@@ -75,6 +75,9 @@ const websiteJsonLd = {
     {/* 禁止百度等移动搜索对页面做转码 / App 化（转码会剥离站点 CSS，导致移动端裸样式） */}
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="MobileOptimized" content="width" />
+    <meta name="HandheldFriendly" content="true" />
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
