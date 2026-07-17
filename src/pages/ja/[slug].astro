@@ -257,12 +257,36 @@ const toolProps = {
     <h2>{t('tool.what_is', locale).replace('{name}', name)}</h2>
     <p>{description}</p>
 
-    <h2>{t('tool.how_to_use', locale)}</h2>
-    <ol>
-      <li><strong>{t('tool.howto_step1_name', locale)}</strong> — {t('tool.howto_step1_text', locale).replace('{name}', name)}</li>
-      <li><strong>{t('tool.howto_step2_name', locale)}</strong> — {t('tool.howto_step2_text', locale)}</li>
-      <li><strong>{t('tool.howto_step3_name', locale)}</strong> — {t('tool.howto_step3_text', locale)}</li>
-    </ol>
+    {tool.slug === 'text-qrcode' ? (
+      <Fragment>
+        <h2>解決する課題：デバイス間で文字をコピーする手間</h2>
+        <p>パソコンにあるリンク・認証コード・Wi-Fiパスワード・住所・文章を、スマホで使いたい。よくある回避策はどれも面倒です——自分宛てにメッセージを送る、メールする、メモアプリを同期する、画面を見ながら手で打ち直す。AppleのユニバーサルクリップボードはApple製デバイス間でしか使えず、WindowsとiPhone、AndroidとMacの間にはクリップボードを共有する標準機能がありません。このツールはそれを一つの動作にまとめます：パソコンで貼り付け、スマホでスキャン、コピー。</p>
+        <h2>使い方</h2>
+        <ol>
+          <li><strong>テキストを貼り付け</strong>：パソコンで内容を貼り付けて「生成」をクリックすると、QRコードがすぐに表示されます。</li>
+          <li><strong>スマホでスキャン</strong>：スマホのカメラや任意のQRアプリで読み取ると、そのテキストを表示するページが開きます。</li>
+          <li><strong>コピーをタップ</strong>：テキストがスマホのクリップボードに入り、どのアプリにも貼り付けられます。</li>
+        </ol>
+        <h2>よくある用途</h2>
+        <ul>
+          <li>PCの長いURLや記事リンクを、手入力せずスマホへ送る</li>
+          <li>認証コードやワンタイムパスワードを、ログイン中の端末へ移す</li>
+          <li>Wi-Fiパスワードをゲストのスマホに共有する</li>
+          <li>住所・電話番号・配送先をモバイルアプリに渡す</li>
+          <li>コマンド・コードスニペット・メモをデスクトップからスマホへ</li>
+        </ul>
+        <p>アカウント登録もアプリのインストールも不要。カメラのあるあらゆるデバイス（Windows・macOS・Android・iPhone間を含む）で使えます。QRコードには生のテキストではなく短い共有リンクが埋め込まれるため、長文でも読み取りやすく、共有されたテキストは2時間後に自動削除されます——認証コードやパスワードをチャット履歴に残しません。</p>
+      </Fragment>
+    ) : (
+      <Fragment>
+        <h2>{t('tool.how_to_use', locale)}</h2>
+        <ol>
+          <li><strong>{t('tool.howto_step1_name', locale)}</strong> — {t('tool.howto_step1_text', locale).replace('{name}', name)}</li>
+          <li><strong>{t('tool.howto_step2_name', locale)}</strong> — {t('tool.howto_step2_text', locale)}</li>
+          <li><strong>{t('tool.howto_step3_name', locale)}</strong> — {t('tool.howto_step3_text', locale)}</li>
+        </ol>
+      </Fragment>
+    )}
 
     <h2>{t('tool.faq', locale)}</h2>
     <h3>{t('tool.faq_free_q', locale).replace('{name}', name)}</h3>

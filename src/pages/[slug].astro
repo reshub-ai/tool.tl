@@ -259,12 +259,36 @@ const toolProps = {
     <h2>{t('tool.what_is', locale).replace('{name}', name)}</h2>
     <p>{description}</p>
 
-    <h2>{t('tool.how_to_use', locale)}</h2>
-    <ol>
-      <li><strong>{t('tool.howto_step1_name', locale)}</strong> — {t('tool.howto_step1_text', locale).replace('{name}', name)}</li>
-      <li><strong>{t('tool.howto_step2_name', locale)}</strong> — {t('tool.howto_step2_text', locale)}</li>
-      <li><strong>{t('tool.howto_step3_name', locale)}</strong> — {t('tool.howto_step3_text', locale)}</li>
-    </ol>
+    {tool.slug === 'text-qrcode' ? (
+      <Fragment>
+        <h2>Why it helps: the cross-device clipboard problem</h2>
+        <p>You have a link, a verification code, a Wi-Fi password, an address, or a paragraph sitting on your computer — and you need it on your phone. The usual workarounds are clumsy: messaging it to yourself, emailing it, syncing a notes app, or retyping it by hand. Apple's Universal Clipboard only works between Apple devices, and there is no built-in way to share a clipboard between Windows and iPhone, or between Android and Mac. This tool collapses all of that into one move: paste on the computer, scan with the phone, copy.</p>
+        <h2>How to use it</h2>
+        <ol>
+          <li><strong>Paste your text</strong> on the computer and click Generate — a QR code appears instantly.</li>
+          <li><strong>Scan the QR code</strong> with your phone camera or any QR app; it opens a page showing your text.</li>
+          <li><strong>Tap Copy</strong> — the text is now on your phone's clipboard, ready to paste into any app.</li>
+        </ol>
+        <h2>Common uses</h2>
+        <ul>
+          <li>Send a long URL or article link from your PC to your phone without typing it</li>
+          <li>Move a verification code or one-time password to the device you're logging in on</li>
+          <li>Share a Wi-Fi password with a guest's phone</li>
+          <li>Pass an address, phone number, or shipping details into a mobile app</li>
+          <li>Get a command, code snippet, or note from your desktop onto your phone</li>
+        </ul>
+        <p>No account and no app install — it works across any devices with a camera, including between Windows, macOS, Android, and iPhone. The QR code encodes a short share link rather than the raw text, so it stays easy to scan even for long content, and the shared text is automatically deleted after 2 hours — keeping verification codes and passwords out of your chat history.</p>
+      </Fragment>
+    ) : (
+      <Fragment>
+        <h2>{t('tool.how_to_use', locale)}</h2>
+        <ol>
+          <li><strong>{t('tool.howto_step1_name', locale)}</strong> — {t('tool.howto_step1_text', locale).replace('{name}', name)}</li>
+          <li><strong>{t('tool.howto_step2_name', locale)}</strong> — {t('tool.howto_step2_text', locale)}</li>
+          <li><strong>{t('tool.howto_step3_name', locale)}</strong> — {t('tool.howto_step3_text', locale)}</li>
+        </ol>
+      </Fragment>
+    )}
 
     <h2>{t('tool.faq', locale)}</h2>
     <h3>{t('tool.faq_free_q', locale).replace('{name}', name)}</h3>

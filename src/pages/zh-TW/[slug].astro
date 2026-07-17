@@ -257,12 +257,36 @@ const toolProps = {
     <h2>{t('tool.what_is', locale).replace('{name}', name)}</h2>
     <p>{description}</p>
 
-    <h2>{t('tool.how_to_use', locale)}</h2>
-    <ol>
-      <li><strong>{t('tool.howto_step1_name', locale)}</strong> — {t('tool.howto_step1_text', locale).replace('{name}', name)}</li>
-      <li><strong>{t('tool.howto_step2_name', locale)}</strong> — {t('tool.howto_step2_text', locale)}</li>
-      <li><strong>{t('tool.howto_step3_name', locale)}</strong> — {t('tool.howto_step3_text', locale)}</li>
-    </ol>
+    {tool.slug === 'text-qrcode' ? (
+      <Fragment>
+        <h2>它解決什麼：跨裝置複製文字的痛點</h2>
+        <p>電腦上有一段文字——一個網址、一串驗證碼、一個 Wi-Fi 密碼、一個地址，或一段文案——你想在手機上用。常規辦法都很彆扭：發給自己的通訊軟體、寄郵件、靠雲端筆記同步，或者照著螢幕手動打。蘋果的「通用剪貼簿」只在蘋果裝置之間有效，而 Windows 和 iPhone、Android 和 Mac 之間根本沒有原生的剪貼簿互通。這個工具把這一切壓成一個動作：電腦上貼上，手機上掃碼，一鍵複製。</p>
+        <h2>如何使用</h2>
+        <ol>
+          <li><strong>貼上文字</strong>：在電腦上貼上要傳的內容，點「產生二維碼」，二維碼立即出現。</li>
+          <li><strong>手機掃碼</strong>：用手機相機或任意掃碼 App 掃一掃，會開啟一個顯示這段文字的網頁。</li>
+          <li><strong>一鍵複製</strong>：點複製按鈕，文字就進了手機剪貼簿，可貼到任何 App。</li>
+        </ol>
+        <h2>常見用途</h2>
+        <ul>
+          <li>把電腦上的長網址、文章連結傳到手機，不用手打</li>
+          <li>把驗證碼 / 一次性密碼傳到正在登入的那台裝置</li>
+          <li>把 Wi-Fi 密碼分享給客人的手機</li>
+          <li>把地址、電話、收貨資訊傳進手機 App</li>
+          <li>把命令、程式碼片段或備註從電腦傳到手機</li>
+        </ul>
+        <p>無需註冊、無需裝 App，跨任何帶鏡頭的裝置都能用，包括 Windows、macOS、Android、iPhone 之間。二維碼裡存的是一個短分享連結（而非原始文字），所以內容再長二維碼也依然好掃；分享的文字會在 2 小時後自動清除，驗證碼、密碼這類內容不會留在聊天記錄裡。</p>
+      </Fragment>
+    ) : (
+      <Fragment>
+        <h2>{t('tool.how_to_use', locale)}</h2>
+        <ol>
+          <li><strong>{t('tool.howto_step1_name', locale)}</strong> — {t('tool.howto_step1_text', locale).replace('{name}', name)}</li>
+          <li><strong>{t('tool.howto_step2_name', locale)}</strong> — {t('tool.howto_step2_text', locale)}</li>
+          <li><strong>{t('tool.howto_step3_name', locale)}</strong> — {t('tool.howto_step3_text', locale)}</li>
+        </ol>
+      </Fragment>
+    )}
 
     <h2>{t('tool.faq', locale)}</h2>
     <h3>{t('tool.faq_free_q', locale).replace('{name}', name)}</h3>

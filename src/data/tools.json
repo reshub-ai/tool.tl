@@ -4301,20 +4301,20 @@
         "ja": "テキストをQRコードに変換"
       },
       "description": {
-        "en": "Turn any text into a QR code you can scan on your phone to copy the content in one tap. Great for moving text, links, or Wi-Fi passwords from PC to phone. Links expire after 2 hours.",
-        "zh-CN": "把任意文本转成二维码，手机扫码即可查看并一键复制内容。适合把文字、链接或 WiFi 密码从电脑传到手机，链接 2 小时后自动失效。",
-        "zh-TW": "把任意文字轉成二維碼，手機掃碼即可查看並一鍵複製內容。適合把文字、連結或 WiFi 密碼從電腦傳到手機，連結 2 小時後自動失效。",
-        "ja": "任意のテキストをQRコードに変換し、スマホでスキャンしてワンタップでコピー。PCからスマホへテキスト・リンク・WiFiパスワードを移すのに最適。リンクは2時間で失効します。"
+        "en": "A cross-device clipboard: paste text on your computer, get a QR code, then scan it with your phone to copy it in one tap — no login, no app. Instantly move links, verification codes, addresses, or Wi-Fi passwords from PC to phone. Content auto-clears after 2 hours.",
+        "zh-CN": "跨设备剪贴板：在电脑上粘贴文字生成二维码，手机扫一扫即可一键复制——免登录、免装 App。网址、验证码、地址、Wi-Fi 密码从电脑秒传手机，内容 2 小时后自动清除，隐私安全。",
+        "zh-TW": "跨裝置剪貼簿：在電腦上貼上文字產生二維碼，手機掃一掃即可一鍵複製——免登入、免裝 App。網址、驗證碼、地址、Wi-Fi 密碼從電腦秒傳手機，內容 2 小時後自動清除，隱私安全。",
+        "ja": "デバイス間クリップボード：パソコンでテキストを貼り付けてQRコードを生成、スマホでスキャンしてワンタップでコピー——ログイン不要・アプリ不要。リンク・認証コード・住所・Wi-FiパスワードをPCからスマホへ即座に移動。内容は2時間後に自動消去。"
       },
       "subtitle": {
-        "en": "Scan to Copy Text on Your Phone",
-        "zh-CN": "扫码在手机上一键复制文本",
-        "zh-TW": "掃碼在手機上一鍵複製文字",
-        "ja": "スキャンしてスマホでテキストをコピー"
+        "en": "Cross-Device Clipboard — Scan to Copy PC Text on Your Phone",
+        "zh-CN": "跨设备剪贴板 —— 扫码把电脑上的文字搬到手机",
+        "zh-TW": "跨裝置剪貼簿 —— 掃碼把電腦上的文字搬到手機",
+        "ja": "デバイス間クリップボード — スキャンでPCの文字をスマホへ"
       },
       "category": "barcode",
       "component": "TextQrcode",
-      "keywords": "text to qr code qrcode share copy phone scan clipboard wifi password link transfer pc to mobile",
+      "keywords": "text to qr code qrcode cross-device clipboard send text to phone pc to mobile transfer copy paste scan verification code wifi password link no app no login 跨设备复制 文字传手机 剪贴板同步",
       "apiType": "frontend",
       "apiEndpoint": "/qrcode/share/create",
       "variants": [
@@ -4328,16 +4328,16 @@
           },
           "defaultMode": "",
           "title": {
-            "en": "Text to QR Code — Scan to Copy on Phone",
-            "zh-CN": "文本转二维码 —— 手机扫码一键复制",
-            "zh-TW": "文字轉二維碼 —— 手機掃碼一鍵複製",
-            "ja": "テキストをQRコードに — スマホでスキャンしてコピー"
+            "en": "Text to QR Code — Cross-Device Copy from PC to Phone",
+            "zh-CN": "文本转二维码 —— 跨设备复制，扫码从电脑搬到手机",
+            "zh-TW": "文字轉二維碼 —— 跨裝置複製，掃碼從電腦搬到手機",
+            "ja": "テキストをQRコードに — PCからスマホへデバイス間コピー"
           },
           "description": {
-            "en": "Enter text, generate a QR code, and scan it with your phone to copy the content instantly. Free, no signup.",
-            "zh-CN": "输入文本生成二维码，用手机扫码即可一键复制内容。免费，无需注册。",
-            "zh-TW": "輸入文字產生二維碼，用手機掃碼即可一鍵複製內容。免費，無需註冊。",
-            "ja": "テキストを入力してQRコードを生成し、スマホでスキャンして即座にコピー。無料・登録不要。"
+            "en": "Paste text on your PC, generate a QR code, and scan it with your phone to copy it instantly — a no-login, no-app cross-device clipboard. Free.",
+            "zh-CN": "在电脑上粘贴文字生成二维码，手机扫码即可一键复制——免登录、免装 App 的跨设备剪贴板。免费。",
+            "zh-TW": "在電腦上貼上文字產生二維碼，手機掃碼即可一鍵複製——免登入、免裝 App 的跨裝置剪貼簿。免費。",
+            "ja": "PCでテキストを貼り付けてQRコードを生成、スマホでスキャンして即座にコピー——ログイン不要・アプリ不要のデバイス間クリップボード。無料。"
           }
         }
       ]
