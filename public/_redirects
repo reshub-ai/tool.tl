@@ -139,6 +139,16 @@
 /en/all/  /en/tools  301
 /zh/all  /zh-CN/tools  301
 /zh/all/  /zh-CN/tools  301
+
+# --- Mistyped all-tools → tools (page is /tools) ---
+/all-tools  /tools  301
+/all-tools/  /tools  301
+/zh-CN/all-tools  /zh-CN/tools  301
+/zh-CN/all-tools/  /zh-CN/tools  301
+/zh-TW/all-tools  /zh-TW/tools  301
+/zh-TW/all-tools/  /zh-TW/tools  301
+/ja/all-tools  /ja/tools  301
+/ja/all-tools/  /ja/tools  301
 /zh/top-tools  /zh-CN/top-tools  301
 /zh/top-tools/  /zh-CN/top-tools  301
 /en/changelog  /changelog  301
