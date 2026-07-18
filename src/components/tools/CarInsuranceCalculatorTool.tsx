@@ -275,7 +275,7 @@ export default function CarInsuranceCalculatorTool({ slug, locale }: Props) {
 
       {/* 结果 */}
       <div style={card}>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',gap:'1rem',marginBottom:'1rem'}}>
+        <div className="tl-auto-stack" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',gap:'1rem',marginBottom:'1rem'}}>
           <div style={{padding:'1rem',borderRadius:'8px',background:'var(--color-bg)',border:'2px solid var(--color-primary)',textAlign:'center'}}>
             <div style={{fontSize:'0.75rem',color:'var(--color-text-secondary)'}}>{t.monthly}</div>
             <div style={{fontSize:'1.8rem',fontWeight:700,color:'var(--color-primary)'}}>{fmtM(result.monthly,locale)}</div>

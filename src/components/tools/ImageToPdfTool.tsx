@@ -316,7 +316,7 @@ export default function ImageToPdfTool({ slug, locale }: Props) {
       {/* 选项 */}
       {items.length > 0 && (
         <div style={card}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '0.75rem', marginBottom: '1rem' }}>
+          <div className="tl-auto-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '0.75rem', marginBottom: '1rem' }}>
             <div>
               <label style={lbl}>{t.pageSize}</label>
               <select style={inp} value={pageSize} onChange={(e) => setPageSize(e.target.value as PageSize)}>

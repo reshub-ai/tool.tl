@@ -386,7 +386,7 @@ export default function JwtDebuggerTool({ slug, locale }: Props) {
           </div>
 
           {/* Header + Payload split */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '12px' }}>
+          <div className="tl-auto-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '12px' }}>
             <div style={card}>
               <div style={panelHead('#fb7185')}>
                 <span>{t.panelHeader}</span>
@@ -423,7 +423,7 @@ export default function JwtDebuggerTool({ slug, locale }: Props) {
       {/* ── ENCODE TAB ── */}
       {tab === 'encode' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '12px' }}>
+          <div className="tl-auto-stack" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '12px' }}>
             <div style={card}>
               <div style={panelHead('#fb7185')}><span>{t.labelHeader}</span></div>
               <textarea value={encHeader} onChange={(e) => setEncHeader(e.target.value)}

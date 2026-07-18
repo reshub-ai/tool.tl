@@ -1,5 +1,12 @@
 @import 'tailwindcss';
 
+/* 功能页(计算器等)的多列 grid 在窄屏(≤768px，含大屏手机)强制堆叠为单列。
+   组件保留内联的桌面多列布局，这里用媒体查询 + !important 覆盖内联 grid-template-columns，
+   比 auto-fit 更可靠（auto-fit 无法区分大屏手机与小桌面窗口）。@media 兼容所有旧内核。 */
+@media (max-width: 768px) {
+  .tl-auto-stack { grid-template-columns: 1fr !important; }
+}
+
 /* ---- Theme CSS variables ---- */
 :root {
   --color-bg: #ffffff;

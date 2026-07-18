@@ -314,7 +314,7 @@ export default function SalaryAfterTaxTool({ slug, locale }: Props) {
             </div>
           </div>
 
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',gap:'16px'}}>
+          <div className="tl-auto-stack" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',gap:'16px'}}>
             {/* 税项明细 */}
             <div style={card}>
               <div style={{fontWeight:700,fontSize:'0.875rem',marginBottom:'12px',color:'var(--color-text)'}}>{t.tax_breakdown}</div>
