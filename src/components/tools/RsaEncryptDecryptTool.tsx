@@ -270,7 +270,7 @@ export default function RsaEncryptDecryptTool({ slug, locale }: Props) {
       </div>
 
       {/* Keys */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '14px' }}>
         <div style={card}>
           <label style={label}>{t.publicKey}</label>
           <textarea
@@ -309,7 +309,7 @@ export default function RsaEncryptDecryptTool({ slug, locale }: Props) {
       </div>
 
       {/* Input / Output */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '14px' }}>
         <div style={card}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
             <label style={{ ...label, margin: 0 }}>{t.inputText}</label>

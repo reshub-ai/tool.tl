@@ -190,7 +190,7 @@ export default function CarInsuranceCalculatorTool({ slug, locale }: Props) {
   const card:React.CSSProperties={background:'var(--color-card-bg)',border:'1px solid var(--color-border)',borderRadius:'12px',padding:'1.25rem',marginBottom:'1rem'};
   const inp:React.CSSProperties={padding:'0.5rem 0.75rem',borderRadius:'6px',border:'1px solid var(--color-border)',background:'var(--color-card-bg)',color:'var(--color-text)',fontSize:'0.9rem',width:'100%',boxSizing:'border-box'};
   const lbl:React.CSSProperties={display:'block',fontSize:'0.78rem',marginBottom:'0.25rem',color:'var(--color-text-secondary)'};
-  const grid2:React.CSSProperties={display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.75rem',marginBottom:'0.75rem'};
+  const grid2:React.CSSProperties={display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',gap:'0.75rem',marginBottom:'0.75rem'};
   const rowS:React.CSSProperties={display:'flex',justifyContent:'space-between',alignItems:'center',padding:'0.5rem 0',borderBottom:'1px solid var(--color-border)'};
 
   return (
@@ -275,7 +275,7 @@ export default function CarInsuranceCalculatorTool({ slug, locale }: Props) {
 
       {/* 结果 */}
       <div style={card}>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem',marginBottom:'1rem'}}>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',gap:'1rem',marginBottom:'1rem'}}>
           <div style={{padding:'1rem',borderRadius:'8px',background:'var(--color-bg)',border:'2px solid var(--color-primary)',textAlign:'center'}}>
             <div style={{fontSize:'0.75rem',color:'var(--color-text-secondary)'}}>{t.monthly}</div>
             <div style={{fontSize:'1.8rem',fontWeight:700,color:'var(--color-primary)'}}>{fmtM(result.monthly,locale)}</div>

@@ -225,7 +225,7 @@ export default function CreditCardPayoffTool({ slug, locale }: Props) {
   const card: React.CSSProperties = { background: 'var(--color-card-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '1.25rem', marginBottom: '1rem' };
   const inp: React.CSSProperties = { padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid var(--color-border)', background: 'var(--color-card-bg)', color: 'var(--color-text)', fontSize: '0.95rem', width: '100%', boxSizing: 'border-box' };
   const lbl: React.CSSProperties = { display: 'block', fontSize: '0.8rem', marginBottom: '0.3rem', color: 'var(--color-text-secondary)' };
-  const grid2: React.CSSProperties = { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' };
+  const grid2: React.CSSProperties = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '0.75rem', marginBottom: '0.75rem' };
   const tdStyle: React.CSSProperties = { padding: '0.35rem 0.5rem', fontSize: '0.8rem', borderBottom: '1px solid var(--color-border)', textAlign: 'right', color: 'var(--color-text)' };
   const thStyle: React.CSSProperties = { ...tdStyle, fontWeight: 600, color: 'var(--color-text-secondary)', background: 'var(--color-bg)', position: 'sticky', top: 0 };
 

@@ -312,7 +312,7 @@ export default function ResizeImageTool({ slug, locale }: Props) {
           </div>
 
           {/* 格式 & 质量 */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '0.75rem', marginBottom: '1rem' }}>
             <div>
               <label style={lbl}>{t.format}</label>
               <select style={inp} value={format} onChange={(e) => setFormat(e.target.value as OutFmt)}>

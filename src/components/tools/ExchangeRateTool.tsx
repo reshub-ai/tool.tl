@@ -213,7 +213,7 @@ export default function ExchangeRateTool({ slug, locale }: Props) {
         )}
 
         {/* Amount + From */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '0.75rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '1rem', marginBottom: '0.75rem' }}>
           <div>
             <label style={labelStyle}>{t.amount}</label>
             <input

@@ -294,7 +294,7 @@ export default function TotpGeneratorTool({ slug, locale }: Props) {
         <span style={{ lineHeight: 1.55 }}>{t.securityNotice.replace('🔒 ', '')}</span>
       </div>
 
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '16px' }}>
 
       {/* ── Left panel: Settings ── */}
       <div style={card}>

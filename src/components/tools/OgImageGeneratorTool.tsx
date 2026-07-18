@@ -252,7 +252,7 @@ export default function OgImageGeneratorTool({ slug, locale }: Props) {
     width: '100%', boxSizing: 'border-box',
   };
   const lbl: React.CSSProperties = { display: 'block', fontSize: '0.78rem', marginBottom: '0.25rem', color: 'var(--color-text-secondary)' };
-  const grid2: React.CSSProperties = { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' };
+  const grid2: React.CSSProperties = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '0.75rem', marginBottom: '0.75rem' };
 
   return (
     <div>

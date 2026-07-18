@@ -232,7 +232,7 @@ export default function TextProcessorTool({ slug, locale }: Props) {
         )}
 
         {/* I/O */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '12px' }}>
           <div>
             <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', marginBottom: '4px' }}>{t.input}</div>
             <textarea value={input} onChange={e => setInput(e.target.value)} placeholder={t.placeholder_in} rows={8} style={taStyle} />

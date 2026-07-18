@@ -284,7 +284,7 @@ export default function SaasChurnTool({ slug, locale }: Props) {
     padding: '0.5rem 0', borderBottom: '1px solid var(--color-border)',
   };
   const bigNum: React.CSSProperties = { fontSize: '1.4rem', fontWeight: 700, color: 'var(--color-primary)' };
-  const grid2: React.CSSProperties = { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '0.75rem' };
+  const grid2: React.CSSProperties = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '0.75rem', marginBottom: '0.75rem' };
   const hint: React.CSSProperties = {
     fontSize: '0.78rem', color: 'var(--color-text-secondary)', marginTop: '0.75rem',
     padding: '0.6rem 0.75rem', background: 'var(--color-bg)', borderRadius: '6px',

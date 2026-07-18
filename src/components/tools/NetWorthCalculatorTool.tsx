@@ -123,7 +123,7 @@ export default function NetWorthCalculatorTool({ slug, locale }: Props) {
 
   return (
     <div>
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem', marginBottom:'1rem' }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap:'1rem', marginBottom:'1rem' }}>
         {/* 资产 */}
         <div style={card}>
           <h3 style={{ margin:'0 0 0.75rem', fontSize:'0.9rem', fontWeight:700, color:'#22c55e' }}>{t.assets_title as string}</h3>
@@ -152,7 +152,7 @@ export default function NetWorthCalculatorTool({ slug, locale }: Props) {
         <div style={{ marginTop:'0.5rem', fontSize:'0.85rem', color: statusColor, fontWeight:600 }}>{status}</div>
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'0.75rem', marginBottom:'1rem' }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap:'0.75rem', marginBottom:'1rem' }}>
         {[
           [t.total_assets as string, fmtMoney(totalAssets, locale), '#22c55e'],
           [t.total_liab as string, fmtMoney(totalLiabs, locale), '#ef4444'],
