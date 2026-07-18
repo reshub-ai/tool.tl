@@ -43,7 +43,7 @@ for (const cat of toolCategories) {
     <div class="header-main flex min-w-0 items-center">
       <a
         href={getLocalizedPath('/', locale)}
-        class="flex items-center gap-2 text-xl font-bold min-h-[44px] min-w-[44px]"
+        class="flex shrink-0 items-center gap-2 text-xl font-bold min-h-[44px] min-w-[44px]"
         style="color: var(--color-text);"
         aria-label="tool.tl"
       >
@@ -171,7 +171,7 @@ for (const cat of toolCategories) {
     </div><!-- end logo + desktop nav wrapper -->
 
     <!-- Right section: Search, Language, Theme -->
-    <div class="header-actions flex items-center gap-2 shrink-0">
+    <div class="header-actions flex flex-1 items-center gap-2 min-w-0 sm:flex-none">
       <!-- Search (Pagefind) -->
       <Search locale={locale} />
 
