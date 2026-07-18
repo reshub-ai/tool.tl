@@ -180,8 +180,10 @@ for (const cat of toolCategories) {
         <slot name="language-switcher" />
       </div>
 
-      <!-- Theme toggle -->
-      <ThemeToggle locale={locale} />
+      <!-- Theme toggle (desktop only; mobile lives inside the menu) -->
+      <div class="hidden xl:block">
+        <ThemeToggle locale={locale} />
+      </div>
 
       <!-- Mobile hamburger button -->
       <button
@@ -267,9 +269,10 @@ for (const cat of toolCategories) {
         {t('nav.changelog', locale)}
       </a>
 
-      <!-- Language switcher (mobile) -->
-      <div class="border-t pt-3" style="border-color: var(--color-border);">
+      <!-- Language & theme (mobile) -->
+      <div class="border-t pt-3 flex items-center justify-between gap-2" style="border-color: var(--color-border);">
         <slot name="language-switcher-mobile" />
+        <ThemeToggle locale={locale} />
       </div>
     </div>
   </div>
