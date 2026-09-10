@@ -67,7 +67,7 @@ function detectExt(dataUrl: string): string {
   return 'png';
 }
 
-export default function Base64DecoderImgTool({ locale }: Props) {
+export default function Base64DecoderImgTool({ slug, locale }: Props) {
   const t = i18n[locale] || i18n.en;
   const [input, setInput] = useState('');
   const [dataUrl, setDataUrl] = useState('');
@@ -83,6 +83,7 @@ export default function Base64DecoderImgTool({ locale }: Props) {
     const url = val.startsWith('data:') ? val : `data:image/png;base64,${val}`;
     setDataUrl(url);
     setTipState('hidden');
+    (window as any).__trackToolUsed?.(slug);
   };
 
   const clear = () => {
