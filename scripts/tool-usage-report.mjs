@@ -62,6 +62,30 @@ const compSrc = Object.fromEntries(
 );
 const caseNames = (comp) =>
   new Set([...(compSrc[comp] ?? '').matchAll(/case '([A-Za-z0-9]+)':/g)].map((m) => m[1]));
+
+/**
+ * 检出「埋点挂在挂载时」：__trackToolUsed 出现在依赖数组为空的 useEffect 里，
+ * 意味着统计到的是页面浏览量而不是使用量，数字会虚高。
+ * 用大括号配对定位回调体，不能用正则硬匹配，否则会跨到下一个 useEffect 的 [] 上误报。
+ */
+function mountTimeTracking(src) {
+  const out = [];
+  for (const m of src.matchAll(/useEffect\(\s*\(\s*\)\s*=>\s*/g)) {
+    let i = m.index + m[0].length;
+    if (src[i] !== '{') continue; // 形如 useEffect(() => () => {...}) 的清理函数，跳过
+    let dep = 0;
+    let j = i;
+    for (; j < src.length; j++) {
+      if (src[j] === '{') dep++;
+      else if (src[j] === '}') { dep--; if (dep === 0) break; }
+    }
+    const body = src.slice(i, j + 1);
+    if (!body.includes('__trackToolUsed')) continue;
+    const tail = src.slice(j + 1, j + 40).replace(/\s/g, '');
+    if (tail.startsWith(',[]')) out.push(body.trim().slice(0, 80));
+  }
+  return out;
+}
 const GEN_CASES = caseNames('GeneratorTool');
 const TXT_CASES = caseNames('TextProcessTool');
 

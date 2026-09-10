@@ -229,11 +229,17 @@ export default function TotpGeneratorTool({ slug, locale }: Props) {
 
   const stop = () => { stopTimer(); setRunning(false); };
 
+  /** 用户主动触发的生成：Start 按钮和加载示例都走这里，只有这里上报使用。 */
+  const startByUser = (...args: Parameters<typeof start>) => {
+    (window as any).__trackToolUsed?.(slug);
+    return start(...args);
+  };
+
   const loadSample = () => {
     const s = 'JBSWY3DPEHPK3PXP';
     setSecret(s); setIssuer('tool.tl'); setAccount('demo@example.com');
     setDigits(6); setPeriod(30);
-    start(s, 6, 30, 'SHA-1', 'tool.tl', 'demo@example.com');
+    startByUser(s, 6, 30, 'SHA-1', 'tool.tl', 'demo@example.com');
   };
 
   const clearAll = () => {
@@ -253,8 +259,8 @@ export default function TotpGeneratorTool({ slug, locale }: Props) {
   useEffect(() => {
     const s = generateBase32(16);
     setSecret(s);
+    // 挂载时自动生成只是初始化，不算一次使用；埋点挂在用户主动触发的 startByUser 上
     start(s, 6, 30, 'SHA-1', '', '');
-    (window as any).__trackToolUsed?.(slug);
     return stopTimer;
   }, []);
 
@@ -341,7 +347,7 @@ export default function TotpGeneratorTool({ slug, locale }: Props) {
         </div>
 
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          <button style={pillPrimary} onClick={() => start()}>{t.btnStart}</button>
+          <button style={pillPrimary} onClick={() => startByUser()}>{t.btnStart}</button>
           <button style={pill} onClick={loadSample}>{t.btnSample}</button>
           <button style={pill} onClick={stop}>{t.btnStop}</button>
         </div>
