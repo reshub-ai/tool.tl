@@ -311,6 +311,12 @@ async function main() {
     });
   }
 
+  // 埋点挂在挂载时的组件（统计到的是浏览量而非使用量）
+  const mountTracked = Object.entries(compSrc)
+    .map(([comp, csrc]) => ({ comp, hits: mountTimeTracking(csrc) }))
+    .filter((x) => x.hits.length > 0)
+    .map((x) => ({ ...x, tools: rows.filter((r) => r.render === x.comp).map((r) => r.slug) }));
+
   const zero = rows.filter((r) => r.usage === 0);
   const noTrack = rows.filter((r) => !r.tracked);
   const routeBad = rows.filter((r) => r.routeIssue);
@@ -333,6 +339,7 @@ async function main() {
   L.push(`| 有后端接口的工具 | ${apiRows.length} |`);
   L.push(`| **接口不可达** | **${NO_PROBE ? '未探测' : apiDown.length}** |`);
   L.push(`| 路由渲染异常 | ${routeBad.length} |`);
+  L.push(`| **埋点挂在挂载时（统计虚高）** | **${mountTracked.length}** |`);
   L.push('');
   if (rankErr) L.push(`⚠️ 排行接口读取失败：${rankErr}，使用次数一列不可信。`, '');
   L.push('> 说明：排行接口服务端硬上限 50 条，排名 50 名之外的工具一律显示为 0 次，');
@@ -380,6 +387,13 @@ async function main() {
     }
   });
 
+  section(`埋点挂在挂载时（${mountTracked.length}）`, mountTracked, (list) => {
+    L.push('`__trackToolUsed` 写在空依赖的 `useEffect` 里，等于每次打开页面就算一次使用，');
+    L.push('统计到的是浏览量而不是使用量，累计数字会明显虚高。应改挂到用户主动触发的动作上。', '');
+    L.push('| 组件 | 受影响工具 |', '|---|---|');
+    for (const x of list) L.push(`| ${esc(x.comp)} | ${x.tools.map((t) => '`' + esc(t) + '`').join('、') || '—'} |`);
+  });
+
   section(`路由渲染异常（${routeBad.length}）`, routeBad, (list) => {
     L.push('| 工具 | 问题 |', '|---|---|');
     for (const r of list) L.push(`| \`${esc(r.slug)}\` | ${esc(r.routeIssue)} |`);
@@ -400,7 +414,8 @@ async function main() {
   process.stderr.write(
     `已写入 ${path.relative(ROOT, OUT)}\n` +
     `  工具 ${rows.length}｜未埋点 ${noTrack.length}｜零使用 ${zero.length}｜` +
-    `接口不可达 ${NO_PROBE ? '未探测' : apiDown.length}｜路由异常 ${routeBad.length}\n`,
+    `接口不可达 ${NO_PROBE ? '未探测' : apiDown.length}｜路由异常 ${routeBad.length}｜` +
+    `挂载时埋点 ${mountTracked.length}\n`,
   );
 }
 
