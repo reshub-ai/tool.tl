@@ -214,6 +214,7 @@ export default function VideoConverterTool({ slug, apiEndpoint, locale }: Props)
         setStatus(t.statusFinished);
         setDownloadUrl(data.download_url);
         setConverting(false);
+        (window as any).__trackToolUsed?.(slug);
       } else if (data.status === 'failed') {
         setStatus(t.statusFailed);
         setError(data.message || t.statusFailed);
@@ -225,7 +226,7 @@ export default function VideoConverterTool({ slug, apiEndpoint, locale }: Props)
     } catch {
       pollRef.current = setTimeout(() => pollJob(jobId), 2000);
     }
-  }, [apiEndpoint, t]);
+  }, [apiEndpoint, t, slug]);
 
   const convert = () => {
     if (!file) { setError(t.noFile); return; }

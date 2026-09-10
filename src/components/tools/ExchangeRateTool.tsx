@@ -116,7 +116,6 @@ export default function ExchangeRateTool({ slug, locale }: Props) {
       setRates(allRates);
       setBase(baseCurrency);
       setDate(data.date || '');
-      (window as any).__trackToolUsed?.(slug);
     } catch {
       setError(t.error);
     } finally {
@@ -139,7 +138,8 @@ export default function ExchangeRateTool({ slug, locale }: Props) {
     const result = inBase * rates[toCurrency];
     const decimals = toCurrency === 'JPY' || toCurrency === 'KRW' ? 0 : 4;
     setConvertedAmount(result.toFixed(decimals));
-  }, [amount, fromCurrency, toCurrency, rates]);
+    (window as any).__trackToolUsed?.(slug);
+  }, [amount, fromCurrency, toCurrency, rates, slug]);
 
   const swapCurrencies = () => {
     setFromCurrency(toCurrency);

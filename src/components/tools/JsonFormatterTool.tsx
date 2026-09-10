@@ -187,13 +187,14 @@ export default function JsonFormatterTool({ slug, locale }: Props) {
     const [obj, err] = tryParse(input);
     if (err) return flash(t.msgInvalid.replace('{error}', err));
     setOutput(JSON.stringify(obj));
+    (window as any).__trackToolUsed?.(slug);
   };
 
   const validate = () => {
     if (!input.trim()) return flash(t.msgEmpty);
     const [, err] = tryParse(input);
     if (err) flash(t.msgInvalid.replace('{error}', err));
-    else flash(t.msgValid, true);
+    else { flash(t.msgValid, true); (window as any).__trackToolUsed?.(slug); }
   };
 
   const copy = async () => {
@@ -208,6 +209,7 @@ export default function JsonFormatterTool({ slug, locale }: Props) {
     if (err) return flash(t.msgInvalid.replace('{error}', err));
     setInput(JSON.stringify(decodeDeep(obj), null, 2));
     flash(t.msgUnescape, true);
+    (window as any).__trackToolUsed?.(slug);
   };
 
   const escape = () => {
@@ -216,6 +218,7 @@ export default function JsonFormatterTool({ slug, locale }: Props) {
     if (err) return flash(t.msgInvalid.replace('{error}', err));
     setInput(JSON.stringify(encodeDeep(obj), null, 2));
     flash(t.msgEscape, true);
+    (window as any).__trackToolUsed?.(slug);
   };
 
   const tree = () => {
