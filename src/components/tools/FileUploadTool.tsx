@@ -237,11 +237,13 @@ export default function FileUploadTool({ slug, apiEndpoint, locale }: Props) {
         return;
       }
 
+      // exif-viewer / exif-auto-orient 后端读取的字段名是 image，其余接口是 file
+      const fileField = slug === 'exif-viewer' || slug === 'exif-auto-orient' ? 'image' : 'file';
       const formData = new FormData();
       if (multi) {
-        files.forEach((f) => formData.append('file', f));
+        files.forEach((f) => formData.append(fileField, f));
       } else {
-        formData.append('file', files[0]);
+        formData.append(fileField, files[0]);
       }
 
       const endpoint = slug === 'pdf-to-word'
