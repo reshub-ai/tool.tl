@@ -5,6 +5,39 @@ export interface ChangelogItem {
 
 export const CHANGELOG: ChangelogItem[] = [
   {
+    date: '2026-09-10',
+    lines: {
+      en: [
+        '🛠 Fixed a routing bug that made several tools unusable on their secondary URLs — Word Counter, CRC Calculator (MODBUS/CCITT/multi), Hex Arithmetic, Checksum Calculator, Text Processor and the USD→CNY / USD→EUR currency pages were rendering a plain text box instead of the real tool. They now load correctly in all four languages.',
+        '🛠 Fixed Timestamp Converter and Regex Tester, which were showing a passthrough text box that echoed your input instead of running the conversion.',
+        '🛠 Fixed EXIF Viewer and EXIF Auto-Orient — every upload was rejected with a "No file uploaded" error. Both tools work again.',
+        '🛠 Fixed duplicate tool forms appearing on the TOTP Generator, Base64 Image Encoder and Base64 Image Decoder secondary pages.',
+        '📊 Improved the accuracy of the Top Tools ranking: several tools were not counting completed actions at all (Base64 Image Decoder, video conversion via the queued path, and most JSON Formatter buttons), while the currency converter counted page views instead of conversions.',
+      ],
+      'zh-CN': [
+        '🛠 修复路由问题：字数统计、CRC 计算器（MODBUS/CCITT/多算法）、十六进制运算、校验和计算器、文本处理器，以及美元兑人民币、美元兑欧元汇率页面，此前在这些二级网址上显示的是一个普通文本框而不是真正的工具，现已在四种语言下全部恢复正常。',
+        '🛠 修复时间戳转换和正则表达式测试：此前页面只是把输入原样返回，并未执行转换，现已修复。',
+        '🛠 修复 EXIF 查看器和 EXIF 自动旋转：此前任何上传都会报「No file uploaded」错误，两个工具已恢复可用。',
+        '🛠 修复 TOTP 令牌生成器、Base64 图片编码、Base64 图片解码的二级页面重复显示两个工具表单的问题。',
+        '📊 提升热门工具排行的准确度：部分工具此前完全没有统计到实际使用（Base64 图片解码、走排队通道的视频转换、JSON 格式化的多数按钮），而汇率换算统计的是页面浏览量而非实际换算次数，均已修正。',
+      ],
+      'zh-TW': [
+        '🛠 修復路由問題：字數統計、CRC 計算器（MODBUS/CCITT/多演算法）、十六進位運算、校驗和計算器、文字處理器，以及美元兌人民幣、美元兌歐元匯率頁面，先前在這些二級網址上顯示的是普通文字框而非真正的工具，現已在四種語言下全部恢復正常。',
+        '🛠 修復時間戳轉換與正規表達式測試：先前頁面只是把輸入原樣回傳，並未執行轉換，現已修復。',
+        '🛠 修復 EXIF 檢視器與 EXIF 自動旋轉：先前任何上傳都會回報「No file uploaded」錯誤，兩個工具已恢復可用。',
+        '🛠 修復 TOTP 權杖產生器、Base64 圖片編碼、Base64 圖片解碼的二級頁面重複顯示兩個工具表單的問題。',
+        '📊 提升熱門工具排行的準確度：部分工具先前完全沒有統計到實際使用（Base64 圖片解碼、走排隊通道的影片轉換、JSON 格式化的多數按鈕），而匯率換算統計的是頁面瀏覽量而非實際換算次數，均已修正。',
+      ],
+      ja: [
+        '🛠 ルーティングの不具合を修正：文字数カウント、CRC計算機（MODBUS/CCITT/マルチ）、16進数計算、チェックサム計算機、テキスト処理、および USD→CNY / USD→EUR の為替ページで、実際のツールではなく単純なテキストボックスが表示されていました。4言語すべてで正常に動作します。',
+        '🛠 タイムスタンプ変換と正規表現テスターを修正：入力をそのまま返すだけで変換が実行されていませんでした。',
+        '🛠 EXIFビューアとEXIF自動回転を修正：アップロードが常に「No file uploaded」エラーになっていました。どちらも復旧しています。',
+        '🛠 TOTPトークン生成・Base64画像エンコード・Base64画像デコードの下位ページでツールのフォームが二重に表示される問題を修正しました。',
+        '📊 人気ツールランキングの精度を改善：一部のツールで実際の利用が全く集計されていませんでした（Base64画像デコード、キュー経由の動画変換、JSONフォーマッタの大半のボタン）。また為替換算はページ閲覧数を集計していたため、実際の換算回数に修正しました。',
+      ],
+    },
+  },
+  {
     date: '2026-07-17',
     lines: {
       en: [
