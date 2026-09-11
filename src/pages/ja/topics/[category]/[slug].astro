@@ -30,7 +30,7 @@ function splitContent(html: string): string[] {
 }
 const articleParts = splitContent(article.content);
 
-const canonicalPath = 'ja/topics/${categorySlug}/${slug}';
+const canonicalPath = `topics/${categorySlug}/${slug}`;
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -38,7 +38,7 @@ const articleJsonLd = {
   description: article.summary,
   datePublished: article.created_at,
   dateModified: article.updated_at,
-  url: `https://tool.tl/${canonicalPath}`,
+  url: `https://tool.tl${getLocalizedPath(canonicalPath, locale)}`,
   publisher: { '@type': 'Organization', name: 'tool.tl', url: 'https://tool.tl' },
 };
 ---
@@ -57,7 +57,7 @@ const articleJsonLd = {
     <span>/</span>
     <a href="/ja/topics" style="color: var(--color-primary)">{t('topics.title', locale)}</a>
     <span>/</span>
-    <a href="/ja/topics/{categorySlug}" style="color: var(--color-primary)">{category?.name || categorySlug}</a>
+    <a href={getLocalizedPath(`topics/${categorySlug}`, locale)} style="color: var(--color-primary)">{category?.name || categorySlug}</a>
     <span>/</span>
     <span style="color: var(--color-text)">{article.title}</span>
   </nav>
@@ -82,7 +82,7 @@ const articleJsonLd = {
   )}
 
   <footer class="mt-10 pt-6 border-t flex items-center gap-6" style="border-color: var(--color-border)">
-    <a href="/ja/topics/{categorySlug}" class="text-sm" style="color: var(--color-primary)">
+    <a href={getLocalizedPath(`topics/${categorySlug}`, locale)} class="text-sm" style="color: var(--color-primary)">
       ← {category?.name || categorySlug}
     </a>
     <button class="like-btn flex items-center gap-1 px-4 py-2 rounded border text-sm"
