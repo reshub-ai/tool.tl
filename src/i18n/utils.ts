@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/config/site';
 import { defaultLocale, locales, hreflangMap, type Locale } from './config';
 
 import en from './locales/en.json';
@@ -54,7 +55,7 @@ export function getLocalizedPath(path: string, locale: Locale): string {
 /** Generate alternate hreflang links for a given path (no locale prefix). */
 export function getAlternateLinks(path: string): Array<{ hreflang: string; href: string }> {
   const clean = path.replace(/^\/+|\/+$/g, '');
-  const base = 'https://tool.tl';
+  const base = SITE_URL;
   const links: Array<{ hreflang: string; href: string }> = [];
 
   for (const locale of locales) {

@@ -1,4 +1,5 @@
 ---
+import { SITE_URL } from '@/config/site';
 import BaseLayout from './BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
@@ -31,7 +32,7 @@ const breadcrumbLd = {
     '@type': 'ListItem',
     position: i + 1,
     name: b.label,
-    ...(b.href ? { item: `https://tool.tl${b.href}` } : {}),
+    ...(b.href ? { item: `${SITE_URL}${b.href}` } : {}),
   })),
 };
 
@@ -41,7 +42,7 @@ const softwareAppLd: Record<string, any> = {
   '@type': 'WebApplication',
   name: title,
   description: description,
-  url: locale === 'en' ? `https://tool.tl/${canonicalPath}` : `https://tool.tl/${locale}/${canonicalPath}`,
+  url: locale === 'en' ? `${SITE_URL}/${canonicalPath}` : `${SITE_URL}/${locale}/${canonicalPath}`,
   applicationCategory: 'UtilitiesApplication',
   browserRequirements: 'Requires JavaScript. Works in any modern browser.',
   operatingSystem: 'Any',
@@ -56,12 +57,12 @@ const softwareAppLd: Record<string, any> = {
   publisher: {
     '@type': 'Organization',
     name: 'tool.tl',
-    url: 'https://tool.tl',
+    url: SITE_URL,
   },
 };
 
 // HowTo structured data
-const toolOgImageUrl = `https://tool.tl/og/${tool.slug}.png`;
+const toolOgImageUrl = `${SITE_URL}/og/${tool.slug}.png`;
 const howToLd = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
@@ -122,7 +123,7 @@ const allJsonLd = [breadcrumbLd, softwareAppLd, howToLd, faqLd, ...(extraJsonLd 
   description={description}
   locale={locale}
   canonicalPath={canonicalPath}
-  ogImage={`https://tool.tl/og/${tool.slug}.png`}
+  ogImage={toolOgImageUrl}
   jsonLd={allJsonLd}
 >
   <Fragment slot="header">

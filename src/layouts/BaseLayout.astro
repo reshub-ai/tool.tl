@@ -1,4 +1,5 @@
 ---
+import { SITE_URL } from '@/config/site';
 import { getAlternateLinks, getLocalizedPath } from '@/i18n/utils';
 import type { Locale } from '@/i18n/config';
 import CookieConsent from '@/components/CookieConsent';
@@ -26,7 +27,7 @@ const {
   jsonLd,
 } = Astro.props;
 
-const siteUrl = 'https://tool.tl';
+const siteUrl = SITE_URL;
 const siteName = 'tool.tl';
 const normalizedTitle = title.trim();
 const fullTitle = normalizedTitle.toLowerCase().endsWith(`| ${siteName}`)

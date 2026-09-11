@@ -1,4 +1,5 @@
 ---
+import { SITE_URL } from '@/config/site';
 export const prerender = false;
 
 import BlogLayout from '@/layouts/BlogLayout.astro';
@@ -38,11 +39,11 @@ const articleJsonLd = {
   description: article.summary,
   datePublished: article.created_at,
   dateModified: article.updated_at,
-  url: `https://tool.tl/${locale}/blog/${slug}`,
+  url: `${SITE_URL}/${locale}/blog/${slug}`,
   publisher: {
     '@type': 'Organization',
     name: 'tool.tl',
-    url: 'https://tool.tl',
+    url: SITE_URL,
   },
 };
 ---

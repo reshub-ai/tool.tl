@@ -1,3 +1,4 @@
+import { SITE_URL } from './src/config/site.ts';
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
@@ -5,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  site: 'https://tool.tl',
+  site: SITE_URL,
   output: 'static',
   adapter: cloudflare({
     platformProxy: {
