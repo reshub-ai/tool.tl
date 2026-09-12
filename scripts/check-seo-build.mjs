@@ -37,6 +37,7 @@ async function walk(dir) {
     const path = join(dir, entry.name);
     if (entry.isDirectory()) { await walk(path); continue; }
     if (!entry.name.endsWith('.html')) continue;
+    assert.ok(entry.name !== 'index.html' || dir === 'dist', `${path} 会触发 Pages 目录尾斜杠重定向`);
     if (process.env.SEO_DEBUG) console.log(path);
     const html = await readFile(path, 'utf8');
     const relative = path.replaceAll('\\', '/').replace(/^dist\//, '').replace(/(?:\/)?index\.html$/, '').replace(/\.html$/, '');

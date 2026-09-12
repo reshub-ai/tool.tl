@@ -8,6 +8,8 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: SITE_URL,
   trailingSlash: 'never',
+  // Pages 直接托管目录/index.html 时会补尾斜杠；文件布局与规范 URL 保持一致。
+  build: { format: 'file' },
   output: 'static',
   adapter: cloudflare({
     platformProxy: {
