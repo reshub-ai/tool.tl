@@ -7,6 +7,7 @@ import Footer from '@/components/Footer.astro';
 import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
 import AdSlot from '@/components/AdSlot.astro';
 import { fetchCategories } from '@/lib/content-api';
+import { contentError } from '@/lib/content-routing';
 import { t } from '@/i18n/utils';
 import type { Locale } from '@/i18n/config';
 
@@ -16,7 +17,9 @@ let categories: any[] = [];
 try {
   categories = await fetchCategories(locale);
   categories = categories.filter((c: any) => c.article_count > 0);
-} catch (e) {}
+} catch {
+  return contentError(503, locale);
+}
 ---
 
 <BaseLayout

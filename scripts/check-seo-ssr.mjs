@@ -52,6 +52,7 @@ try {
   }
   assert.ok(ready, `开发服务未启动：${output}`);
   for (const prefix of locales) {
+    await page(prefix + '/topics');
     for (const path of ['/topics/test/seo-check', '/blog/seo-check']) {
       const html = await page(prefix + path);
       const canonicalPath = '/blog/seo-check';
@@ -97,10 +98,11 @@ try {
     }
     unavailable = true;
     try {
-      for (const path of ['/blog', '/topics/test', '/blog/seo-check', '/topics/test/seo-check']) {
+      for (const path of ['/topics', '/blog', '/topics/test', '/blog/seo-check', '/topics/test/seo-check']) {
         const res = await fetch(base + prefix + path, { redirect: 'manual' });
         assert.equal(res.status, 503, prefix + path);
         assert.equal(res.headers.get('retry-after'), '60');
+        assert.equal(res.headers.get('cache-control'), 'no-store');
       }
     } finally { unavailable = false; }
   }
