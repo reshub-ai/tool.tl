@@ -10,6 +10,8 @@ interface Props {
   description: string;
   locale?: string;
   canonicalPath: string;
+  canonicalQuery?: string;
+  showAlternates?: boolean;
   ogImage?: string;
   ogType?: string;
   noindex?: boolean;
@@ -21,6 +23,8 @@ const {
   description,
   locale = 'en',
   canonicalPath,
+  canonicalQuery = '',
+  showAlternates = true,
   ogImage,
   ogType = 'website',
   noindex = false,
@@ -42,9 +46,9 @@ const adClient = _adsenseRaw
   ? (_adsenseRaw.startsWith('ca-') ? _adsenseRaw : `ca-${_adsenseRaw}`)
   : '';
 
-const canonicalUrl = `${siteUrl}${getLocalizedPath(canonicalPath, locale as Locale)}`;
+const canonicalUrl = `${siteUrl}${getLocalizedPath(canonicalPath, locale as Locale)}${canonicalQuery}`;
 
-const alternateLinks = getAlternateLinks(canonicalPath);
+const alternateLinks = showAlternates ? getAlternateLinks(canonicalPath) : [];
 
 const ogImageUrl = ogImage ?? `${siteUrl}/og-default.png`;
 const ogHasDimensions = true;

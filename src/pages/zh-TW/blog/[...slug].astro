@@ -4,6 +4,7 @@ export const prerender = false;
 
 import BlogLayout from '@/layouts/BlogLayout.astro';
 import AdSlot from '@/components/AdSlot.astro';
+import { contentError } from '@/lib/content-routing';
 import { fetchArticleBySlug } from '@/lib/content-api';
 import { t } from '@/i18n/utils';
 import type { Locale } from '@/i18n/config';
@@ -11,17 +12,14 @@ import type { Locale } from '@/i18n/config';
 const locale: Locale = 'zh-TW';
 const { slug } = Astro.params;
 
-if (!slug) {
-  return Astro.redirect(`/${locale}/blog`);
+if (!slug) return contentError(404, locale);
+let article;
+try {
+  article = await fetchArticleBySlug(slug, locale);
+} catch {
+  return contentError(503, locale);
 }
-
-const article = await fetchArticleBySlug(slug, locale);
-
-if (!article) {
-  return Astro.redirect('/404');
-}
-
-
+if (!article) return contentError(404, locale);
 
 function splitArticleContentForAd(html: string): string[] {
   if (!html) return [''];

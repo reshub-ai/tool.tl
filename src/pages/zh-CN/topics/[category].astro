@@ -6,6 +6,7 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import LanguageSwitcher from '@/components/LanguageSwitcher.astro';
 import AdSlot from '@/components/AdSlot.astro';
+import { contentError, getContentPage, getContentQuery } from '@/lib/content-routing';
 import { fetchCategories, fetchArticles } from '@/lib/content-api';
 import { t } from '@/i18n/utils';
 import type { Locale } from '@/i18n/config';
@@ -13,7 +14,8 @@ import type { Locale } from '@/i18n/config';
 const locale: Locale = 'zh-CN';
 const { category: categorySlug } = Astro.params;
 
-const page = Number(Astro.url.searchParams.get('page')) || 1;
+const page = getContentPage(Astro.url.searchParams);
+if (page === null) return contentError(404, locale);
 
 let category: any = null;
 let articles = { articles: [] as any[], total: 0, pages: 0 };
@@ -22,13 +24,13 @@ try {
   const categories = await fetchCategories(locale);
   category = categories.find((c: any) => c.slug === categorySlug);
   if (category) {
-    articles = await fetchArticles(page, 20, category.id, locale);
+    articles = await fetchArticles(page, 20, category.slug, locale);
   }
-} catch (e) {}
-
-if (!category) {
-  return Astro.redirect('/zh-CN/topics');
+} catch {
+  return contentError(503, locale);
 }
+
+if (!category || page > Math.max(1, articles.pages)) return contentError(404, locale);
 ---
 
 <BaseLayout
@@ -36,6 +38,8 @@ if (!category) {
   description={category.desc || t('topics.subtitle', locale)}
   locale={locale}
   canonicalPath={`topics/${categorySlug}`}
+  canonicalQuery={getContentQuery(page)}
+  showAlternates={page === 1}
 >
   <Fragment slot="header">
     <Header locale={locale}>

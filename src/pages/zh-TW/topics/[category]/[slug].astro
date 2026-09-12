@@ -4,6 +4,7 @@ export const prerender = false;
 
 import BlogLayout from '@/layouts/BlogLayout.astro';
 import AdSlot from '@/components/AdSlot.astro';
+import { contentError } from '@/lib/content-routing';
 import { fetchArticleBySlug, fetchCategories } from '@/lib/content-api';
 import { t, getLocalizedPath } from '@/i18n/utils';
 import type { Locale } from '@/i18n/config';
@@ -11,17 +12,17 @@ import type { Locale } from '@/i18n/config';
 const locale: Locale = 'zh-TW';
 const { category: categorySlug, slug } = Astro.params;
 
-if (!slug || !categorySlug) return Astro.redirect('/zh-TW/topics');
-
-const [article, categories] = await Promise.all([
-  fetchArticleBySlug(slug, locale).catch(() => null),
-  fetchCategories(locale).catch(() => []),
-]);
-
-if (!article) return Astro.redirect('/zh-TW/topics');
-
-const category = categories.find((c: any) => c.slug === categorySlug);
-
+if (!slug || !categorySlug) return contentError(404, locale);
+let article;
+let categories;
+try {
+  [article, categories] = await Promise.all([fetchArticleBySlug(slug, locale), fetchCategories(locale)]);
+} catch {
+  return contentError(503, locale);
+}
+if (!article) return contentError(404, locale);
+const category = categories.find(c => c.slug === categorySlug);
+if (!category || article.category_key !== categorySlug) return contentError(404, locale);
 
 function splitContent(html: string): string[] {
   if (!html) return [''];
@@ -31,7 +32,8 @@ function splitContent(html: string): string[] {
 }
 const articleParts = splitContent(article.content);
 
-const canonicalPath = `topics/${categorySlug}/${slug}`;
+// 同一文章只声明 blog 为规范入口，保留 topics 分类阅读入口。
+const canonicalPath = `blog/${slug}`;
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',

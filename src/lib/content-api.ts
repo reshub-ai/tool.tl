@@ -17,6 +17,7 @@ export interface Article {
   content: string;
   cover_image?: string;
   category_id: number;
+  category_key: string;
   category_name?: string;
   views: number;
   likes: number;
@@ -42,8 +43,8 @@ export async function fetchArticles(
 ): Promise<{ articles: Article[]; total: number; pages: number }> {
   const params = new URLSearchParams({
     site_id: SITE_ID,
-    page: String(page),
-    per_page: String(perPage),
+    limit: String(perPage),
+    offset: String((page - 1) * perPage),
     lang: locale,
   });
   if (categorySlug) params.set('category', categorySlug);
@@ -60,6 +61,7 @@ export async function fetchArticles(
     content: d.content || '',
     cover_image: d.cover_image || d.og_image,
     category_id: d.category_id || 0,
+    category_key: d.category_key || '',
     category_name: d.category_name || d.category_key || '',
     views: d.view_count ?? d.views ?? 0,
     likes: d.like_count ?? d.likes ?? 0,
@@ -70,7 +72,7 @@ export async function fetchArticles(
   return {
     articles: items,
     total: json.total || 0,
-    pages: json.pages || Math.ceil((json.total || 0) / perPage),
+    pages: Math.ceil((json.total || 0) / perPage),
   };
 }
 
@@ -88,6 +90,7 @@ export async function fetchArticleBySlug(slug: string, locale = 'en'): Promise<A
     content: d.content || '',
     cover_image: d.cover_image || d.og_image,
     category_id: d.category_id || 0,
+    category_key: d.category_key || '',
     category_name: d.category_name || d.category_key || '',
     views: d.view_count ?? d.views ?? 0,
     likes: d.like_count ?? d.likes ?? 0,

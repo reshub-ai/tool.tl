@@ -15,11 +15,13 @@ interface Props {
   description: string;
   locale: Locale;
   canonicalPath: string;
+  canonicalQuery?: string;
+  showAlternates?: boolean;
   ogImage?: string;
   jsonLd?: object;
 }
 
-const { title, description, locale, canonicalPath, ogImage, jsonLd } = Astro.props;
+const { title, description, locale, canonicalPath, canonicalQuery, showAlternates, ogImage, jsonLd } = Astro.props;
 ---
 
 <BaseLayout
@@ -27,6 +29,8 @@ const { title, description, locale, canonicalPath, ogImage, jsonLd } = Astro.pro
   description={description}
   locale={locale}
   canonicalPath={canonicalPath}
+  canonicalQuery={canonicalQuery}
+  showAlternates={showAlternates}
   ogType="article"
   ogImage={ogImage}
   jsonLd={jsonLd}

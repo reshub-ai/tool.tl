@@ -2,26 +2,30 @@
 export const prerender = false;
 
 import BlogLayout from '@/layouts/BlogLayout.astro';
+import { contentError, getContentPage, getContentQuery } from '@/lib/content-routing';
 import { fetchArticles, fetchCategories } from '@/lib/content-api';
 import { t } from '@/i18n/utils';
 import type { Locale } from '@/i18n/config';
 
 const locale: Locale = 'zh-CN';
 
-const page = Number(Astro.url.searchParams.get('page')) || 1;
+const page = getContentPage(Astro.url.searchParams);
+if (page === null) return contentError(404, locale);
 const categorySlug = Astro.url.searchParams.get('category') || undefined;
 
 let articles = { articles: [] as any[], total: 0, pages: 0 };
 let categories: any[] = [];
 
 try {
-  [articles, categories] = await Promise.all([
-    fetchArticles(page, 20, categorySlug, locale),
-    fetchCategories(locale),
-  ]);
-} catch (e) {
-  console.error('[Blog] API fetch failed:', e);
+  categories = await fetchCategories(locale);
+  if (categorySlug && !categories.some(c => c.slug === categorySlug)) return contentError(404, locale);
+  articles = await fetchArticles(page, 20, categorySlug, locale);
+} catch {
+  return contentError(503, locale);
 }
+if (page > Math.max(1, articles.pages)) return contentError(404, locale);
+const canonicalQuery = getContentQuery(page, categorySlug);
+
 ---
 
 <BlogLayout
@@ -29,6 +33,8 @@ try {
   description={t('blog.subtitle', locale)}
   locale={locale}
   canonicalPath="blog"
+  canonicalQuery={canonicalQuery}
+  showAlternates={page === 1 && !categorySlug}
 >
   <div class="flex items-center justify-between gap-4 flex-wrap">
     <div>

@@ -38,6 +38,8 @@ const errors = [];
 await Promise.all(Array.from({ length: 6 }, async () => {
   while (cursor < targets.length) {
     const expected = new URL(targets[cursor++]);
+    const canonicalExpected = new URL(expected);
+    canonicalExpected.pathname = canonicalExpected.pathname.replace(/\/topics\/[^/]+\/([^/]+)$/, '/blog/$1');
     try {
       const { status, headers, html } = await get(expected.pathname);
       assert.equal(status, 200, `状态 ${status}，Location=${headers.get('location')}`);
@@ -45,19 +47,19 @@ await Promise.all(Array.from({ length: 6 }, async () => {
       assert.ok(!/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html));
       const canonical = [...html.matchAll(/<link[^>]+rel="canonical"[^>]+href="([^"]+)"/g)];
       assert.equal(canonical.length, 1);
-      assert.equal(new URL(canonical[0][1]).href, expected.href);
+      assert.equal(new URL(canonical[0][1]).href, canonicalExpected.href);
       const og = html.match(/<meta[^>]+property="og:url"[^>]+content="([^"]+)"/);
       assert.ok(og);
-      assert.equal(new URL(og[1]).href, expected.href);
+      assert.equal(new URL(og[1]).href, canonicalExpected.href);
       const links = [...html.matchAll(/<link[^>]+hreflang="([^"]+)"[^>]+href="([^"]+)"/g)];
       assert.equal(links.length, 5);
-      const path = expected.pathname.replace(/^\/(?:ja|zh-CN|zh-TW)(?=\/|$)/, '').replace(/\/$/, '');
+      const path = canonicalExpected.pathname.replace(/^\/(?:ja|zh-CN|zh-TW)(?=\/|$)/, '').replace(/\/$/, '');
       const expectedLinks = { en: origin + (path || '/'), 'x-default': origin + (path || '/'),
         ja: origin + '/ja' + path, 'zh-Hans': origin + '/zh-CN' + path, 'zh-Hant': origin + '/zh-TW' + path };
       assert.deepEqual(Object.fromEntries(links.map(m => [m[1], m[2]])), expectedLinks);
       if (path.startsWith('/blog/') || path.startsWith('/topics/')) {
         const ld = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].flatMap(m => JSON.parse(m[1]));
-        assert.equal(ld.find(item => item['@type'] === 'Article')?.url, expected.href);
+        assert.equal(ld.find(item => item['@type'] === 'Article')?.url, canonicalExpected.href);
         assert.ok(!html.includes('{categorySlug}'));
       }
     } catch (error) { errors.push(`${expected.href}: ${error.message}`); }
