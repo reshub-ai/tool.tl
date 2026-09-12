@@ -54,12 +54,11 @@ export function getLocalizedPath(path: string, locale: Locale): string {
 
 /** Generate alternate hreflang links for a given path (no locale prefix). */
 export function getAlternateLinks(path: string): Array<{ hreflang: string; href: string }> {
-  const clean = path.replace(/^\/+|\/+$/g, '');
   const base = SITE_URL;
   const links: Array<{ hreflang: string; href: string }> = [];
 
   for (const locale of locales) {
-    const localePath = locale === defaultLocale ? `/${clean}` : `/${locale}/${clean}`;
+    const localePath = getLocalizedPath(path, locale);
     links.push({
       hreflang: hreflangMap[locale],
       href: `${base}${localePath}`,
@@ -69,7 +68,7 @@ export function getAlternateLinks(path: string): Array<{ hreflang: string; href:
   // x-default points to default locale
   links.push({
     hreflang: 'x-default',
-    href: `${base}/${clean}`,
+    href: `${base}${getLocalizedPath(path, defaultLocale)}`,
   });
 
   return links;

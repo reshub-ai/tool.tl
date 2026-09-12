@@ -34,7 +34,7 @@ async function page(path) {
 }
 try {
   let ready = false;
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 180; i++) {
     if (server.exitCode !== null) throw new Error(output);
     try { await fetch(base + '/robots.txt', { signal: AbortSignal.timeout(1000) }); ready = true; break; } catch {}
     await delay(1000);

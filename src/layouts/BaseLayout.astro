@@ -42,10 +42,7 @@ const adClient = _adsenseRaw
   ? (_adsenseRaw.startsWith('ca-') ? _adsenseRaw : `ca-${_adsenseRaw}`)
   : '';
 
-const canonicalUrl =
-  locale === 'en'
-    ? `${siteUrl}/${canonicalPath}`
-    : `${siteUrl}/${locale}/${canonicalPath}`;
+const canonicalUrl = `${siteUrl}${getLocalizedPath(canonicalPath, locale as Locale)}`;
 
 const alternateLinks = getAlternateLinks(canonicalPath);
 

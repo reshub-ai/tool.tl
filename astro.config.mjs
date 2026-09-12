@@ -7,6 +7,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   site: SITE_URL,
+  trailingSlash: 'never',
   output: 'static',
   adapter: cloudflare({
     platformProxy: {
@@ -23,7 +24,10 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => !page.includes('/404') && !page.endsWith('/q/'),
+      filter: (page) => {
+        const pathname = new URL(page).pathname.replace(/\/+$/, '') || '/';
+        return !pathname.includes('/404') && pathname !== '/q';
+      },
       i18n: {
         defaultLocale: 'en',
         locales: {

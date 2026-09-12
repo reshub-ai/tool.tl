@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
-import { readdir, readFile } from 'node:fs/promises';
+import { readdirSync as readdir, readFileSync as readFile } from 'node:fs';
 import { join } from 'node:path';
 
 // 完整构建后检查静态页面与 sitemap；SSR 详情页另由 check-seo-ssr 验收。
 const origin = 'https://www.tool.tl';
 const strictPaths = process.argv.includes('--strict-paths');
+console.log('读取 sitemap…');
 const sitemapFiles = (await readdir('dist')).filter(name => /^sitemap-.*\.xml$/.test(name));
 assert.ok(sitemapFiles.includes('sitemap-index.xml'), '缺少 sitemap index');
 const locs = [];
@@ -26,6 +27,7 @@ const key = value => {
   return url.href;
 };
 const sitemapSet = new Set(locs.map(key));
+console.log(`检查 ${locs.length} 条 sitemap URL 对应页面…`);
 for (const url of locs) assert.ok(!/\/(?:q|404)\/?$/.test(new URL(url).pathname), `不应纳入 sitemap：${url}`);
 let checked = 0;
 const staticUrls = new Set();
@@ -35,15 +37,19 @@ async function walk(dir) {
     const path = join(dir, entry.name);
     if (entry.isDirectory()) { await walk(path); continue; }
     if (!entry.name.endsWith('.html')) continue;
+    if (process.env.SEO_DEBUG) console.log(path);
     const html = await readFile(path, 'utf8');
-    if (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/.test(html)) continue;
+    const relative = path.replaceAll('\\', '/').replace(/^dist\//, '').replace(/(?:\/)?index\.html$/, '').replace(/\.html$/, '');
+    if (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/.test(html)) {
+      assert.ok(!sitemapSet.has(key(`${origin}/${relative}`)), `${path} 为 noindex，却进入 sitemap`);
+      continue;
+    }
     const canonical = [...html.matchAll(/<link[^>]+rel="canonical"[^>]+href="([^"]+)"/g)];
     assert.equal(canonical.length, 1, `${path} canonical 数量错误`);
     const url = canonical[0][1];
     assert.equal(new URL(url).origin, origin, path);
     assert.ok(!html.includes('https://tool.tl'), `${path} 残留裸域`);
     if (strictPaths) assert.ok(sitemapSet.has(key(url)), `${path} canonical 不在 sitemap 中：${url}`);
-    const relative = path.replaceAll('\\', '/').replace(/^dist\//, '').replace(/(?:\/)?index\.html$/, '').replace(/\.html$/, '');
     if (strictPaths) assert.equal(key(url), key(`${origin}/${relative}`), `${path} canonical 指向其他页面`);
     const alternates = [...html.matchAll(/<link[^>]+hreflang="([^"]+)"[^>]+href="([^"]+)"/g)];
     assert.equal(alternates.length, 5, path);
@@ -54,6 +60,7 @@ async function walk(dir) {
     }
     staticUrls.add(key(`${origin}/${relative}`));
     checked++;
+    if (checked % 200 === 0) console.log(`已检查 ${checked} 个静态页面`);
   }
 }
 await walk('dist');
